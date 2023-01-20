@@ -16,11 +16,10 @@ module.exports = {
       price: {
         allowNull: false,
         type: Sequelize.DECIMAL,
-        field: 'sale_id',      },
+      },
       urlImage: {
         allowNull: false,
         type: Sequelize.DECIMAL,
-        field: 'url_image',
       },
     })
 
