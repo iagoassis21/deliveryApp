@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Login from './pages/Login';
 import DeliveryAppContext from './Context/DeliveryAppContext';
 
 function App() {
   const {
     // adicione aqui os states criados no arquivo DeliveryAppContext.jsx
-  } = useContext(DeliveryAppContext)
+  } = useContext(DeliveryAppContext);
 
   return (
-    <div className="App">
-    </div>
+    <Switch>
+      <Route exact path="/" component={ Login } />
+    </Switch>
+
   );
 }
 
