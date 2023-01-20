@@ -14,10 +14,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: 'user_id',
       },
-      saleId: {
+      sellerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        field: 'sale_id',
+        field: 'seller_id',
       },
       totalPrice: {
         allowNull: false,

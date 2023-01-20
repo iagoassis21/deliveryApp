@@ -1,7 +1,4 @@
-const { DataTypes } = require("sequelize/types");
-const { sequelize } = require(".")
-
-module.exports = () => {
+module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
     "Sale",
     {
@@ -15,7 +12,7 @@ module.exports = () => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      saleId: {
+      sellerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -33,14 +30,14 @@ module.exports = () => {
   );
 
   Sale.associate = (models) => {
-    models.belongsTo(models.User, {
-      foreignKey: userId,
+    Sale.belongsTo(models.User, {
+      foreignKey: 'userId',
       as: 'users',
     });
   }
   Sale.associate = (models) => {
-    models.belongsTo(models.User, {
-      foreignKey: sellerId,
+    Sale.belongsTo(models.User, {
+      foreignKey: 'sellerId',
       as: 'sellers',
     });
   }

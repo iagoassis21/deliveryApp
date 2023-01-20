@@ -1,0 +1,19 @@
+const { User } = require('../database/models/');
+const md5 = require('md5');
+const createToken = require('../utils/createToken');
+
+
+const getUser = async ({ email, password }) => {
+  const passCrypt = md5(password);
+  const user = await User.findOne({ where: { email } });
+
+  if(!user) throw new Error('Not found');
+  if(user.password !== passCrypt) throw new Error('Not found');
+
+  const { password: _, userWithPass } = user.dataValues;
+  const token = createToken(userWithPass);
+  console.log(token);
+  return token;
+}
+
+module.exports = getUser;
