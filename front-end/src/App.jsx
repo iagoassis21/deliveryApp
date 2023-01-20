@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import DeliveryAppContext from './Context/DeliveryAppContext';
+import Products from './pages/Products';
 
 function App() {
   const {
@@ -9,9 +10,10 @@ function App() {
   } = useContext(DeliveryAppContext);
 
   return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-    </Switch>
+    <Routes>
+      <Route exact path="/" element={ Login } />
+      <Route exact path="/customer/products" element={ Products } />
+    </Routes>
 
   );
 }
