@@ -1,40 +1,49 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import DeliveryAppContext from '../Context/DeliveryAppContext';
 import logo from '../images/logo.svg';
+import regexEmail from '../utils/regexEmail';
 
 export default function Login(props) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    email, password,
+    setEmail,
+    setPassword,
+  } = useContext(DeliveryAppContext);
   const [disabled, setDisabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const validateEmail = () => {
-    const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    return !!(email.match(emailRegex));
+  const validateEmail = (param) => {
+    if (!regexEmail.test(param)) {
+      setDisabled(true);
+      return setErrorMsg('O campo e-mail precisa ser um e-mail válido!');
+    }
+    setErrorMsg('');
+    return setEmail(param);
   };
 
-  const validatePassword = () => {
-    const passwordLength = 6;
-    return password.length >= passwordLength;
-  };
-
-  const changeEmail = ({ target: { value } }) => {
-    setEmail(value);
-    setDisabled(!(validateEmail() && validatePassword()));
-  };
-
-  const changePassword = ({ target: { value } }) => {
-    setPassword(value);
-    setDisabled(!(validateEmail() && validatePassword()));
+  const validatePassword = (param) => {
+    if (param.length < +'7') {
+      setDisabled(false);
+      return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
+    }
+    setDisabled(true);
+    setErrorMsg('');
+    return setPassword(param);
   };
 
   const onClickLogin = () => {
-    localStorage.setItem('user', JSON.stringify({ email }));
+    // implementar logica para redirecionar se estiver tudo certo
   };
 
   const onClickRegister = () => {
     const { history } = props;
     history.push('/register');
   };
+
+  useEffect(() => {
+    if (email && password) return setDisabled(false);
+  }, [email, password]);
 
   return (
     <div className="loginPage">
@@ -44,22 +53,23 @@ export default function Login(props) {
           <p>GRUPO 10</p>
         </div>
         <div>
-          <input
-            name="email"
-            type="email"
-            data-testid="common_login__input-email"
-            placeholder="Email"
-            onChange={ changeEmail }
-            value={ email }
-          />
-          <input
-            name="password"
-            type="email"
-            data-testid="common_login__input-email"
-            placeholder="Senha"
-            onChange={ changePassword }
-            value={ password }
-          />
+          <label htmlFor="inputEmail">
+            <input
+              id="inputEmail"
+              type="email"
+              data-testid="common_login__input-email"
+              placeholder="Email"
+              onChange={ ({ target: { value } }) => validateEmail(value) }
+            />
+          </label>
+          <label htmlFor="inputPass">
+            <input
+              id="inputPass"
+              data-testid="common_login__input-password"
+              placeholder="Senha"
+              onChange={ ({ target: { value } }) => validatePassword(value) }
+            />
+          </label>
           <button
             className="login-button"
             type="button"
@@ -76,7 +86,11 @@ export default function Login(props) {
           >
             Ainda não tenho conta
           </button>
-          <span>Elemento oculto (Mensagens de erro)</span>
+          <span
+            data-testid="common_login__element-invalid-email"
+          >
+            {errorMsg}
+          </span>
         </div>
       </form>
     </div>
