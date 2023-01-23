@@ -4,9 +4,13 @@ import getDeliveryData from '../Services/DeliveryAppApi';
 import DeliveryAppContext from './DeliveryAppContext';
 
 export default function DeliveryAppProvider({ children }) {
+  // const [] = useState('');
   const [erro, setErro] = useState('');
-  const [products, setProducts] = useState([])
-  const [quantity, setQuantity] = useState(0)
+  const [products, setProducts] = useState([]);
+  const [quantity, setQuantity] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const requestDeliveryData = async () => {
     try {
@@ -22,11 +26,20 @@ export default function DeliveryAppProvider({ children }) {
 
   return (
     <Provider
-      value={{
+      value={ {
         requestDeliveryData,
-        erro, setErro,
-        products, setProducts,
-        quantity, setQuantity,
+        erro,
+        setErro,
+        products,
+        setProducts,
+        quantity,
+        setQuantity,
+        name,
+        setName,
+        email,
+        setEmail,
+        password,
+        setPassword,
       } }
     >
       { children }
