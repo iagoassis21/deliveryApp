@@ -25,18 +25,20 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       timestamps: false,
-      tableName: 'users',
+      tableName: 'sales',
     }
   );
 
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, {
+      through: Sale,
       foreignKey: 'userId',
       as: 'users',
     });
   }
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, {
+      through: Sale,
       foreignKey: 'sellerId',
       as: 'sellers',
     });
