@@ -7,6 +7,7 @@ const createUser = async (obj) => {
   validateRegister(obj);
   const passCrypt = md5(obj.password);
   const user = await User.findOne({ where: { email: obj.email } });
+  console.log(user);
 
   if (user !== null) {
     throw new Error('Conflict');
