@@ -9,7 +9,7 @@ const DeliveryAppMock = [
   { id: 8, name: 'Brahma Duplo Malte 350ml', price: 2.79, image_url: 'brahma_duplo_malte_350ml.jpg' },
   { id: 9, name: 'Becks 600ml', price: 8.89, image_url: 'becks_600ml.jpg' },
   { id: 10, name: 'Skol Beats Senses 269ml', price: 3.57, image_url: 'skol_beats_senses_269ml.jpg' },
-  { id: 11, name: 'Stella Artois 275ml', price: 3.49, image_url: 'stella_artois_275ml.jpg' }
+  { id: 11, name: 'Stella Artois 275ml', price: 3.49, image_url: 'stella_artois_275ml.jpg' },
 ];
 
 export default DeliveryAppMock;

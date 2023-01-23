@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import DeliveryAppContext from './Context/DeliveryAppContext';
 import Products from './pages/Products';
 import Register from './pages/Register';
+import Orders from './pages/Orders';
 
 function App() {
   // const {
@@ -15,6 +16,8 @@ function App() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/products" component={ Products } />
+      {/* <Route exact path="/customer/checkout" component={ Checkout } /> */}
+      <Route exact path="/customer/orders" component={ Orders } />
     </Switch>
 
   );
