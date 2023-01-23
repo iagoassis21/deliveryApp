@@ -12,6 +12,7 @@ export default function Login(props) {
   } = useContext(DeliveryAppContext);
   const [disabled, setDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+  const seis = 6;
 
   const validateEmail = (param) => {
     if (!regexEmail.test(param)) {
@@ -23,11 +24,10 @@ export default function Login(props) {
   };
 
   const validatePassword = (param) => {
-    if (param.length < +'7') {
-      setDisabled(false);
+    if (param.length < seis) {
+      setDisabled(true);
       return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
     }
-    setDisabled(true);
     setErrorMsg('');
     return setPassword(param);
   };
