@@ -10,7 +10,8 @@ export default function Products() {
             <span>{ item.image_url }</span>
             <span>{ item.name }</span>
             <span>{ item.price }</span>
-          </div>))
+          </div>
+        ))
       }
     </div>
   );

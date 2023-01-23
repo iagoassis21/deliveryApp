@@ -3,7 +3,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default function NavBar(item) {
+export default function NavBar() {
   // const { user } = useContext(DeliveryAppContext)
   // deixei essas linhas comentadas pois mais para frente pensei em usa-las para pegar o nome do usuario pelo state
   const history = useHistory();

@@ -28,7 +28,7 @@ export default function Login(props) {
   };
 
   const onClickLogin = () => {
-    // Implemente aqui a lógica para fazer login
+    localStorage.setItem('user', JSON.stringify({ email }));
   };
 
   const onClickRegister = () => {
