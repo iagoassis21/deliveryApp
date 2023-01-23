@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import DeliveryAppContext from './Context/DeliveryAppContext';
 import Products from './pages/Products';
+import Register from './pages/Register';
 
 function App() {
-  const {
-    // adicione aqui os states criados no arquivo DeliveryAppContext.jsx
-  } = useContext(DeliveryAppContext);
+  // const {
+  //   // adicione aqui os states criados no arquivo DeliveryAppContext.jsx
+  // } = useContext(DeliveryAppContext);
 
   return (
-    <Routes>
-      <Route exact path="/" element={ Login } />
-      <Route exact path="/customer/products" element={ Products } />
-    </Routes>
+    <Switch>
+      <Route exact path="/" component={ Login } />
+      <Route exact path="/register" component={ Register } />
+      <Route exact path="/customer/products" component={ Products } />
+    </Switch>
 
   );
 }
