@@ -19,7 +19,12 @@ module.exports = {
       },
       urlImage: {
         allowNull: false,
+<<<<<<< HEAD
         type: Sequelize.DECIMAL,
+=======
+        type: Sequelize.STRING,
+        field: 'url_image',
+>>>>>>> 9664939fd38d6fcda1f3d7dbffe7c3979dd86eb3
       },
     })
 
