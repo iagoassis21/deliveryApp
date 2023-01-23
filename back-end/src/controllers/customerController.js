@@ -21,9 +21,9 @@ const getOrder = async (req, res) => {
   } catch (error) {
     return res.status(404).json({ message: 'Not found' });
   }
-}
+};
 
 module.exports = {
   createOrder,
   getOrder,
-}
+};

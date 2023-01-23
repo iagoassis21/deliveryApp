@@ -17,12 +17,12 @@ const createOrder = async (obj) => {
 };
 
 const getOrder = async (id) => {
-  const order =  await Sale.findByPk(id);
+  const order = await Sale.findByPk(id);
 
   if (!order) throw new Error('Not found');
 
   return order;
-}
+};
 
 module.exports = {
   createOrder,
