@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
 import DeliveryAppContext from './Context/DeliveryAppContext';
 import Products from './pages/Products';
@@ -13,7 +13,8 @@ function App() {
 
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
+      <Redirect from="/" to="/login" />
+      <Route exact path="/login" component={ Login } />
       <Route exact path="/register" component={ Register } />
       <Route exact path="/customer/products" component={ Products } />
       {/* <Route exact path="/customer/checkout" component={ Checkout } /> */}
