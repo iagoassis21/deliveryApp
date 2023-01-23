@@ -10,8 +10,8 @@ const getUser = async ({ email, password }) => {
   
   const { password: _, ...userWithPass } = user.dataValues;
   const token = createToken(userWithPass);
-  // console.log(token);
-  return token;
+  delete userWithPass.id;   
+  return { ...userWithPass, token };
 };
 
 module.exports = {
