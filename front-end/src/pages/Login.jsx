@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import logo from '../images/logo.svg';
 import regexEmail from '../utils/regexEmail';
@@ -10,26 +10,29 @@ export default function Login(props) {
     setEmail,
     setPassword,
   } = useContext(DeliveryAppContext);
-  const [disabled, setDisabled] = useState(true);
+  const [mailIsValid, setMailIsValid] = useState(false);
+  const [passIsValid, setPassIsValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const seis = 6;
 
-  const validateEmail = (param) => {
-    if (!regexEmail.test(param)) {
-      setDisabled(true);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (!regexEmail.test(event.target.value)) {
+      setMailIsValid(false);
       return setErrorMsg('O campo e-mail precisa ser um e-mail válido!');
     }
-    setErrorMsg('');
-    return setEmail(param);
+    setMailIsValid(true);
+    return setErrorMsg('');
   };
 
-  const validatePassword = (param) => {
-    if (param.length < seis) {
-      setDisabled(true);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value.length < seis) {
+      setPassIsValid(false);
       return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
     }
-    setErrorMsg('');
-    return setPassword(param);
+    setPassIsValid(true);
+    return setErrorMsg('');
   };
 
   const onClickLogin = () => {
@@ -40,10 +43,6 @@ export default function Login(props) {
     const { history } = props;
     history.push('/register');
   };
-
-  useEffect(() => {
-    if (email && password) return setDisabled(false);
-  }, [email, password]);
 
   return (
     <div className="loginPage">
@@ -56,25 +55,28 @@ export default function Login(props) {
           <label htmlFor="inputEmail">
             <input
               id="inputEmail"
-              type="email"
+              name="email"
               data-testid="common_login__input-email"
               placeholder="Email"
-              onChange={ ({ target: { value } }) => validateEmail(value) }
+              value={ email }
+              onChange={ handleEmailChange }
             />
           </label>
           <label htmlFor="inputPass">
             <input
               id="inputPass"
+              name="password"
               data-testid="common_login__input-password"
               placeholder="Senha"
-              onChange={ ({ target: { value } }) => validatePassword(value) }
+              value={ password }
+              onChange={ handlePasswordChange }
             />
           </label>
           <button
             className="login-button"
             type="button"
             data-testid="common_login__button-login"
-            disabled={ disabled }
+            disabled={ !mailIsValid || !passIsValid }
             onClick={ onClickLogin }
           >
             Entrar
