@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import regexEmail from '../utils/regexEmail';
 
@@ -12,40 +12,41 @@ export default function Register() {
     setEmail,
     setPassword,
   } = useContext(DeliveryAppContext);
-
-  const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
+  const [mailIsValid, setMailIsValid] = useState(false);
+  const [passIsValid, setPassIsValid] = useState(false);
+  const [nameIsValid, setNameIsValid] = useState(false);
+  // const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const validateName = (param) => {
-    if (param.length < DOZE) {
-      setButtonIsEnabled(true);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+    if (event.target.value.length < DOZE) {
+      setNameIsValid(false);
       return setErrorMsg('O campo nome precisa ter no mínimo 12 caracteres');
     }
-    setErrorMsg('');
-    return setName(param);
+    setNameIsValid(true);
+    return setErrorMsg('');
   };
 
-  const validatePassword = (param) => {
-    if (param.length < SEIS) {
-      setButtonIsEnabled(true);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value.length < SEIS) {
+      setPassIsValid(false);
       return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
     }
-    setErrorMsg('');
-    return setPassword(param);
+    setPassIsValid(true);
+    return setErrorMsg('');
   };
 
-  const validateEmail = (param) => {
-    if (!regexEmail.test(param)) {
-      setButtonIsEnabled(true);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (!regexEmail.test(event.target.value)) {
+      setMailIsValid(false);
       return setErrorMsg('O campo e-mail precisa ser um e-mail válido!');
     }
-    setErrorMsg('');
-    return setEmail(param);
+    setMailIsValid(true);
+    return setErrorMsg('');
   };
-
-  useEffect(() => {
-    if (name && email && password) return setButtonIsEnabled(false);
-  }, [name, email, password]);
 
   return (
     <>
@@ -55,10 +56,12 @@ export default function Register() {
           <br />
           <input
             id="newUserName"
+            name="name"
+            data-testid="common_register__input-name"
             type="text"
             placeholder="Seu Nome"
-            data-testid="common_register__input-name"
-            onChange={ ({ target: { value } }) => validateName(value) }
+            value={ name }
+            onChange={ handleNameChange }
           />
         </label>
         <br />
@@ -67,10 +70,12 @@ export default function Register() {
           <br />
           <input
             id="newUserEmail"
+            name="email"
+            data-testid="common_register__input-email"
             type="text"
             placeholder="seu-email@site.com.br"
-            data-testid="common_register__input-email"
-            onChange={ ({ target: { value } }) => validateEmail(value) }
+            value={ email }
+            onChange={ handleEmailChange }
           />
         </label>
         <br />
@@ -79,23 +84,25 @@ export default function Register() {
           <br />
           <input
             id="newUserPassword"
+            name="password"
+            data-testid="common_register__input-password"
             type="password"
             placeholder="**********"
-            data-testid="common_register__input-password"
-            onChange={ ({ target: { value } }) => validatePassword(value) }
+            value={ password }
+            onChange={ handlePasswordChange }
           />
         </label>
         <br />
         <button
           id="sendButton"
+          data-testid="common_register__button-register"
           type="button"
-          data-testid="common_register__input-register"
-          disabled={ buttonIsEnabled }
+          disabled={ !mailIsValid || !passIsValid || !nameIsValid }
         >
-          CADASTRO
+          CADASTRAR
         </button>
       </form>
-      <span data-testid="common_register__input-invalid_register">
+      <span data-testid="common_register__element-invalid_register">
         { errorMsg }
       </span>
     </>
