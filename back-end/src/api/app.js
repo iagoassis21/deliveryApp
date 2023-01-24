@@ -1,5 +1,6 @@
 const express = require('express');
 require('express-async-errors');
+const cors = require('cors');
 
 // const GenericError = require('../middlewares/GenericError')
 const loginRouter = require('../Routes/loginRoute');
@@ -10,6 +11,7 @@ const customerRoute = require('../Routes/customerRoute');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use('/login', loginRouter);
 app.use('/register', registerRoute);

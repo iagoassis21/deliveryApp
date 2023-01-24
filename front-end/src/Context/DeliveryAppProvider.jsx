@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import getDeliveryData from '../Services/DeliveryAppApi';
+import { getDeliveryData } from '../Services/DeliveryAppApi';
 import DeliveryAppContext from './DeliveryAppContext';
 
 export default function DeliveryAppProvider({ children }) {

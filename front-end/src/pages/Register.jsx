@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import regexEmail from '../utils/regexEmail';
+import { getRegister } from '../Services/DeliveryAppApi';
 
 const DOZE = 12;
 const SEIS = 6;
 
-export default function Register() {
+export default function Register(props) {
   const {
     name, email, password,
     setName,
@@ -46,6 +48,16 @@ export default function Register() {
     }
     setMailIsValid(true);
     return setErrorMsg('');
+  };
+
+  const onClickRegister = async () => {
+    const { history } = props;
+    const { message } = await getRegister(name, email, password);
+    if (message === 'Conflict') {
+      return setErrorMsg('Usuário já cadastrado');
+    }
+    setErrorMsg('');
+    return history.push('/customer/products');
   };
 
   return (
@@ -98,6 +110,7 @@ export default function Register() {
           data-testid="common_register__button-register"
           type="button"
           disabled={ !mailIsValid || !passIsValid || !nameIsValid }
+          onClick={ onClickRegister }
         >
           CADASTRAR
         </button>
@@ -108,3 +121,9 @@ export default function Register() {
     </>
   );
 }
+
+Register.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
