@@ -10,6 +10,7 @@ const customerRoute = require('../Routes/customerRoute');
 
 const app = express();
 app.use(express.json());
+app.use('/static', express.static('public'));
 
 app.use('/login', loginRouter);
 app.use('/register', registerRoute);
