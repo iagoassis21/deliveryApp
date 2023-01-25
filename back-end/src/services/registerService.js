@@ -13,14 +13,18 @@ const createUser = async (obj) => {
     throw new Error('Conflict');
   }
   
-  await User.create({
+  const { dataValues } = await User.create({
     name: obj.name,
     email: obj.email,
     password: passCrypt,
     role: 'customer',
   });
 
-  return createToken({ ...obj, password: '_' });
+  const { id, password, ...rest } = dataValues;
+
+  const token = createToken({ ...obj, password: '_' });
+  
+  return { token, ...rest }
 };
 
 module.exports = {
