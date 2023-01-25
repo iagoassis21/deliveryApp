@@ -5,7 +5,7 @@ const getUser = async (req, res) => {
     const { email, password } = req.body;
     const token = await loginService.getUser({ email, password });
     // console.log(token);
-    return res.status(200).json({ token });
+    return res.status(200).json(token);
   } catch (error) {
     return res.status(404).json({ message: 'Not found' });
   }
