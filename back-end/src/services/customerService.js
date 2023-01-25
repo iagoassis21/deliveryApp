@@ -1,19 +1,24 @@
-const { Sale } = require('../database/models');
+const { Sale, SalesProduct } = require('../database/models');
 
 const createOrder = async (obj) => {
-  // console.log(obj);
   const order = await Sale.create({
-  userId: obj.userId,
-  sellerId: obj.sellerId,
-  totalPrice: obj.totalPrice,
-  deliveryAddress: obj.deliveryAddress,
-  deliveryNumber: obj.deliveryNumber,
-  saleDate: obj.saleDate,
-  status: obj.status,
+    userId: obj.userId,
+    sellerId: obj.sellerId,
+    totalPrice: obj.totalPrice,
+    deliveryAddress: obj.deliveryAddress,
+    deliveryNumber: obj.deliveryNumber,
+    saleDate: new Date(),
+    status: obj.status || 'Pendente',
   });
-  console.log(order);
+   obj.products.map(async ({ productId, quantity }) => {
+    await SalesProduct.create({
+      saleId: order.id,
+      productId,
+      quantity,
+    });
+  });
 
-  return order;
+  return order.id;
 };
 
 const getOrder = async (id) => {
@@ -24,7 +29,14 @@ const getOrder = async (id) => {
   return order;
 };
 
+const getOrderBySeller = async (id) => {
+  const sales = await Sale.findAll({ where: { sellerId: id } });
+
+  return sales;
+};
+
 module.exports = {
   createOrder,
   getOrder,
+  getOrderBySeller,
 };
