@@ -41,6 +41,12 @@ const getOrderByUser = async (id) => {
   return sales;
 };
 
+const getAllOrders = async () => {
+  const sales = await Sale.findAll();
+
+  return sales;
+};
+
 const updateStatus = async (id, newStatus) => {
   const sale = await Sale.findByPk(id);
 
@@ -56,4 +62,5 @@ module.exports = {
   getOrderBySeller,
   getOrderByUser,
   updateStatus,
+  getAllOrders,
 };

@@ -45,6 +45,16 @@ const getOrderByUser = async (req, res) => {
   }
 };
 
+const getAllOrders = async (req, res) => {
+  try {
+    const sales = await customerService.getAllOrders();
+
+    return res.status(201).json(sales);
+  } catch (error) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+};
+
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -65,4 +75,5 @@ module.exports = {
   getOrderBySeller,
   getOrderByUser,
   updateStatus,
+  getAllOrders,
 };
