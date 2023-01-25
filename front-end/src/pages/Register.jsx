@@ -52,11 +52,12 @@ export default function Register(props) {
 
   const onClickRegister = async () => {
     const { history } = props;
-    const { message } = await getRegister(name, email, password);
+    const { message, ...user } = await getRegister(name, email, password);
     if (message === 'Conflict') {
       return setErrorMsg('Usuário já cadastrado');
     }
     setErrorMsg('');
+    localStorage.setItem('user', JSON.stringify(user));
     return history.push('/customer/products');
   };
 

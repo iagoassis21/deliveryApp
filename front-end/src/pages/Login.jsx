@@ -44,11 +44,12 @@ export default function Login(props) {
 
   const onClickLogin = async () => {
     const { history } = props;
-    const { message } = await getLoginApp(email, password);
+    const { message, ...user } = await getLoginApp(email, password);
     if (message === 'Not found') {
       return setErrorMsg('Dados Invalidos');
     }
     setErrorMsg('');
+    localStorage.setItem('user', JSON.stringify(user));
     return history.push('/customer/products');
   };
 
