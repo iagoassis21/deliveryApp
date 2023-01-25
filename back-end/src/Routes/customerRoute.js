@@ -1,12 +1,13 @@
 const express = require('express');
 const customerController = require('../controllers/customerController');
+const verifyToken = require('../middlewares/verifyToken');
 
 const customerRoute = express.Router();
 
-customerRoute.post('/', customerController.createOrder);
-customerRoute.get('/:id', customerController.getOrder);
-customerRoute.get('/seller/:id', customerController.getOrderBySeller);
-customerRoute.get('/user/:id', customerController.getOrderByUser);
-customerRoute.patch('/update/:id', customerController.updateStatus);
+customerRoute.post('/', verifyToken, customerController.createOrder);
+customerRoute.get('/:id', verifyToken, customerController.getOrder);
+customerRoute.get('/seller/:id', verifyToken, customerController.getOrderBySeller);
+customerRoute.get('/user/:id', verifyToken, customerController.getOrderByUser);
+customerRoute.patch('/update/:id', verifyToken, customerController.updateStatus);
 
 module.exports = customerRoute;
