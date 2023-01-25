@@ -4,7 +4,7 @@ const createOrder = async (req, res) => {
   try {
     const newSale = await customerService.createOrder(req.body);
     // console.log(order);
-    
+
     return res.status(201).json(newSale);
   } catch (error) {
     console.log(error);
@@ -23,7 +23,19 @@ const getOrder = async (req, res) => {
   }
 };
 
+const getOrderBySeller = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sales = await customerService.getOrderBySeller(id);
+
+    return res.status(201).json(sales);
+  } catch (error) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrder,
+  getOrderBySeller,
 };
