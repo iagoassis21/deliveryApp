@@ -1,16 +1,20 @@
+const admService = require('../services/admService');
+
 const createUsers = async (req, res) => {
   try {
-    const newUser = await userService.createUser(req.body);
-    return res.status(201).json(newUser);
+    await admService.admCreateUser(req.body);
+    return res.status(201).json({ message: 'Created' });
   } catch (error) {
+    console.log(error);
     return res.status(409).json({ message: 'Conflict User' });
   }
 };
 
 const deleteUsers = async (req, res) => {
   try {
-    const newUser = await userService.deleteUser(req.body);
-    return res.status(201).json(newUser);
+    const { id } = req.params;
+    await admService.deleteUser(id);
+    return res.status(201).json({ message: 'Deleted' });
   } catch (error) {
     return res.status(409).json({ message: 'Not Found' });
   }

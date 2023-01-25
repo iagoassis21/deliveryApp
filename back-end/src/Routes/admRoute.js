@@ -1,11 +1,12 @@
 const express = require('express');
+const admController = require('../controllers/admController');
 
-const verifyToken = require('../middlewares/verifyToken');
+// const verifyToken = require('../middlewares/verifyToken');
 
 const admRoute = express.Router();
 
-admRoute.post('/manage', admController.createUsers);
+admRoute.post('/manager', admController.createUsers);
 
-admRoute.delete('/manage', admController.deleteUsers);
+admRoute.delete('/manager/:id', admController.deleteUsers);
 
 module.exports = admRoute;
