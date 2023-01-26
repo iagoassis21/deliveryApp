@@ -1,16 +1,26 @@
-import React from 'react';
-import DeliveryAppMock from '../Mocks/DeliveryAppMock';
+import React, { useEffect, useState } from 'react';
+import LoadingBar from '../Components/LoadingBar';
+import NavBar from '../Components/navBar';
+import ProductCard from '../Components/ProductCard';
+import { getDeliveryData } from '../Services/DeliveryAppApi';
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const data = async () => {
+      const response = await getDeliveryData();
+      setProducts(response);
+    };
+    data();
+  }, []);
+
   return (
     <div>
+      <NavBar />
+      { products && products.length === 0 && <LoadingBar />}
       {
-        DeliveryAppMock.map((item) => (
-          <div key={ item.id }>
-            <span>{ item.image_url }</span>
-            <span>{ item.name }</span>
-            <span>{ item.price }</span>
-          </div>
+        products.map((item) => (
+          <ProductCard key={ item.id } products={ item } />
         ))
       }
     </div>
