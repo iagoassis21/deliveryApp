@@ -1,9 +1,14 @@
 const URL = 'http://localhost:3001';
 const appJson = 'application/json';
 
-export const getDeliveryData = async () => {
+export const getDeliveryData = async (token) => {
+  const options = {
+    method: 'GET',
+    headers: { 'Content-Type': appJson, Authorization: token },
+    // body: JSON.stringify({ email: emailParams, password: passParams }),
+  };
   try {
-    const response = await fetch(`${URL}/products`);
+    const response = await fetch(`${URL}/products`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -41,7 +46,7 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
+    console.log('erro na tentativa de registro', error);
   }
 };
 

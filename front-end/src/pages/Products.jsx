@@ -5,14 +5,17 @@ import ProductCard from '../Components/ProductCard';
 import { getDeliveryData } from '../Services/DeliveryAppApi';
 
 export default function Products() {
+  const getUserToken = JSON.parse(localStorage.getItem('user'));
+  const { token } = getUserToken;
+  console.log(token);
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const data = async () => {
-      const response = await getDeliveryData();
+      const response = await getDeliveryData(token);
       setProducts(response);
     };
     data();
-  }, []);
+  }, [token]);
 
   return (
     <div>

@@ -4,10 +4,11 @@ const createToken = require('../utils/createToken');
 const validateRegister = require('../utils/validateRegister');
 
 const createUser = async (obj) => {
-  validateRegister(obj);
+  console.log(obj);
+  // validateRegister(obj);
   const passCrypt = md5(obj.password);
   const user = await User.findOne({ where: { email: obj.email } });
-  console.log(user);
+  console.log('log do register service', user);
 
   if (user !== null) {
     throw new Error('Conflict');
