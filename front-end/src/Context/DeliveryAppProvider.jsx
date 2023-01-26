@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { getDeliveryData } from '../Services/DeliveryAppApi';
+import addItemToArray from '../utils/addItemToArray';
 import DeliveryAppContext from './DeliveryAppContext';
 
 export default function DeliveryAppProvider({ children }) {
@@ -11,6 +12,20 @@ export default function DeliveryAppProvider({ children }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const updateCart = (param) => {
+    const getCartFromLocal = JSON.parse(localStorage.getItem('cart'));
+    console.log('getCartFromLocal', typeof getCartFromLocal, getCartFromLocal);
+
+    if (!getCartFromLocal) {
+      return localStorage.setItem('cart', JSON.stringify([]));
+    }
+
+    const result = addItemToArray(getCartFromLocal, param);
+    console.log('result', result);
+    const updatedCart = localStorage.setItem('cart', JSON.stringify(result));
+    return updatedCart;
+  };
 
   const requestDeliveryData = async () => {
     try {
@@ -40,9 +55,10 @@ export default function DeliveryAppProvider({ children }) {
         setEmail,
         password,
         setPassword,
+        updateCart,
       } }
     >
-      { children }
+      {children}
     </Provider>
   );
 }

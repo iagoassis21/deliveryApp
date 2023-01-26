@@ -9,6 +9,7 @@ export default function Products() {
   const { token } = getUserToken;
   console.log(token);
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const data = async () => {
       const response = await getDeliveryData(token);

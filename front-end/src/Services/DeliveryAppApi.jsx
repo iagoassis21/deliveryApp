@@ -1,11 +1,15 @@
 const URL = 'http://localhost:3001';
 const appJson = 'application/json';
 
+const headerParam = { 'Content-Type': 'application/json' };
+
 export const getDeliveryData = async (token) => {
   const options = {
     method: 'GET',
-    headers: { 'Content-Type': appJson, Authorization: token },
-    // body: JSON.stringify({ email: emailParams, password: passParams }),
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
   };
   try {
     const response = await fetch(`${URL}/products`, options);
@@ -19,7 +23,7 @@ export const getDeliveryData = async (token) => {
 export const getLoginApp = async (emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': appJson },
+    headers: headerParam,
     body: JSON.stringify({ email: emailParams, password: passParams }),
   };
   try {
@@ -34,7 +38,7 @@ export const getLoginApp = async (emailParams, passParams) => {
 export const getRegister = async (nameParams, emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': appJson },
+    headers: headerParam,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -54,7 +58,7 @@ export const getRegisterByAdm = async ({ nameParams,
   emailParams, passParams, roleParams }) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': appJson },
+    headers: headerParam,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
