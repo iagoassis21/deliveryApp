@@ -18,11 +18,13 @@ export default function Products() {
     <div>
       <NavBar />
       { products && products.length === 0 && <LoadingBar />}
-      {
-        products.map((item) => (
-          <ProductCard key={ item.id } products={ item } />
-        ))
-      }
+      <div className="grid grid-cols-4 gap-4 mt-4 rounded-lg">
+        {
+          products.map((item) => (
+            <ProductCard key={ item.id } products={ item } />
+          ))
+        }
+      </div>
     </div>
   );
 }

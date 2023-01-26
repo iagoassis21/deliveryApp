@@ -1,4 +1,5 @@
 const URL = 'http://localhost:3001';
+const appJson = 'application/json';
 
 export const getDeliveryData = async () => {
   try {
@@ -13,7 +14,7 @@ export const getDeliveryData = async () => {
 export const getLoginApp = async (emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': appJson },
     body: JSON.stringify({ email: emailParams, password: passParams }),
   };
   try {
@@ -28,7 +29,7 @@ export const getLoginApp = async (emailParams, passParams) => {
 export const getRegister = async (nameParams, emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': appJson },
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -48,7 +49,7 @@ export const getRegisterByAdm = async ({ nameParams,
   emailParams, passParams, roleParams }) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': appJson },
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
