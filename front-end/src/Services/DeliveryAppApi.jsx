@@ -1,4 +1,5 @@
 const URL = 'http://localhost:3001';
+const appJson = 'application/json';
 
 const headerParam = { 'Content-Type': 'application/json' };
 
@@ -49,7 +50,7 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
+    console.log('erro na tentativa de registro', error);
   }
 };
 
@@ -57,7 +58,7 @@ export const getRegisterByAdm = async ({ nameParams,
   emailParams, passParams, roleParams }) => {
   const options = {
     method: 'POST',
-    headers,
+    headers: headerParam,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
