@@ -5,15 +5,22 @@ const createToken = require('../utils/createToken');
 const getUser = async ({ email, password }) => {
   const passCrypt = md5(password);
   const user = await User.findOne({ where: { email } });
-  
+
   if (!user || user.password !== passCrypt) throw new Error('Not found');
-  
+
   const { password: _, ...userWithPass } = user.dataValues;
   const token = createToken(userWithPass);
-  delete userWithPass.id;   
+  delete userWithPass.id;
   return { ...userWithPass, token };
+};
+
+const getUserbyId = async (id) => {
+  const user = await User.findByPk(id);
+
+  return user;
 };
 
 module.exports = {
   getUser,
+  getUserbyId,
 };
