@@ -5,7 +5,6 @@ export default function Admin() {
   return (
     <div>
       <AdmForm />
-
     </div>
   );
 }
