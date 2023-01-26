@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import DeliveryAppContext from '../Context/DeliveryAppContext';
 
 export default function ProductCard({ products }) {
+  const { updateCart } = useContext(DeliveryAppContext);
   const { id, urlImage, name, price } = products;
   const [unitItem, setUnitItem] = useState(0);
+
+  const increaseQuantity = () => {
+    const productsWithoutId = { name, price, urlImage };
+    const newObj = { ...productsWithoutId, qnt: 0 };
+    return updateCart(newObj);
+  };
 
   return (
     <div>
@@ -37,7 +45,7 @@ export default function ProductCard({ products }) {
         />
         <button
           type="button"
-          onClick={ () => { setUnitItem(unitItem + 1); } }
+          onClick={ () => increaseQuantity() }
           data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           +

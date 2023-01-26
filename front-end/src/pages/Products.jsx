@@ -6,9 +6,11 @@ import { getDeliveryData } from '../Services/DeliveryAppApi';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
+    const localToken = JSON.parse(localStorage.getItem('user'));
     const data = async () => {
-      const response = await getDeliveryData();
+      const response = await getDeliveryData(localToken.token);
       setProducts(response);
     };
     data();

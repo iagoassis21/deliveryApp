@@ -1,8 +1,17 @@
 const URL = 'http://localhost:3001';
 
-export const getDeliveryData = async () => {
+const headerParam = { 'Content-Type': 'application/json' };
+
+export const getDeliveryData = async (token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
   try {
-    const response = await fetch(`${URL}/products`);
+    const response = await fetch(`${URL}/products`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -13,7 +22,7 @@ export const getDeliveryData = async () => {
 export const getLoginApp = async (emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: headerParam,
     body: JSON.stringify({ email: emailParams, password: passParams }),
   };
   try {
@@ -28,7 +37,7 @@ export const getLoginApp = async (emailParams, passParams) => {
 export const getRegister = async (nameParams, emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: headerParam,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -48,7 +57,7 @@ export const getRegisterByAdm = async ({ nameParams,
   emailParams, passParams, roleParams }) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
