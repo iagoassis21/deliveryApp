@@ -11,7 +11,7 @@ export default function orders() {
           OrderItems.map((item) => (
             <div
               key={ item.id }
-              datatest-id={ `customer_orders__element-order-id-${item.id}` }
+              data-testid={ `customer_orders__element-order-id-${item.id}` }
             >
               <p>{item.pedido}</p>
               <p
