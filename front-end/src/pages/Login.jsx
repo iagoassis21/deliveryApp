@@ -9,18 +9,8 @@ export default function Login(props) {
   const { email, password, setEmail, setPassword } = useContext(DeliveryAppContext);
   const [mailIsValid, setMailIsValid] = useState(false);
   const [passIsValid, setPassIsValid] = useState(false);
-  // const [deliveryDate, setDeliveryDate] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
-  // const [validLogin, setValidLogin] = useState(false);
   const seis = 6;
-
-  // useEffect(() => {
-  //   const getDelivery = async () => {
-  //     const data = await getDeliveryData();
-  //     setDeliveryDate(data);
-  //   };
-  //   getDelivery();
-  // }, []);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -50,6 +40,8 @@ export default function Login(props) {
     }
     setErrorMsg('');
     localStorage.setItem('user', JSON.stringify(user));
+    setEmail('');
+    setPassword('');
     return history.push('/customer/products');
   };
 
