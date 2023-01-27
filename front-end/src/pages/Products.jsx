@@ -21,7 +21,7 @@ export default function Products() {
     <div>
       <NavBar />
       { products && products.length === 0 && <LoadingBar />}
-      <div className="grid grid-cols-4 gap-4 mt-4 rounded-lg">
+      <div>
         {
           products.map((item) => (
             <ProductCard key={ item.id } products={ item } />
