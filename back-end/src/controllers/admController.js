@@ -5,7 +5,6 @@ const createUsers = async (req, res) => {
     await admService.admCreateUser(req.body);
     return res.status(201).json({ message: 'Created' });
   } catch (error) {
-    console.log(error);
     return res.status(409).json({ message: 'Conflict User' });
   }
 };

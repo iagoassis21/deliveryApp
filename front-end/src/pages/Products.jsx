@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import LoadingBar from '../Components/LoadingBar';
-import NavBar from '../Components/navBar';
+import NavBar from '../Components/NavBar';
 import ProductCard from '../Components/ProductCard';
 import { getDeliveryData } from '../Services/DeliveryAppApi';
 
 export default function Products() {
-  const getUserToken = JSON.parse(localStorage.getItem('user'));
-  const { token } = getUserToken;
-  console.log(token);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    const getUserToken = JSON.parse(localStorage.getItem('user'));
+    const { token } = getUserToken;
     const data = async () => {
       const response = await getDeliveryData(token);
       setProducts(response);
     };
     data();
-  }, [token]);
+  }, []);
 
   return (
     <div>

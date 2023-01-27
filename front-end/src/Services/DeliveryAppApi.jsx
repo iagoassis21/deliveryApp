@@ -1,5 +1,4 @@
 const URL = 'http://localhost:3001';
-const appJson = 'application/json';
 
 const headerParam = { 'Content-Type': 'application/json' };
 
@@ -69,7 +68,6 @@ export const getRegisterByAdm = async ({ nameParams,
   try {
     const response = await fetch(`${URL}/admin/manager`, options);
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (error) {
     console.log(error);

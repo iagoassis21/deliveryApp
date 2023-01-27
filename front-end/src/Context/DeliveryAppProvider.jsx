@@ -15,14 +15,12 @@ export default function DeliveryAppProvider({ children }) {
 
   const updateCart = (param) => {
     const getCartFromLocal = JSON.parse(localStorage.getItem('cart'));
-    console.log('getCartFromLocal', typeof getCartFromLocal, getCartFromLocal);
 
     if (!getCartFromLocal) {
       return localStorage.setItem('cart', JSON.stringify([]));
     }
 
     const result = addItemToArray(getCartFromLocal, param);
-    console.log('result', result);
     const updatedCart = localStorage.setItem('cart', JSON.stringify(result));
     return updatedCart;
   };

@@ -9,7 +9,6 @@ function AdmForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(nome, email, senha, tipoUsuario);
   };
 
   const createUser = async () => {
