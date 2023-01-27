@@ -3,15 +3,35 @@ import React, { useState, useContext } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 
 export default function ProductCard({ products }) {
-  const { updateCart } = useContext(DeliveryAppContext);
+  const { cartItems, setCartItems } = useContext(DeliveryAppContext);
   const { id, urlImage, name, price } = products;
   const priceFixed = Number(price).toFixed(2);
   const [unitItem, setUnitItem] = useState(0);
 
+  const decreaseQuantity = () => {
+    if (unitItem === 0) {
+      setUnitItem(0);
+    }
+    setUnitItem(unitItem - 1);
+  };
+
   const increaseQuantity = () => {
-    const productsWithoutId = { name, price, urlImage };
-    const newObj = { ...productsWithoutId, qnt: 0 };
-    return updateCart(newObj);
+    setUnitItem(unitItem + 1);
+    const itemIncreasedObj = {
+      [id]: id,
+      name,
+      price,
+      Qtd: 1 + unitItem,
+      subTotal: (priceFixed * (1 + unitItem)).toFixed(2) };
+    const verifyItemInCart = cartItems.find((item) => item[id] === id);
+    console.log('checando se o item ja existe no carrinho', verifyItemInCart);
+    if (verifyItemInCart) {
+      const cartItemsArray = [...cartItems, itemIncreasedObj];
+      setCartItems(cartItemsArray);
+      return localStorage.setItem('cart', JSON.stringify(cartItemsArray));
+    }
+    console.log('obj criado', itemIncreasedObj);
+    console.log('array do cartItems dentro do local storage', cartItems);
   };
 
   return (
@@ -40,7 +60,7 @@ export default function ProductCard({ products }) {
         <button
           className="border-2 w-8 border-black rounded-lg"
           type="button"
-          onClick={ () => (unitItem === 0 ? setUnitItem(0) : setUnitItem(unitItem - 1)) }
+          onClick={ decreaseQuantity }
           data-testid={ `customer_products__button-card-rm-item-${id}` }
         >
           -
@@ -54,7 +74,7 @@ export default function ProductCard({ products }) {
         <button
           className="border-2 w-8 border-black rounded-lg"
           type="button"
-          onClick={ () => increaseQuantity() }
+          onClick={ increaseQuantity }
           data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           +
@@ -65,5 +85,10 @@ export default function ProductCard({ products }) {
 }
 
 ProductCard.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  products: PropTypes.shape({
+    id: PropTypes.number,
+    urlImage: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
 };

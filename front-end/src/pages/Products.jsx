@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import CardCart from '../Components/CardCart';
 import LoadingBar from '../Components/LoadingBar';
 import NavBar from '../Components/navBar';
 import ProductCard from '../Components/ProductCard';
+import DeliveryAppContext from '../Context/DeliveryAppContext';
 import { getDeliveryData } from '../Services/DeliveryAppApi';
 
 export default function Products() {
+  const { cartItems } = useContext(DeliveryAppContext);
   const getUserToken = JSON.parse(localStorage.getItem('user'));
   const { token } = getUserToken;
-  console.log(token);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    if (!JSON.parse(localStorage.getItem('cart'))) {
+      return localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
     const data = async () => {
       const response = await getDeliveryData(token);
       setProducts(response);
     };
     data();
-  }, [token]);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [token, cartItems]);
 
   return (
     <div>
@@ -28,6 +34,7 @@ export default function Products() {
             <ProductCard key={ item.id } products={ item } />
           ))
         }
+        <CardCart />
       </div>
     </div>
   );
