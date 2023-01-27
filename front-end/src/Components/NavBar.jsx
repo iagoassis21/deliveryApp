@@ -26,7 +26,7 @@ export default function NavBar() {
         }
         <button
           type="button"
-          data-testId="customer_products__element-navbar-link-orders"
+          data-testid="customer_products__element-navbar-link-orders"
           onClick={ () => onClickNavigation('orders') }
           className="ordersBtn"
         >
@@ -34,13 +34,13 @@ export default function NavBar() {
         </button>
         <button
           type="button"
-          data-testId="customer_products__element-navbar-user-full-name"
+          data-testid="customer_products__element-navbar-user-full-name"
         >
           {name}
         </button>
         <button
           type="button"
-          data-testId="customer_products__element-navbar-link-logout"
+          data-testid="customer_products__element-navbar-link-logout"
           onClick={ logout }
         >
           Sair

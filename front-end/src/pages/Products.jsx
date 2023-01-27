@@ -8,8 +8,8 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getUserToken = JSON.parse(localStorage.getItem('user'));
-    const { token } = getUserToken;
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    // const { token } = getUserToken;
     const data = async () => {
       const response = await getDeliveryData(token);
       setProducts(response);
