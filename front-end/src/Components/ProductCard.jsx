@@ -1,37 +1,44 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 
 export default function ProductCard({ products }) {
   const { cartItems, setCartItems } = useContext(DeliveryAppContext);
   const { id, urlImage, name, price } = products;
-  const priceFixed = Number(price).toFixed(2);
+  const priceFixed = Number(price).toFixed(2).replace('.', ',');
   const [unitItem, setUnitItem] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const decreaseQuantity = () => {
     if (unitItem === 0) {
-      setUnitItem(0);
+      return setUnitItem(0);
     }
-    setUnitItem(unitItem - 1);
+    return setUnitItem(unitItem - 1);
   };
+
+  useEffect(() => {
+    let arrayCart = [];
+    const itemIncreasedObj = {
+      id,
+      name,
+      price,
+      Qtd: unitItem,
+      subTotal: (price * unitItem) };
+    const checkItemInCart = cartItems.some((item) => item.id === itemIncreasedObj.id);
+    if (checkItemInCart) {
+      arrayCart = cartItems.map((item) => {
+        if (item.id === itemIncreasedObj.id) return itemIncreasedObj;
+        return item;
+      });
+    } else arrayCart = [...cartItems, itemIncreasedObj];
+    setCartItems(arrayCart.filter(({ Qtd }) => Qtd !== 0));
+  }, [unitItem]);
 
   const increaseQuantity = () => {
     setUnitItem(unitItem + 1);
-    const itemIncreasedObj = {
-      [id]: id,
-      name,
-      price,
-      Qtd: 1 + unitItem,
-      subTotal: (priceFixed * (1 + unitItem)).toFixed(2) };
-    const verifyItemInCart = cartItems.find((item) => item[id] === id);
-    console.log('checando se o item ja existe no carrinho', verifyItemInCart);
-    if (verifyItemInCart) {
-      const cartItemsArray = [...cartItems, itemIncreasedObj];
-      setCartItems(cartItemsArray);
-      return localStorage.setItem('cart', JSON.stringify(cartItemsArray));
-    }
-    console.log('obj criado', itemIncreasedObj);
-    console.log('array do cartItems dentro do local storage', cartItems);
   };
 
   return (
@@ -55,7 +62,7 @@ export default function ProductCard({ products }) {
         <p
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          { `R$ ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
+          { `${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
         </p>
         <button
           className="border-2 w-8 border-black rounded-lg"
