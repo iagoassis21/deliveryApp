@@ -1,80 +1,132 @@
 import React, { useState } from 'react';
-import { getRegisterByAdm } from '../Services/DeliveryAppApi';
+import PropTypes from 'prop-types';
+import { getRegisterByAdm, getUsersData } from '../Services/DeliveryAppApi';
+import regexEmail from '../utils/regexEmail';
 
-function AdmForm() {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [tipoUsuario, setTipoUsuario] = useState('');
+function AdmForm({ setUsers, token }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'customer',
+  });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(nome, email, senha, tipoUsuario);
+  const NAME_LENGHT = 12;
+  const PASSWORD_LENGHT = 6;
+
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
 
-  const createUser = async () => {
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log('Form submitted', formData);
+    const { name, email, password, role } = formData;
     const newUser = {
-      nameParams: nome,
-      emailParams: email,
-      passParams: senha,
-      roleParams: tipoUsuario,
+      name,
+      email,
+      password,
+      role,
+      token,
     };
     await getRegisterByAdm(newUser);
+    const users = await getUsersData(token);
+    setUsers(users);
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+      role: 'customer',
+    });
   };
 
+  React.useEffect(() => {
+    const isNameValid = formData.name.length >= NAME_LENGHT;
+    const isEmailValid = regexEmail.test(formData.email);
+    const isPasswordValid = formData.password.length >= PASSWORD_LENGHT;
+
+    setIsButtonDisabled(!(isNameValid && isEmailValid && isPasswordValid));
+  }, [formData]);
+
   return (
-    <form onSubmit={ handleSubmit }>
-      <label htmlFor="nameinput">
-        Nome:
-        <input
-          type="text"
-          data-testid="admin_manage__input-name"
-          value={ nome }
-          onChange={ (event) => setNome(event.target.value) }
-        />
-      </label>
-      <br />
-      <label htmlFor="emailInput">
-        Email:
-        <input
-          type="email"
-          data-testid="admin_manage__input-email"
-          value={ email }
-          onChange={ (event) => setEmail(event.target.value) }
-        />
-      </label>
-      <br />
-      <label htmlFor="passInput">
-        Senha:
-        <input
-          type="password"
-          data-testid="admin_manage__input-password"
-          value={ senha }
-          onChange={ (event) => setSenha(event.target.value) }
-        />
-      </label>
-      <br />
-      <label htmlFor="statusInput">
-        Tipo de Usuário:
-        <select
-          data-testid="admin_manage__select-role"
-          value={ tipoUsuario }
-          onChange={ (event) => setTipoUsuario(event.target.value) }
-        >
-          <option value="admin"> Admin</option>
-          <option value="seller">Seller</option>
-          <option value="costumer">Comum</option>
-        </select>
-      </label>
-      <br />
+    <form onSubmit={ handleFormSubmit }>
+      <div>
+        <label htmlFor="name">
+          Name:
+          <input
+            type="text"
+            id="name"
+            name="name"
+            data-testid="admin_manage__input-name"
+            value={ formData.name }
+            onChange={ handleInputChange }
+          />
+        </label>
+      </div>
+
+      <div>
+        <label htmlFor="email">
+          Email:
+          <input
+            type="email"
+            id="email"
+            name="email"
+            data-testid="admin_manage__input-email"
+            value={ formData.email }
+            onChange={ handleInputChange }
+          />
+        </label>
+      </div>
+
+      <div>
+        <label htmlFor="password">
+          Password:
+          <input
+            type="password"
+            id="password"
+            name="password"
+            data-testid="admin_manage__input-password"
+            value={ formData.password }
+            onChange={ handleInputChange }
+          />
+        </label>
+      </div>
+
+      <div>
+        <label htmlFor="role">
+          Role:
+          <select
+            id="role"
+            name="role"
+            data-testid="admin_manage__select-role"
+            value={ formData.role }
+            onChange={ handleInputChange }
+          >
+            <option value="customer">customer</option>
+            <option value="seller">seller</option>
+          </select>
+        </label>
+      </div>
+
       <button
-        type="button"
-        onClick={ () => createUser() }
+        type="submit"
+        disabled={ isButtonDisabled }
+        data-testid="admin_manage__button-register"
       >
-        Cadastrar
+        Submit
       </button>
+      <span data-testid="admin_manage__element-invalid-register" />
     </form>
   );
 }
+
+AdmForm.propTypes = {
+  token: PropTypes.string.isRequired,
+  setUsers: PropTypes.string.isRequired,
+};
 
 export default AdmForm;

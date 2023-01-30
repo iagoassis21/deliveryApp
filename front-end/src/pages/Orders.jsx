@@ -1,6 +1,6 @@
 import React from 'react';
 import OrderItems from '../Mocks/OrdersMock';
-import NavBar from '../Components/navBar';
+import NavBar from '../Components/NavBar';
 
 export default function orders() {
   return (

@@ -3,11 +3,9 @@ const customerService = require('../services/customerService');
 const createOrder = async (req, res) => {
   try {
     const newSale = await customerService.createOrder(req.body);
-    // console.log(order);
 
     return res.status(201).json(newSale);
   } catch (error) {
-    console.log(error);
     return res.status(409).json({ message: 'Conflict customer' });
   }
 };
@@ -59,12 +57,10 @@ const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-    console.log(status);
     const update = await customerService.updateStatus(id, status);
 
     return res.status(201).json(update);
   } catch (error) {
-    console.log(error);
     return res.status(404).json({ message: 'Conflict' });
   }
 };

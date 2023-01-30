@@ -1,14 +1,12 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 const createToken = require('../utils/createToken');
-const validateRegister = require('../utils/validateRegister');
+// const validateRegister = require('../utils/validateRegister');
 
 const createUser = async (obj) => {
-  console.log(obj);
   // validateRegister(obj);
   const passCrypt = md5(obj.password);
   const user = await User.findOne({ where: { email: obj.email } });
-  console.log('log do register service', user);
 
   if (user !== null) {
     throw new Error('Conflict');
@@ -21,11 +19,12 @@ const createUser = async (obj) => {
     role: 'customer',
   });
 
-  const { id, password, ...rest } = dataValues;
+  const { id, name, email, role } = dataValues;
 
-  const token = createToken({ ...obj, password: '_' });
+  const token = createToken({ id, name, email, role });
   
-  return { token, ...rest }
+  return { id, name, email, role, token };
+
 };
 
 module.exports = {
