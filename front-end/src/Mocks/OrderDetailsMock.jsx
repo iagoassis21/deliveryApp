@@ -1,0 +1,25 @@
+const OrderDetailsMock = [
+  { id: 1,
+    pedido: 1,
+    userId: 710,
+    sellerId: 25,
+    sellerName: 'Robervaldo',
+    totalPrice: 10.00,
+    deliveryAddress: 'Rua das Flores, 123',
+    deliveryNumber: '123',
+    saleDate: Date.now(),
+    status: 'Pendente',
+  },
+  // { id: 2,
+  //   pedido: 2,
+  //   userId: 711,
+  //   sellerId: 26,
+  //   totalPrice: 25.34,
+  //   deliveryAddress: 'Rua das Barril, 456',
+  //   deliveryNumber: '456',
+  //   saleDate: Date.now(),
+  //   status: 'Entregue',
+  // },
+];
+
+export default OrderDetailsMock;
