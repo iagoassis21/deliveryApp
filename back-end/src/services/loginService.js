@@ -10,7 +10,7 @@ const getUser = async ({ email, password }) => {
 
   const { password: _, ...userWithPass } = user.dataValues;
   const token = createToken(userWithPass);
-  delete userWithPass.id;
+  // delete userWithPass.id;
   return { ...userWithPass, token };
 };
 

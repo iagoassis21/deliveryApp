@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-export default function NavBar(props) {
+export default function Navbar(props) {
   // const { user } = useContext(DeliveryAppContext)
   // deixei essas linhas comentadas pois mais para frente pensei em usa-las para pegar o nome do usuario pelo state
   const { name, page } = props;
@@ -42,7 +42,7 @@ export default function NavBar(props) {
   );
 }
 
-NavBar.propTypes = {
+Navbar.propTypes = {
   name: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
 };

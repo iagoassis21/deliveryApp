@@ -110,3 +110,37 @@ export const deleteUsers = async (id, token) => {
     console.log(error);
   }
 };
+
+export const getOrdersBySellerId = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/customer/seller/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOrderById = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/customer/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdmForm from '../Components/adminForm';
-import NavBar from '../Components/navBar';
+import NavBar from '../Components/NavBar';
 import { getUsersData, deleteUsers } from '../Services/DeliveryAppApi';
 
 export default function Admin() {
@@ -25,7 +25,7 @@ export default function Admin() {
 
   return (
     <div>
-      <NavBar page="Gerenciar Usuários" name="Admin" />
+      <NavBar />
       <AdmForm setUsers={ setUsers } token={ token } />
       {
         users.map((item, index) => (
