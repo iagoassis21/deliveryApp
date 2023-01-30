@@ -6,6 +6,13 @@ const getAllProducts = async () => {
   return products;
 };
 
+const getProductsById = async (id) => {
+  const product = await Product.findByPk(id);
+
+  return product;
+}
+
 module.exports = {
   getAllProducts,
+  getProductsById,
 };
