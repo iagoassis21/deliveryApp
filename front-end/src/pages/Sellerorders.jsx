@@ -10,7 +10,6 @@ export default function SellerOrders(props) {
     const data = async () => {
       const userInfo = JSON.parse(localStorage.getItem('user'));
       const { id, token } = userInfo;
-      console.log(id);
       const response = await getOrdersBySellerId(token, id);
       setOrders(response);
     };

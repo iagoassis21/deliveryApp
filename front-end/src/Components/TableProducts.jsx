@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getProductbyId,
+  getProductsBySaleId,
+  getOrderById } from '../Services/DeliveryAppApi';
 
-export default function TableProducts() {
+export default function TableProducts({ saleId }) {
+  const [order, setOrder] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const data = async () => {
+      const myProducts = await getProductsBySaleId(saleId);
+      const saleDetails = await getOrderById(saleId);
+      const productsDetails = await getProductbyId(myProducts.productId);
+      setProducts([...productsDetails, ...myProducts]);
+      setOrder(saleDetails);
+      // setOrder([...saleDetails, ...products, ...productsDetails]);
+    };
+    data();
+    console.log(order, products);
+  }, []);
+
   return (
     <table className="table-responsive">
       <thead>

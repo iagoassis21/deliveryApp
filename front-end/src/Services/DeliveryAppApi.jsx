@@ -144,3 +144,37 @@ export const getOrderById = async (token, id) => {
     console.log(error);
   }
 };
+
+export const getProductsBySaleId = async (token, saleId) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/products/saler/${saleId}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProductbyId = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/products/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
