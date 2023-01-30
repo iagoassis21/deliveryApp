@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAllSellers } from '../Services/DeliveryAppApi';
 
 export default function AddressFormCard() {
+  const [sellers, setAllSellers] = useState([]);
+  useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const getSellers = async () => {
+      const sellerData = await getAllSellers(token);
+      return setAllSellers(sellerData);
+    };
+    getSellers();
+  }, []);
+
   return (
     <div>
       <form>
         <select data-testid="customer_checkout__select-seller">
-          <option value="Fulana1">Fulana Pereira</option>
-          <option value="Fulana2">Fulana Silva</option>
-          <option value="Fulana3">Fulana Gonçalves</option>
+          {sellers.map((seller) => (
+            <option key={ seller.id } value={ seller.id }>
+              {seller.name}
+            </option>))}
         </select>
         <label htmlFor="addresInput">
           <input

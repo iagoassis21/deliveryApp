@@ -7,6 +7,7 @@ import Orders from './pages/Orders';
 import Customer from './pages/Customer';
 import Admin from './pages/Admin';
 import Checkout from './pages/Checkout';
+import OrderDetails from './pages/OrderDetails';
 import './App.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       <Route exact path="/customer/products" component={ Products } />
       <Route exact path="/customer/checkout" component={ Checkout } />
       <Route exact path="/customer/orders" component={ Orders } />
-      <Route exact path="/customer/orders/:orderId" component={ Orders } />
+      <Route exact path="/customer/orders/:orderId" component={ OrderDetails } />
       <Route exact path="/admin/manage" component={ Admin } />
     </Switch>
 
