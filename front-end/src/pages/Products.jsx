@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CardCart from '../Components/CardCart';
 import LoadingBar from '../Components/LoadingBar';
 import NavBar from '../Components/NavBar';
 import ProductCard from '../Components/ProductCard';
@@ -9,7 +10,6 @@ export default function Products() {
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
-    // const { token } = getUserToken;
     const data = async () => {
       const response = await getDeliveryData(token);
       setProducts(response);
@@ -27,6 +27,7 @@ export default function Products() {
             <ProductCard key={ item.id } products={ item } />
           ))
         }
+        <CardCart />
       </div>
     </div>
   );

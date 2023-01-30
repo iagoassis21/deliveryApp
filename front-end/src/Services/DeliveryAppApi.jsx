@@ -58,7 +58,10 @@ export const getRegisterByAdm = async ({ name,
   email, password, role, token }) => {
   const options = {
     method: 'POST',
-    headers: headerParam,
+    headers: {
+      'Content-Type': CONTENT_TYPE,
+      Authorization: `${token}`,
+    },
     body: JSON.stringify({
       name,
       email,
