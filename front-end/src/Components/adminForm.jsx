@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { getRegisterByAdm, getUsersData } from '../Services/DeliveryAppApi';
 import regexEmail from '../utils/regexEmail';
 
@@ -25,8 +26,6 @@ function AdmForm({ setUsers, token }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log('Form submitted', formData);
-    // const userInfo = JSON.parse(localStorage.getItem('user'));
-    // const { token } = userInfo;
     const { name, email, password, role } = formData;
     const newUser = {
       name,
@@ -125,5 +124,10 @@ function AdmForm({ setUsers, token }) {
     </form>
   );
 }
+
+AdmForm.propTypes = {
+  token: PropTypes.string.isRequired,
+  setUsers: PropTypes.string.isRequired,
+};
 
 export default AdmForm;

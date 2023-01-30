@@ -1,4 +1,5 @@
 const URL = 'http://localhost:3001';
+const CONTENT_TYPE = 'application/json';
 
 export const getDeliveryData = async () => {
   try {
@@ -13,7 +14,7 @@ export const getDeliveryData = async () => {
 export const getLoginApp = async (emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': CONTENT_TYPE },
     body: JSON.stringify({ email: emailParams, password: passParams }),
   };
   try {
@@ -28,7 +29,7 @@ export const getLoginApp = async (emailParams, passParams) => {
 export const getRegister = async (nameParams, emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': CONTENT_TYPE },
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -48,7 +49,7 @@ export const getRegisterByAdm = async ({ name,
   email, password, role, token }) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `${token}` },
+    headers: { 'Content-Type': CONTENT_TYPE, Authorization: `${token}` },
     body: JSON.stringify({
       name,
       email,
@@ -72,7 +73,7 @@ export const getUsersData = async (token) => {
       `${URL}/admin`,
       { method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': CONTENT_TYPE,
           Authorization: `${token}`,
         } },
     );
@@ -89,7 +90,7 @@ export const deleteUsers = async (id, token) => {
       `${URL}/admin/manager/${id}`,
       { method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': CONTENT_TYPE,
           Authorization: `${token}`,
         } },
     );
