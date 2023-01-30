@@ -1,4 +1,4 @@
-const OrderDetailsMock = [
+export const OrderDetailsMock = [
   { id: 1,
     pedido: 1,
     userId: 710,
@@ -10,16 +10,8 @@ const OrderDetailsMock = [
     saleDate: Date.now(),
     status: 'Pendente',
   },
-  // { id: 2,
-  //   pedido: 2,
-  //   userId: 711,
-  //   sellerId: 26,
-  //   totalPrice: 25.34,
-  //   deliveryAddress: 'Rua das Barril, 456',
-  //   deliveryNumber: '456',
-  //   saleDate: Date.now(),
-  //   status: 'Entregue',
-  // },
 ];
 
-export default OrderDetailsMock;
+export const SaleDetailsMock = [
+  { id: 1, pedido: 1, status: 'Pendente', orderDate: Date.now(), price: 10.00 },
+];

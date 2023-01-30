@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
-import OrderDetailsMock from '../Mocks/OrderDetailsMock';
+import { OrderDetailsMock } from '../Mocks/OrderDetailsMock';
+import { getOrderData } from '../Services/DeliveryAppApi';
 
 export default function OrderDetails() {
   const COD = 'customer_order_details';
+  useEffect(() => {
+    const paramsMock = 1;
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const resultOrder = async () => {
+      const orderData = await getOrderData(token, paramsMock);
+      console.log(orderData);
+      return orderData;
+    };
+    resultOrder();
+  });
   //   const { orderId } = useParams();
 
   return (
