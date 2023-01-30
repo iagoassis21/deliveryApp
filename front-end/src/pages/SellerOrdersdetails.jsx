@@ -21,34 +21,10 @@ export default function SellerOrdersdetails() {
   return (
     <div>
       <NavBar />
-      {
-        <div>
-          <h1>Detalhe do Pedido</h1>
-          <TableProducts />
-          {/* <div>
-            <p>
-              {`PEDIDO ${order.id}`}
-            </p>
-            <p>
-              {order.saleDate}
-            </p>
-            <p>
-              {order.status}
-            </p>
-            <p>
-              {order.status}
-            </p>
-          </div> */}
-          <div />
-        </div>
-        // order.map((obj) => (
-        //   <div key={ obj.id }>
-        //     <p>{obj.id}</p>
-        //     <p>{obj.status}</p>
-        //     <p>{obj.totalPrice}</p>
-        //     <p>{obj.saleDate}</p>
-        //   </div>))
-      }
+      <div>
+        <h1>Detalhe do Pedido</h1>
+        <TableProducts />
+      </div>
     </div>
   );
 }

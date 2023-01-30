@@ -6,21 +6,34 @@ export default function TableProducts() {
       <thead>
         <tr>
           <th>
-            {' '}
-            PEDIDO
-            {' '}
-            { order.id }
-            {' '}
+            { `PEDIDO ${order.id}`}
           </th>
           <th>
-            {' '}
             { order.saleDate }
-            {' '}
           </th>
           <th>
-            {' '}
             { order.status }
-            {' '}
+          </th>
+          {/* <th className="table"> {  } </th>
+            <th className="table"> Moeda </th> */}
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th>
+            Item
+          </th>
+          <th>
+            Descrição
+          </th>
+          <th>
+            Quantidade
+          </th>
+          <th>
+            Valor Unitário
+          </th>
+          <th>
+            Sub-total
           </th>
           {/* <th className="table"> {  } </th>
             <th className="table"> Moeda </th> */}
@@ -29,12 +42,11 @@ export default function TableProducts() {
       <tbody>
         {products.map((product) => (
           <tr key={ product.id }>
-            <td>{ desp.description }</td>
-            <td>{ desp.tag }</td>
-            <td>{ desp.method }</td>
-            <td>{ this.valueInput(desp.value) }</td>
-            <td>{ desp.exchangeRates[desp.currency].name }</td>
-
+            <td>{product.id}</td>
+            <td>{product.name }</td>
+            <td>{ product.quant }</td>
+            <td>{ product.value }</td>
+            <td>{ product.subTotal}</td>
           </tr>
         ))}
       </tbody>
