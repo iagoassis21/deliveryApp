@@ -45,10 +45,11 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
 };
 
 export const getRegisterByAdm = async ({ nameParams,
-  emailParams, passParams, roleParams }) => {
+  emailParams, passParams, roleParams, token }) => {
+  console.log(roleParams);
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Authorization: `${token}` },
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -61,6 +62,39 @@ export const getRegisterByAdm = async ({ nameParams,
     const json = await response.json();
     console.log(json);
     return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUsersData = async (token) => {
+  try {
+    const response = await fetch(
+      `${URL}/admin`,
+      { method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        } },
+    );
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUsers = async (id, token) => {
+  try {
+    await fetch(
+      `${URL}/admin/manager/${id}`,
+      { method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        } },
+    );
+    console.log(`O usuário ${id} foi deletado`);
   } catch (error) {
     console.log(error);
   }
