@@ -8,6 +8,6 @@ admRoute.post('/manager', verifyToken, admController.createUsers);
 
 admRoute.delete('/manager/:id', verifyToken, admController.deleteUsers);
 
-admRoute.get('/',verifyToken ,admController.getAllUsers);
+admRoute.get('/', verifyToken, admController.getAllUsers);
 
 module.exports = admRoute;

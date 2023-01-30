@@ -24,7 +24,6 @@ const createUser = async (obj) => {
   const token = createToken({ id, name, email, role });
   
   return { id, name, email, role, token };
-
 };
 
 module.exports = {
