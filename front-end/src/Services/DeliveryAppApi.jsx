@@ -44,17 +44,16 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
   }
 };
 
-export const getRegisterByAdm = async ({ nameParams,
-  emailParams, passParams, roleParams, token }) => {
-  console.log(roleParams);
+export const getRegisterByAdm = async ({ name,
+  email, password, role, token }) => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `${token}` },
     body: JSON.stringify({
-      name: nameParams,
-      email: emailParams,
-      password: passParams,
-      role: roleParams,
+      name,
+      email,
+      password,
+      role,
     }),
   };
   try {

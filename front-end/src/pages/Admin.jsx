@@ -10,13 +10,12 @@ export default function Admin() {
   useEffect(() => {
     const data = async () => {
       const userInfo = JSON.parse(localStorage.getItem('user'));
-      const tkn = userInfo.token;
-      setToken(tkn);
-      const response = await getUsersData(tkn);
+      setToken(userInfo.token);
+      const response = await getUsersData(userInfo.token);
       setUsers(response);
     };
     data();
-  }, [users]);
+  }, []);
 
   const handleDelete = async (id) => {
     await deleteUsers(id, token);
@@ -27,7 +26,7 @@ export default function Admin() {
   return (
     <div>
       <NavBar page="Gerenciar Usuários" name="Admin" />
-      <AdmForm setUsers={ setUsers } />
+      <AdmForm setUsers={ setUsers } token={ token } />
       {
         users.map((item, index) => (
           <div key={ item.id }>
@@ -36,7 +35,11 @@ export default function Admin() {
             >
               {item.id}
             </p>
-            <p data-testid="admin_manage__input-email">{item.name}</p>
+            <p
+              data-testid={ `admin_manage__element-user-table-name-${index}` }
+            >
+              {item.name}
+            </p>
             <p
               data-testid={ `admin_manage__element-user-table-email-${index}` }
             >

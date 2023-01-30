@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken');
+const jwtKey = require('fs')
+  .readFileSync('../back-end/jwt.evaluation.key', { encoding: 'utf-8' });
 const loginService = require('../services/loginService');
-
-require('dotenv/config');
-
-const secret = process.env.JWT_SECRET || 'secret_key';
 
 const verifyToken = async (req, res, next) => {
   const token = req.header('Authorization');
@@ -13,7 +11,7 @@ const verifyToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, jwtKey);
     const user = await loginService.getUserbyId(decoded.data.id);
 
     if (!user) {

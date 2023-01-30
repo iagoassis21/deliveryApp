@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { getRegisterByAdm, getUsersData } from '../Services/DeliveryAppApi';
 import regexEmail from '../utils/regexEmail';
 
-function AdmForm() {
+function AdmForm({ setUsers, token }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    role: '',
+    role: 'customer',
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -21,9 +22,28 @@ function AdmForm() {
     });
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log('Form submitted', formData);
+    // const userInfo = JSON.parse(localStorage.getItem('user'));
+    // const { token } = userInfo;
+    const { name, email, password, role } = formData;
+    const newUser = {
+      name,
+      email,
+      password,
+      role,
+      token,
+    };
+    await getRegisterByAdm(newUser);
+    const users = await getUsersData(token);
+    setUsers(users);
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+      role: 'customer',
+    });
   };
 
   React.useEffect(() => {
