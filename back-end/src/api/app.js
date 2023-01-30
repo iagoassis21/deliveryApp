@@ -20,4 +20,5 @@ app.use('/register', registerRoute);
 app.use('/products', productsRouter);
 app.use('/customer', customerRoute);
 app.use('/admin', admRoute);
+
 module.exports = app;

@@ -1,4 +1,5 @@
 const URL = 'http://localhost:3001';
+const CONTENT_TYPE = 'application/json';
 
 const headerParam = { 'Content-Type': 'application/json' };
 
@@ -53,22 +54,55 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
   }
 };
 
-export const getRegisterByAdm = async ({ nameParams,
-  emailParams, passParams, roleParams }) => {
+export const getRegisterByAdm = async ({ name,
+  email, password, role, token }) => {
   const options = {
     method: 'POST',
     headers: headerParam,
     body: JSON.stringify({
-      name: nameParams,
-      email: emailParams,
-      password: passParams,
-      role: roleParams,
+      name,
+      email,
+      password,
+      role,
     }),
   };
   try {
     const response = await fetch(`${URL}/admin/manager`, options);
     const json = await response.json();
     return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUsersData = async (token) => {
+  try {
+    const response = await fetch(
+      `${URL}/admin`,
+      { method: 'GET',
+        headers: {
+          'Content-Type': CONTENT_TYPE,
+          Authorization: `${token}`,
+        } },
+    );
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUsers = async (id, token) => {
+  try {
+    await fetch(
+      `${URL}/admin/manager/${id}`,
+      { method: 'DELETE',
+        headers: {
+          'Content-Type': CONTENT_TYPE,
+          Authorization: `${token}`,
+        } },
+    );
+    console.log(`O usuário ${id} foi deletado`);
   } catch (error) {
     console.log(error);
   }

@@ -39,6 +39,11 @@ export default function Login(props) {
       return setErrorMsg('Dados Invalidos');
     }
     setErrorMsg('');
+    if (user.role === 'administrator') {
+      setErrorMsg('');
+      localStorage.setItem('user', JSON.stringify(user));
+      return history.push('/admin/manage');
+    }
     localStorage.setItem('user', JSON.stringify(user));
     setEmail('');
     setPassword('');

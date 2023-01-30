@@ -5,6 +5,7 @@ const createUser = async (req, res) => {
     const result = await registerService.createUser(req.body);
     return res.status(201).json(result);
   } catch (error) {
+    console.log(error);
     return res.status(409).json({ message: 'Conflict' });
   }
 };

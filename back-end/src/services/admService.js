@@ -18,7 +18,7 @@ const admCreateUser = async (obj) => {
     name: obj.name,
     email: obj.email,
     password: passCrypt,
-    role: obj.role || 'Customer',
+    role: obj.role,
   });
 
   return createToken({ ...obj, password: '_' });
@@ -30,7 +30,14 @@ const deleteUser = async (id) => {
   return user;
 };
 
+const getAllUsers = async () => {
+  const users = await User.findAll();
+
+  return users;
+}
+
 module.exports = {
   admCreateUser,
   deleteUser,
+  getAllUsers,
 };
