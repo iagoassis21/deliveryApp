@@ -1,9 +1,18 @@
 const URL = 'http://localhost:3001';
 const CONTENT_TYPE = 'application/json';
 
-export const getDeliveryData = async () => {
+const headerParam = { 'Content-Type': 'application/json' };
+
+export const getDeliveryData = async (token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
   try {
-    const response = await fetch(`${URL}/products`);
+    const response = await fetch(`${URL}/products`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -14,7 +23,7 @@ export const getDeliveryData = async () => {
 export const getLoginApp = async (emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': CONTENT_TYPE },
+    headers: headerParam,
     body: JSON.stringify({ email: emailParams, password: passParams }),
   };
   try {
@@ -29,7 +38,7 @@ export const getLoginApp = async (emailParams, passParams) => {
 export const getRegister = async (nameParams, emailParams, passParams) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': CONTENT_TYPE },
+    headers: headerParam,
     body: JSON.stringify({
       name: nameParams,
       email: emailParams,
@@ -41,7 +50,7 @@ export const getRegister = async (nameParams, emailParams, passParams) => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
+    console.log('erro na tentativa de registro', error);
   }
 };
 
@@ -49,7 +58,7 @@ export const getRegisterByAdm = async ({ name,
   email, password, role, token }) => {
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': CONTENT_TYPE, Authorization: `${token}` },
+    headers: headerParam,
     body: JSON.stringify({
       name,
       email,
@@ -60,7 +69,6 @@ export const getRegisterByAdm = async ({ name,
   try {
     const response = await fetch(`${URL}/admin/manager`, options);
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (error) {
     console.log(error);

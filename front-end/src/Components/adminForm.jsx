@@ -10,7 +10,6 @@ function AdmForm({ setUsers, token }) {
     password: '',
     role: 'customer',
   });
-
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const NAME_LENGHT = 12;

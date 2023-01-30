@@ -5,6 +5,7 @@ import Products from './pages/Products';
 import Register from './pages/Register';
 import Orders from './pages/Orders';
 import Customer from './pages/Customer';
+import './styles/main.css';
 import Admin from './pages/Admin';
 
 function App() {
