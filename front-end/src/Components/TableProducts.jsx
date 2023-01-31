@@ -134,7 +134,8 @@ export default function Tableproductss({ saleId }) {
                   <td
                     data-testid={ `${dSubPrice}-${index}` }
                   >
-                    { Number(products.SalesProduct.quantity * products.price) }
+                    { Number(products.SalesProduct.quantity
+                      * products.price).toFixed(2).replace('.', ',') }
                   </td>
                 </tr>
               ))
