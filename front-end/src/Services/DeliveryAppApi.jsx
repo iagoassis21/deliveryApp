@@ -178,3 +178,23 @@ export const getProductbyId = async (token, id) => {
     console.log(error);
   }
 };
+
+export const updateStatus = async (id, status, token) => {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      status,
+    }),
+  };
+  try {
+    const response = await fetch(`${URL}/customer/update/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};

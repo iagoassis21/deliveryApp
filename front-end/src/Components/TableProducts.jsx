@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getOrderById } from '../Services/DeliveryAppApi';
+import { getOrderById, updateStatus } from '../Services/DeliveryAppApi';
 
 export default function Tableproductss({ saleId }) {
   const [order, setOrder] = useState([]);
@@ -17,18 +17,37 @@ export default function Tableproductss({ saleId }) {
     const data = async () => {
       const userInfo = JSON.parse(localStorage.getItem('user'));
       const { token } = userInfo;
-      console.log(token);
+      // console.log(token);
       const saleDetails = await getOrderById(token, saleId);
       setOrder(saleDetails);
-      console.log(saleDetails);
+      // console.log(saleDetails);
     };
     data();
   }, []);
 
+  const handleStatus = async (event) => {
+    event.preventDefault();
+    const { name } = event.target;
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    const { token } = userInfo;
+    if (name === 'Preparando') {
+      const preparando = 'Preparando';
+      await updateStatus(saleId, preparando, token);
+      const update = await await getOrderById(token, saleId);
+      setOrder(update);
+    }
+    if (name === 'Transito') {
+      const transito = 'Em Trânsito';
+      await updateStatus(saleId, transito, token);
+      const update = await getOrderById(token, saleId);
+      setOrder(update);
+    }
+  };
+
   return (
     <div>
       {
-        order.map((obj) => (
+        order && order.map((obj) => (
           <table className="table-responsive" key={ obj.id }>
             <thead>
               <tr>
@@ -51,6 +70,8 @@ export default function Tableproductss({ saleId }) {
                   <button
                     type="button"
                     data-testid="seller_order_details__button-preparing-check"
+                    name="Preparando"
+                    onClick={ handleStatus }
                   >
                     PREPARAR PEDIDO
                   </button>
@@ -59,6 +80,8 @@ export default function Tableproductss({ saleId }) {
                   <button
                     type="button"
                     data-testid="seller_order_details__button-dispatch-check"
+                    name="Transito"
+                    onClick={ handleStatus }
                   >
                     SAIU PARA ENTREGA
                   </button>
