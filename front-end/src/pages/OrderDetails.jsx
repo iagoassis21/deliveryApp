@@ -10,7 +10,6 @@ export default function OrderDetails() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const resultOrder = async () => {
       const orderData = await getOrderData(token, paramsMock);
-      console.log(orderData);
       return orderData;
     };
     resultOrder();

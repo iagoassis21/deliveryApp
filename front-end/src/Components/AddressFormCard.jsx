@@ -7,6 +7,7 @@ export default function AddressFormCard() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const getSellers = async () => {
       const sellerData = await getAllSellers(token);
+      console.log(sellerData);
       return setAllSellers(sellerData);
     };
     getSellers();
@@ -17,7 +18,7 @@ export default function AddressFormCard() {
       <form>
         <select data-testid="customer_checkout__select-seller">
           {sellers.map((seller) => (
-            <option key={ seller.id } value={ seller.id }>
+            <option key={ seller.name } value={ seller.id }>
               {seller.name}
             </option>))}
         </select>

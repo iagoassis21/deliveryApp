@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 
 export default function CardCart() {
   const history = useHistory();
-  const { cartItems } = useContext(DeliveryAppContext);
-  const [cartValue, setCartValue] = useState(0);
+  const { cartItems, cartValue, setCartValue } = useContext(DeliveryAppContext);
 
   useEffect(() => {
     const getSubTotal = () => {
@@ -13,7 +12,12 @@ export default function CardCart() {
         setCartValue(0);
         return 0;
       }
-      const getTotal = cartItems.reduce((acc, { Qtd, price }) => acc + (Qtd * price), 0);
+      const getTotal = cartItems
+        .reduce((acc, { Qtd, price }) => {
+          const priceFixed = Number(price.replace(',', '.'));
+          return acc + (Qtd * priceFixed);
+        }, 0);
+
       const subTotalFixed = getTotal.toFixed(2).replace('.', ',');
       return setCartValue(subTotalFixed);
     };

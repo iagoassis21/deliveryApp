@@ -21,19 +21,23 @@ export default function ProductCard({ products }) {
 
   useEffect(() => {
     let arrayCart = [];
+
     const itemIncreasedObj = {
-      id,
+      id: cartItems.length,
       name,
-      price,
+      price: priceFixed,
       Qtd: unitItem,
       subTotal: (price * unitItem) };
-    const checkItemInCart = cartItems.some((item) => item.id === itemIncreasedObj.id);
+
+    const checkItemInCart = cartItems.some((item) => item.name === itemIncreasedObj.name);
+
     if (checkItemInCart) {
       arrayCart = cartItems.map((item) => {
-        if (item.id === itemIncreasedObj.id) return itemIncreasedObj;
+        if (item.name === itemIncreasedObj.name) return itemIncreasedObj;
         return item;
       });
     } else arrayCart = [...cartItems, itemIncreasedObj];
+
     setCartItems(arrayCart.filter(({ Qtd }) => Qtd !== 0));
   }, [unitItem]);
 

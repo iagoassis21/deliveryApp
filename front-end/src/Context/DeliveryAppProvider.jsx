@@ -11,6 +11,7 @@ export default function DeliveryAppProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cartItems, setCartItems] = useState([]);
+  const [cartValue, setCartValue] = useState(0);
 
   const requestDeliveryData = async () => {
     try {
@@ -42,6 +43,8 @@ export default function DeliveryAppProvider({ children }) {
         setPassword,
         cartItems,
         setCartItems,
+        cartValue,
+        setCartValue,
       } }
     >
       {children}
