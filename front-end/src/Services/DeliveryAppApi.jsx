@@ -154,7 +154,7 @@ export const getProductsBySaleId = async (token, saleId) => {
     },
   };
   try {
-    const response = await fetch(`${URL}/products/saler/${saleId}`, options);
+    const response = await fetch(`${URL}/products/seller/${saleId}`, options);
     const json = await response.json();
     return json;
   } catch (error) {

@@ -1,4 +1,4 @@
-const { Sale, SalesProduct } = require('../database/models');
+const { Sale, SalesProduct, Product } = require('../database/models');
 
 const createOrder = async (obj) => {
   const order = await Sale.create({
@@ -22,7 +22,7 @@ const createOrder = async (obj) => {
 };
 
 const getOrder = async (id) => {
-  const order = await Sale.findByPk(id);
+  const order = await Sale.findAll({ where: { id: id }, include: 'products' });
 
   if (!order) throw new Error('Not found');
 
@@ -30,7 +30,7 @@ const getOrder = async (id) => {
 };
 
 const getOrderBySeller = async (id) => {
-  const sales = await Sale.findAll({ where: { sellerId: id } });
+  const sales = await Sale.findAll({ where: { sellerId: id }, include: 'products' });
 
   return sales;
 };
