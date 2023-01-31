@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { getProductbyId,
   getProductsBySaleId,
   getOrderById } from '../Services/DeliveryAppApi';
 
-export default function TableProducts({ saleId }) {
+export default function TableProducts({ saleId, token }) {
   const [order, setOrder] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const data = async () => {
-      const myProducts = await getProductsBySaleId(saleId);
-      const saleDetails = await getOrderById(saleId);
-      const productsDetails = await getProductbyId(myProducts.productId);
-      setProducts([...productsDetails, ...myProducts]);
+      const myProducts = await getProductsBySaleId(token, saleId);
+      const saleDetails = await getOrderById(token, saleId);
+      // const productsDetails = await myProducts.forEach((product) => {
+      //   getProductbyId(token, product.productId);
+      // });
       setOrder(saleDetails);
-      // setOrder([...saleDetails, ...products, ...productsDetails]);
+      // setProducts([...productsDetails, ...myProducts]);
+      console.log(token);
+      console.log('myProducts - lista de produtos com quantidade -->', myProducts);
+      console.log('saleDetails - detalhes da venda -->', saleDetails);
+      // console.log(
+      //   'productsDetails - nome e preço do produto -->',
+      //   productsDetails,
+      // );
     };
     data();
-    console.log(order, products);
   }, []);
 
   return (
@@ -73,3 +81,8 @@ export default function TableProducts({ saleId }) {
     </table>
   );
 }
+
+TableProducts.propTypes = {
+  saleId: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+};
