@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getSaleById } from '../Services/DeliveryAppApi';
 import TableHeaderCheckout from '../Components/TableHeaderCheckout';
 import TableBodyCheckout from '../Components/TableBodyCheckout';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 
 export default function OrderDetails() {
+  const { id } = useParams();
   const { setCart } = useContext(DeliveryAppContext);
   const [saleData, setSalaData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,14 +14,14 @@ export default function OrderDetails() {
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const resultOrder = async () => {
-      const orderData = await getSaleById(+'1', token);
+      const orderData = await getSaleById(id, token);
       console.log(orderData);
       setSalaData(orderData);
       setLoading(false);
       return setCart(orderData.products);
     };
     resultOrder();
-  }, [setCart]);
+  }, [setCart, id]);
 
   const getDateFormated = (date) => {
     const dateFormated = new Date(date);
