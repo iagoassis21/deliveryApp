@@ -23,11 +23,11 @@ export default function ProductCard({ products }) {
     let arrayCart = [];
 
     const itemIncreasedObj = {
-      id: cartItems.length,
+      id: cartItems.length + 1,
       name,
       price: priceFixed,
-      Qtd: unitItem,
-      subTotal: (price * unitItem) };
+      quantity: unitItem,
+      totalPrice: (price * unitItem) };
 
     const checkItemInCart = cartItems.some((item) => item.name === itemIncreasedObj.name);
 
@@ -38,7 +38,7 @@ export default function ProductCard({ products }) {
       });
     } else arrayCart = [...cartItems, itemIncreasedObj];
 
-    setCartItems(arrayCart.filter(({ Qtd }) => Qtd !== 0));
+    setCartItems(arrayCart.filter(({ quantity }) => quantity !== 0));
   }, [unitItem]);
 
   const increaseQuantity = () => {
