@@ -21,19 +21,23 @@ export default function ProductCard({ products }) {
 
   useEffect(() => {
     let arrayCart = [];
+
     const itemIncreasedObj = {
-      id,
+      id: cartItems.length,
       name,
-      price,
+      price: priceFixed,
       Qtd: unitItem,
       subTotal: (price * unitItem) };
-    const checkItemInCart = cartItems.some((item) => item.id === itemIncreasedObj.id);
+
+    const checkItemInCart = cartItems.some((item) => item.name === itemIncreasedObj.name);
+
     if (checkItemInCart) {
       arrayCart = cartItems.map((item) => {
-        if (item.id === itemIncreasedObj.id) return itemIncreasedObj;
+        if (item.name === itemIncreasedObj.name) return itemIncreasedObj;
         return item;
       });
     } else arrayCart = [...cartItems, itemIncreasedObj];
+
     setCartItems(arrayCart.filter(({ Qtd }) => Qtd !== 0));
   }, [unitItem]);
 
@@ -44,13 +48,16 @@ export default function ProductCard({ products }) {
   return (
     <div
       key={ id }
+      className="flex-col justify-center
+     text-center border-4 border-lime-600 border-color: rgb(101 163 13); rounded-lg"
     >
       <img
+        className="flex self-center justify-center"
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt={ name }
       />
-      <div>
+      <div className="bg-slate-400">
         <p
           data-testid={ `customer_products__element-card-title-${id}` }
         >
@@ -62,6 +69,7 @@ export default function ProductCard({ products }) {
           { `${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
         </p>
         <button
+          className="border-2 w-8 border-black rounded-lg"
           type="button"
           onClick={ decreaseQuantity }
           data-testid={ `customer_products__button-card-rm-item-${id}` }
@@ -69,11 +77,13 @@ export default function ProductCard({ products }) {
           -
         </button>
         <input
+          className="w-10 text-center rounded-lg"
           onChange={ (event) => setUnitItem(event.target.value) }
           value={ unitItem }
           data-testid={ `customer_products__input-card-quantity-${id}` }
         />
         <button
+          className="border-2 w-8 border-black rounded-lg"
           type="button"
           onClick={ increaseQuantity }
           data-testid={ `customer_products__button-card-add-item-${id}` }

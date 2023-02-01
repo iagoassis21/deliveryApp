@@ -4,6 +4,7 @@ const cors = require('cors');
 
 // const GenericError = require('../middlewares/GenericError')
 const loginRouter = require('../Routes/loginRoute');
+const sellerRouter = require('../Routes/sellerRoute');
 const productsRouter = require('../Routes/productsRouts');
 const registerRoute = require('../Routes/registerRoute');
 const customerRoute = require('../Routes/customerRoute');
@@ -16,6 +17,7 @@ app.use(express.static('public'));
 app.use(cors());
 
 app.use('/login', loginRouter);
+app.use('/seller', sellerRouter);
 app.use('/register', registerRoute);
 app.use('/products', productsRouter);
 app.use('/customer', customerRoute);
