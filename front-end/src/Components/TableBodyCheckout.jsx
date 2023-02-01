@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import LoadingBar from './LoadingBar';
 
 export default function TableBodyCheckout() {
-  const { cartItems, setCartItems, cart, setCart } = useContext(DeliveryAppContext);
+  const { cartItems, setCartItems, cart } = useContext(DeliveryAppContext);
 
   const location = useLocation();
   const { pathname } = location;
