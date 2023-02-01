@@ -6,6 +6,7 @@ const customerRoute = express.Router();
 
 customerRoute.post('/', verifyToken, customerController.createOrder);
 customerRoute.get('/:id', verifyToken, customerController.getOrder);
+customerRoute.get('/details/:id', verifyToken, customerController.getAllOrderDetails);
 customerRoute.get('/seller/:id', verifyToken, customerController.getOrderBySeller);
 customerRoute.get('/user/:id', verifyToken, customerController.getOrderByUser);
 customerRoute.get('/', verifyToken, customerController.getAllOrders);

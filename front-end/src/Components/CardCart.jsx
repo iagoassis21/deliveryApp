@@ -13,16 +13,16 @@ export default function CardCart() {
         return 0;
       }
       const getTotal = cartItems
-        .reduce((acc, { Qtd, price }) => {
+        .reduce((acc, { quantity, price }) => {
           const priceFixed = Number(price.replace(',', '.'));
-          return acc + (Qtd * priceFixed);
+          return acc + (quantity * priceFixed);
         }, 0);
 
       const subTotalFixed = getTotal.toFixed(2).replace('.', ',');
       return setCartValue(subTotalFixed);
     };
     getSubTotal();
-  }, [cartItems, cartValue]);
+  }, [cartItems, cartValue, setCartValue]);
 
   const onClickRedirect = () => {
     history.push('/customer/checkout');

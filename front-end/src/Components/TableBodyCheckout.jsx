@@ -1,41 +1,91 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import DeliveryAppContext from '../Context/DeliveryAppContext';
+import LoadingBar from './LoadingBar';
 
 export default function TableBodyCheckout() {
-  const cartItems = JSON.parse(localStorage.getItem('cart'));
-  const CCEOT = 'customer_checkout__element-order-table-';
+  const { cartItems, setCartItems, cart, setCart } = useContext(DeliveryAppContext);
+
+  const location = useLocation();
+  const { pathname } = location;
+
+  const checkout = pathname === '/customer/checkout';
+  const testId = checkout ? 'customer_checkout__' : 'customer_order_details__';
+
+  useEffect(() => {
+    const products = JSON.parse(localStorage.getItem('cart'));
+    setCartItems(products);
+  }, []);
+
+  const getPrice = (product) => {
+    const result = checkout
+      ? Number(product.totalPrice)
+      : product.price * Number(product.quantity);
+    return result.toFixed(2).replace('.', ',');
+  };
 
   const removeItem = (id) => {
     const result = cartItems.filter((item) => item.id !== id);
-    window.location.reload(true);
-    return localStorage.setItem('cart', JSON.stringify(result));
+    localStorage.setItem('cart', JSON.stringify(result));
+    return setCartItems(result);
+  };
+
+  const checkPageParams = () => {
+    if (checkout) {
+      return cartItems;
+    }
+    return cart;
   };
 
   return (
-    <tbody>
-      {
-        cartItems.map((product, index) => (
-          <tr key={ index }>
-            <td data-testid={ `${CCEOT}item-number-${index}` }>{product.id}</td>
-            <td data-testid={ `${CCEOT}name-${index}` }>{product.name}</td>
-            <td data-testid={ `${CCEOT}quantity-${index}` }>{product.Qtd}</td>
-            <td data-testid={ `${CCEOT}unit-price-${index}` }>{product.price}</td>
-            <td data-testid={ `${CCEOT}sub-total-${index}` }>
-              {
-                Number(product.subTotal).toFixed(2).replace('.', ',')
-              }
-            </td>
-            <td>
-              <button
-                type="button"
-                data-testid={ `${CCEOT}remove-${index}` }
-                onClick={ () => removeItem(product.id) }
+    !cartItems ? <LoadingBar /> : (
+      <tbody>
+        {
+          checkPageParams().map((product, index) => (
+            <tr key={ index }>
+              <td
+                data-testid={ `${testId}element-order-table-item-number-${index}` }
               >
-                REMOVER
-              </button>
-            </td>
-          </tr>
-        ))
-      }
-    </tbody>
+                { Number(index + 1) }
+              </td>
+
+              <td
+                data-testid={ `${testId}element-order-table-name-${index}` }
+              >
+                { product.name }
+              </td>
+              <td
+                data-testid={ `${testId}element-order-table-quantity-${index}` }
+              >
+                { product.quantity }
+              </td>
+              <td
+                data-testid={ `${testId}element-order-table-unit-price-${index}` }
+              >
+                { product.price }
+              </td>
+              <td data-testid={ `${testId}element-order-table-sub-total-${index}` }>
+                {
+                  getPrice(product)
+                }
+              </td>
+              {
+                pathname === '/customer/checkout' && (
+                  <td>
+                    <button
+                      type="button"
+                      data-testid={ `${testId}element-order-table-remove-${index}` }
+                      onClick={ () => removeItem(product.id) }
+                    >
+                      REMOVER
+                    </button>
+                  </td>
+                )
+              }
+            </tr>
+          ))
+        }
+      </tbody>
+    )
   );
 }
