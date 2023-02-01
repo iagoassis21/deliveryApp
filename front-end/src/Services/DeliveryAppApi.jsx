@@ -128,6 +128,24 @@ export const getOrdersBySellerId = async (token, id) => {
   }
 };
 
+
+export const getOrderData = async (token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(${URL}/customer/, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getOrderById = async (token, id) => {
   const options = {
     method: 'GET',
@@ -138,6 +156,23 @@ export const getOrderById = async (token, id) => {
   };
   try {
     const response = await fetch(`${URL}/customer/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllSellers = async (token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(${URL}/seller, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -162,6 +197,23 @@ export const getProductsBySaleId = async (token, saleId) => {
   }
 };
 
+export const getAllSalesByUserId = async (id, token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(${URL}/login/${id}, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getProductbyId = async (token, id) => {
   const options = {
     method: 'GET',
@@ -172,6 +224,23 @@ export const getProductbyId = async (token, id) => {
   };
   try {
     const response = await fetch(`${URL}/products/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSaleById = async (id, token) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(${URL}/customer/details/${id}, options);
     const json = await response.json();
     return json;
   } catch (error) {

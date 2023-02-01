@@ -21,12 +21,23 @@ const getOrder = async (req, res) => {
   }
 };
 
+const getAllOrderDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await customerService.getAllOrderDetails(id);
+
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+};
+
 const getOrderBySeller = async (req, res) => {
   try {
     const { id } = req.params;
     const sales = await customerService.getOrderBySeller(id);
 
-    return res.status(201).json(sales);
+    return res.status(200).json(sales);
   } catch (error) {
     console.log(error);
     return res.status(404).json({ message: 'Not found' });
@@ -38,7 +49,7 @@ const getOrderByUser = async (req, res) => {
     const { id } = req.params;
     const sales = await customerService.getOrderByUser(id);
 
-    return res.status(201).json(sales);
+    return res.status(200).json(sales);
   } catch (error) {
     return res.status(404).json({ message: 'Not found' });
   }
@@ -48,7 +59,7 @@ const getAllOrders = async (req, res) => {
   try {
     const sales = await customerService.getAllOrders();
 
-    return res.status(201).json(sales);
+    return res.status(200).json(sales);
   } catch (error) {
     return res.status(404).json({ message: 'Not found' });
   }
@@ -69,6 +80,7 @@ const updateStatus = async (req, res) => {
 module.exports = {
   createOrder,
   getOrder,
+  getAllOrderDetails,
   getOrderBySeller,
   getOrderByUser,
   updateStatus,

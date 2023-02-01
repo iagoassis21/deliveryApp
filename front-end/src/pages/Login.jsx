@@ -57,7 +57,7 @@ export default function Login(props) {
 
   const onClickRegister = () => {
     const { history } = props;
-    history.push('/register');
+    history.push('/register/');
   };
 
   const loginTestId = 'common_login__element-invalid-email';
