@@ -23,6 +23,14 @@ export default function DeliveryAppProvider({ children }) {
     }
   }, [cartItems]);
 
+  useEffect(() => {
+    if (cartItems !== null || cartItems !== undefined) {
+      const result = cartItems
+        .reduce((acc, { subTotal }) => acc + subTotal, 0).toFixed(2).replace('.', ',');
+      setCartValue(result);
+    }
+  }, [cartItems]);
+
   const requestDeliveryData = async () => {
     try {
       const response = await getDeliveryData();
