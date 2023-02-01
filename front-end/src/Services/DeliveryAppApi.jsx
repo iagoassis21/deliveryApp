@@ -111,6 +111,24 @@ export const deleteUsers = async (id, token) => {
   }
 };
 
+export const getOrdersBySellerId = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/customer/seller/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 export const getOrderData = async (token) => {
   const options = {
     method: 'GET',
@@ -120,7 +138,24 @@ export const getOrderData = async (token) => {
     },
   };
   try {
-    const response = await fetch(`${URL}/customer/`, options);
+    const response = await fetch(${URL}/customer/, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOrderById = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/customer/${id}`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -137,7 +172,24 @@ export const getAllSellers = async (token) => {
     },
   };
   try {
-    const response = await fetch(`${URL}/seller`, options);
+    const response = await fetch(${URL}/seller, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProductsBySaleId = async (token, saleId) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/products/seller/${saleId}`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -154,7 +206,24 @@ export const getAllSalesByUserId = async (id, token) => {
     },
   };
   try {
-    const response = await fetch(`${URL}/login/${id}`, options);
+    const response = await fetch(${URL}/login/${id}, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProductbyId = async (token, id) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await fetch(`${URL}/products/${id}`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -171,7 +240,27 @@ export const getSaleById = async (id, token) => {
     },
   };
   try {
-    const response = await fetch(`${URL}/customer/details/${id}`, options);
+    const response = await fetch(${URL}/customer/details/${id}, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateStatus = async (id, status, token) => {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      ...headerParam,
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      status,
+    }),
+  };
+  try {
+    const response = await fetch(`${URL}/customer/update/${id}`, options);
     const json = await response.json();
     return json;
   } catch (error) {

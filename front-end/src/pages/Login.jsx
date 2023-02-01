@@ -44,6 +44,11 @@ export default function Login(props) {
       localStorage.setItem('user', JSON.stringify(user));
       return history.push('/admin/manage');
     }
+    if (user.role === 'seller') {
+      setErrorMsg('');
+      localStorage.setItem('user', JSON.stringify(user));
+      return history.push('seller/orders');
+    }
     localStorage.setItem('user', JSON.stringify(user));
     setEmail('');
     setPassword('');

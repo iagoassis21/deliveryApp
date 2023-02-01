@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Orders from './pages/Orders';
 import Admin from './pages/Admin';
 import Checkout from './pages/Checkout';
+import SellerOrders from './pages/Sellerorders';
+import SellerOrdersdetails from './pages/SellerOrdersdetails';
 import OrderDetails from './pages/OrderDetails';
 import './App.css';
 
@@ -20,6 +22,8 @@ function App() {
       <Route exact path="/customer/orders" component={ Orders } />
       <Route exact path="/customer/orders/:orderId" component={ OrderDetails } />
       <Route exact path="/admin/manage" component={ Admin } />
+      <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route exact path="/seller/orders/:id" component={ SellerOrdersdetails } />
     </Switch>
 
   );

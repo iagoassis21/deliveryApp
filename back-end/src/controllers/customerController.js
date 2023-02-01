@@ -39,6 +39,7 @@ const getOrderBySeller = async (req, res) => {
 
     return res.status(200).json(sales);
   } catch (error) {
+    console.log(error);
     return res.status(404).json({ message: 'Not found' });
   }
 };

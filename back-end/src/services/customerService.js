@@ -58,7 +58,7 @@ const getAllOrderDetails = async (id) => {
 };
 
 const getOrderBySeller = async (id) => {
-  const sales = await Sale.findAll({ where: { sellerId: id } });
+  const sales = await Sale.findAll({ where: { sellerId: id }, include: 'products' });
 
   return sales;
 };
@@ -79,8 +79,9 @@ const updateStatus = async (id, newStatus) => {
   const sale = await Sale.findByPk(id);
 
   if (!sale) return new Error('Conflict');
-  console.log(newStatus, typeof (newStatus));
+  // console.log(newStatus, typeof (newStatus));
   const upStatus = await Sale.update({ status: newStatus }, { where: { id } });
+  // console.log(upStatus);
   return upStatus;
 };
 
