@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getDeliveryData } from '../Services/DeliveryAppApi';
 import DeliveryAppContext from './DeliveryAppContext';
 
@@ -12,6 +12,14 @@ export default function DeliveryAppProvider({ children }) {
   const [password, setPassword] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [cartValue, setCartValue] = useState(0);
+
+  useEffect(() => {
+    if (cartItems !== null || cartItems !== undefined) {
+      const result = cartItems
+        .reduce((acc, { subTotal }) => acc + subTotal, 0).toFixed(2).replace('.', ',');
+      setCartValue(result);
+    }
+  }, [cartItems]);
 
   const requestDeliveryData = async () => {
     try {

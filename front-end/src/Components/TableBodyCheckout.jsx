@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import DeliveryAppContext from '../Context/DeliveryAppContext';
+
+const CCEOT = 'customer_checkout__element-order-table-';
 
 export default function TableBodyCheckout() {
-  const cartItems = JSON.parse(localStorage.getItem('cart'));
-  const CCEOT = 'customer_checkout__element-order-table-';
+  const { cartItems, setCartItems } = useContext(DeliveryAppContext);
+
+  useEffect(() => {
+    const products = JSON.parse(localStorage.getItem('cart'));
+    setCartItems(products);
+  }, []);
 
   const removeItem = (id) => {
     const result = cartItems.filter((item) => item.id !== id);
-    window.location.reload(true);
-    return localStorage.setItem('cart', JSON.stringify(result));
+    localStorage.setItem('cart', JSON.stringify(result));
+    return setCartItems(result);
   };
 
   return (
@@ -15,7 +22,7 @@ export default function TableBodyCheckout() {
       {
         cartItems.map((product, index) => (
           <tr key={ index }>
-            <td data-testid={ `${CCEOT}item-number-${index}` }>{product.id}</td>
+            <td data-testid={ `${CCEOT}item-number-${index}` }>{Number(index + 1)}</td>
             <td data-testid={ `${CCEOT}name-${index}` }>{product.name}</td>
             <td data-testid={ `${CCEOT}quantity-${index}` }>{product.Qtd}</td>
             <td data-testid={ `${CCEOT}unit-price-${index}` }>{product.price}</td>

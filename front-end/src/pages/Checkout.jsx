@@ -34,7 +34,7 @@ export default function Checkout() {
                 type="button"
                 data-testid="customer_checkout__element-order-total-price"
               >
-                {`Total: R$ ${cartValue}`}
+                {cartValue}
 
               </button>
             </section>
