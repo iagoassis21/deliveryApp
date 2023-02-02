@@ -54,8 +54,7 @@ export default function OrderDetails() {
               {`${getDateFormated(saleData.saleDate)}`}
             </p>
             <p
-              data-testid={ `${COD}__element-order-details-label-
-                  delivery-status${0}` }
+              data-testid={ `${COD}__element-order-details-label-delivery-status${0}` }
             >
               {`${saleData.status}`}
             </p>
