@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AddressFormCard from '../Components/AddressFormCard';
+import NavBar from '../Components/NavBar';
 import TableBodyCheckout from '../Components/TableBodyCheckout';
 import TableHeaderCheckout from '../Components/TableHeaderCheckout';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
@@ -20,6 +21,7 @@ export default function Checkout() {
 
   return (
     <div>
+      <NavBar />
       <h1>Finalizar Pedido</h1>
       {
         cartState.length === 0

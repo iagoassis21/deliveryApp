@@ -4,9 +4,10 @@ import { getSaleById } from '../Services/DeliveryAppApi';
 import TableHeaderCheckout from '../Components/TableHeaderCheckout';
 import TableBodyCheckout from '../Components/TableBodyCheckout';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
+import NavBar from '../Components/NavBar';
 
 export default function OrderDetails() {
-  const { id } = useParams();
+  const { orderId } = useParams();
   const { setCart } = useContext(DeliveryAppContext);
   const [saleData, setSalaData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,14 +15,13 @@ export default function OrderDetails() {
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const resultOrder = async () => {
-      const orderData = await getSaleById(id, token);
-      console.log(orderData);
+      const orderData = await getSaleById(orderId, token);
       setSalaData(orderData);
       setLoading(false);
       return setCart(orderData.products);
     };
     resultOrder();
-  }, [setCart, id]);
+  }, [setCart, orderId]);
 
   const getDateFormated = (date) => {
     const dateFormated = new Date(date);
@@ -37,6 +37,7 @@ export default function OrderDetails() {
 
   return (
     <div>
+      <NavBar />
       <h1>Detalhe de Pedido</h1>
       <div>
         <section key={ saleData.id }>

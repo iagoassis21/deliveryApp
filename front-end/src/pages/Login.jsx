@@ -1,16 +1,25 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import logo from '../images/logo.svg';
 import regexEmail from '../utils/regexEmail';
 import { getLoginApp } from '../Services/DeliveryAppApi';
 
-export default function Login(props) {
+export default function Login() {
+  const history = useHistory();
   const { email, password, setEmail, setPassword } = useContext(DeliveryAppContext);
   const [mailIsValid, setMailIsValid] = useState(false);
   const [passIsValid, setPassIsValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const seis = 6;
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      history.push('/customer/products');
+    }
+  }, []);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -33,7 +42,6 @@ export default function Login(props) {
   };
 
   const onClickLogin = async () => {
-    const { history } = props;
     const { message, ...user } = await getLoginApp(email, password);
     if (message === 'Not found') {
       return setErrorMsg('Dados Invalidos');
@@ -56,8 +64,7 @@ export default function Login(props) {
   };
 
   const onClickRegister = () => {
-    const { history } = props;
-    history.push('/register/');
+    history.push('/register');
   };
 
   const loginTestId = 'common_login__element-invalid-email';

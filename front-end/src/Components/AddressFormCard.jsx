@@ -14,7 +14,6 @@ export default function AddressFormCard() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const getSellers = async () => {
       const sellerData = await getAllSellers(token);
-      console.log(sellerData);
       return setAllSellers(sellerData);
     };
     getSellers();
@@ -25,16 +24,18 @@ export default function AddressFormCard() {
     const obj = {
       userId,
       sellerId: sellers[0].id,
-      totalPrice: cartItems[0].totalPrice,
+      totalPrice: cartItems.reduce((acc, { price, quantity }) => {
+        const totalPrice = Number(price.replace(',', '.')) * quantity;
+        return acc + totalPrice;
+      }, 0),
       deliveryAddress,
       deliveryNumber,
-      products: cartItems
-        .map(({ id: productId, quantity }) => ({ id: productId, quantity })),
+      products: cartItems.map(({ id, quantity }) => ({ productId: id, quantity })),
       status: 'Pendente',
     };
-    const id = await getSaleData(obj, token);
-    console.log(id);
-    return history.push(`/customer/orders/${id}`);
+    const orderId = await getSaleData(obj, token);
+    if (!orderId) return <h1>Aguardando criação do pedido</h1>;
+    return history.push(`/customer/orders/${orderId}`);
   };
 
   return (

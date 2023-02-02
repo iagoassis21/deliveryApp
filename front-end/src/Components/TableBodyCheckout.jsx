@@ -15,13 +15,14 @@ export default function TableBodyCheckout() {
   useEffect(() => {
     const products = JSON.parse(localStorage.getItem('cart'));
     setCartItems(products);
-  }, []);
+  }, [setCartItems]);
 
   const getPrice = (product) => {
-    const result = checkout
-      ? Number(product.totalPrice)
-      : product.price * Number(product.quantity);
-    return result.toFixed(2).replace('.', ',');
+    const calculateTotalPrice = Number(product.price.replace(',', '.'))
+     * product.quantity;
+    const result = calculateTotalPrice.toFixed(2).replace('.', ',');
+    console.log(result);
+    return result;
   };
 
   const removeItem = (id) => {
@@ -38,7 +39,7 @@ export default function TableBodyCheckout() {
   };
 
   return (
-    !cartItems ? <LoadingBar /> : (
+    !checkout && !cart ? <LoadingBar /> : (
       <tbody>
         {
           checkPageParams().map((product, index) => (
