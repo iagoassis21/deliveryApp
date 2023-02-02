@@ -21,6 +21,8 @@ export default function AddressFormCard() {
 
   const handleSubmit = async () => {
     const { token, id: userId } = JSON.parse(localStorage.getItem('user'));
+    const getCartItems = cartItems
+      .map(({ id, quantity }) => ({ productId: id, quantity }));
     const obj = {
       userId,
       sellerId: sellers[0].id,
@@ -30,9 +32,10 @@ export default function AddressFormCard() {
       }, 0),
       deliveryAddress,
       deliveryNumber,
-      products: cartItems.map(({ id, quantity }) => ({ productId: id, quantity })),
+      products: getCartItems,
       status: 'Pendente',
     };
+    console.log('log do cartItems antes de mandar pro banco', cartItems);
     const orderId = await getSaleData(obj, token);
     if (!orderId) return <h1>Aguardando criação do pedido</h1>;
     return history.push(`/customer/orders/${orderId}`);

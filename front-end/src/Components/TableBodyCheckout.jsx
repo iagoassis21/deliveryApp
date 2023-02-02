@@ -21,7 +21,6 @@ export default function TableBodyCheckout() {
     const calculateTotalPrice = Number(product.price.replace(',', '.'))
      * product.quantity;
     const result = calculateTotalPrice.toFixed(2).replace('.', ',');
-    console.log(result);
     return result;
   };
 
@@ -47,7 +46,7 @@ export default function TableBodyCheckout() {
               <td
                 data-testid={ `${testId}element-order-table-item-number-${index}` }
               >
-                { Number(index + 1) }
+                { index + 1 }
               </td>
 
               <td

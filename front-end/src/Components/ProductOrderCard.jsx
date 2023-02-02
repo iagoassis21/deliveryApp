@@ -1,23 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ProductOrderCard({ orders }) {
   const { id, saleDate, totalPrice, status } = orders;
-  const history = useHistory();
-
-  const onClickRedirect = (idParams) => {
-    history.push(`/customer/orders/${idParams}`);
-  };
-
   return (
-    <button
-      key={ id }
+    <Link
       data-testid={ `customer_orders__element-order-id-${id}` }
-      type="button"
-      onClick={ () => onClickRedirect(id) }
+      to={ `/customer/orders/${id}` }
     >
-      <p>{id}</p>
+      <p
+        data-testid={ `customer_orders__element-order-id-${id}` }
+      >
+        {id}
+      </p>
       <p
         data-testid={ `customer_orders__element-delivery-status-${id}` }
       >
@@ -33,7 +29,7 @@ export default function ProductOrderCard({ orders }) {
       >
         {totalPrice}
       </p>
-    </button>
+    </Link>
   );
 }
 
