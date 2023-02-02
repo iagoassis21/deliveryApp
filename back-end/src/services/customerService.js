@@ -10,13 +10,13 @@ const createOrder = async (obj) => {
     saleDate: new Date(),
     status: obj.status || 'Pendente',
   });
-  obj.products.map(async ({ productId, quantity }) => {
+  await Promise.all(obj.products.map(async ({ productId, quantity }) => {
     await SalesProduct.create({
       saleId: order.id,
       productId,
       quantity,
     });
-  });
+  }));
 
   return order.id;
 };
