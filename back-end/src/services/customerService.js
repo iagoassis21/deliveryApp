@@ -22,28 +22,24 @@ const createOrder = async (obj) => {
 };
 
 const getOrder = async (id) => {
-  const order = await Sale.findAll({ where: { id: id }, include: 'products' });
+  const order = await Sale.findAll({ where: { id }, include: 'products' });
 
   if (!order) throw new Error('Not found');
 
   return order;
 };
 
-
 const getAllOrderDetails = async (id) => {
   const orderById = await Sale.findByPk(id);
   const order = await Sale.findAll({
     where: { id },
     include: [
-      { model: Product, as: "products", through: { attributes: { exclude: 'ProductId'} } },
-      { model: User, as: "sellers", attributes: ["id", "name"], foreignKey: "sellerId" }
-      ],
+      { model: Product, as: 'products', through: { attributes: { exclude: 'ProductId' } } },
+      { model: User, as: 'sellers', attributes: ['id', 'name'], foreignKey: 'sellerId' }],
+});
+  if (!order) return new Error('Not Found');
 
-})
-  if(!order) return new Error('Not Found');
-
-  const products = order[0].products = order[0].products.map(product => {
-    return {
+  const products = order[0].products.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
@@ -51,10 +47,9 @@ const getAllOrderDetails = async (id) => {
     saleId: product.SalesProduct.saleId,
     productId: product.SalesProduct.productId,
     quantity: product.SalesProduct.quantity,
-    }
-    });
+  }));
 
-    return { ...orderById.dataValues, products: products, seller: order[0].sellers };
+    return { ...orderById.dataValues, products, seller: order[0].sellers };
 };
 
 const getOrderBySeller = async (id) => {

@@ -1,35 +1,27 @@
-import React from 'react';
-import OrderItems from '../Mocks/OrdersMock';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../Components/NavBar';
+import { getAllOrdersByUser } from '../Services/DeliveryAppApi';
+import ProductOrderCard from '../Components/ProductOrderCard';
 
-export default function orders() {
+export default function Orders() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const { id, token } = JSON.parse(localStorage.getItem('user'));
+    const data = async () => {
+      const response = await getAllOrdersByUser(id, token);
+      setOrders(response);
+    };
+    data();
+  }, []);
+
   return (
     <div>
       <NavBar />
       <section className="orders-container">
         {
-          OrderItems.map((item) => (
-            <div
-              key={ item.id }
-              data-testid={ `customer_orders__element-order-id-${item.id}` }
-            >
-              <p>{item.pedido}</p>
-              <p
-                data-testid={ `customer_orders__element-delivery-status-${item.id}` }
-              >
-                {item.status}
-              </p>
-              <p
-                data-testid={ `customer_orders__element-order-date-${item.id}` }
-              >
-                {item.orderDate}
-              </p>
-              <p
-                data-testid={ `customer_orders__element-card-price-${item.id} ` }
-              >
-                {item.price}
-              </p>
-            </div>
+          orders.map((item) => (
+            <ProductOrderCard key={ item.id } orders={ item } />
           ))
         }
       </section>

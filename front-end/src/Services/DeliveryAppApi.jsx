@@ -6,10 +6,7 @@ const headerParam = { 'Content-Type': 'application/json' };
 export const getDeliveryData = async (token) => {
   const options = {
     method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    headers: { ...headerParam, Authorization: token },
   };
   try {
     const response = await fetch(`${URL}/products`, options);
@@ -58,10 +55,7 @@ export const getRegisterByAdm = async ({ name,
   email, password, role, token }) => {
   const options = {
     method: 'POST',
-    headers: {
-      'Content-Type': CONTENT_TYPE,
-      Authorization: `${token}`,
-    },
+    headers: { 'Content-Type': CONTENT_TYPE, Authorization: `${token}` },
     body: JSON.stringify({
       name,
       email,
@@ -83,10 +77,7 @@ export const getUsersData = async (token) => {
     const response = await fetch(
       `${URL}/admin`,
       { method: 'GET',
-        headers: {
-          'Content-Type': CONTENT_TYPE,
-          Authorization: `${token}`,
-        } },
+        headers: { 'Content-Type': CONTENT_TYPE, Authorization: `${token}` } },
     );
     const json = await response.json();
     return json;
@@ -113,11 +104,7 @@ export const deleteUsers = async (id, token) => {
 
 export const getOrdersBySellerId = async (token, id) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
     const response = await fetch(`${URL}/customer/seller/${id}`, options);
@@ -128,31 +115,9 @@ export const getOrdersBySellerId = async (token, id) => {
   }
 };
 
-
-export const getOrderData = async (token) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
-  };
-  try {
-    const response = await fetch(${URL}/customer/, options);
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getOrderById = async (token, id) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
     const response = await fetch(`${URL}/customer/${id}`, options);
@@ -165,14 +130,10 @@ export const getOrderById = async (token, id) => {
 
 export const getAllSellers = async (token) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
-    const response = await fetch(${URL}/seller, options);
+    const response = await fetch(`${URL}/seller`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -182,11 +143,7 @@ export const getAllSellers = async (token) => {
 
 export const getProductsBySaleId = async (token, saleId) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
     const response = await fetch(`${URL}/products/seller/${saleId}`, options);
@@ -197,30 +154,9 @@ export const getProductsBySaleId = async (token, saleId) => {
   }
 };
 
-export const getAllSalesByUserId = async (id, token) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
-  };
-  try {
-    const response = await fetch(${URL}/login/${id}, options);
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getProductbyId = async (token, id) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
     const response = await fetch(`${URL}/products/${id}`, options);
@@ -233,14 +169,10 @@ export const getProductbyId = async (token, id) => {
 
 export const getSaleById = async (id, token) => {
   const options = {
-    method: 'GET',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
+    method: 'GET', headers: { ...headerParam, Authorization: token },
   };
   try {
-    const response = await fetch(${URL}/customer/details/${id}, options);
+    const response = await fetch(`${URL}/customer/details/${id}`, options);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -251,16 +183,38 @@ export const getSaleById = async (id, token) => {
 export const updateStatus = async (id, status, token) => {
   const options = {
     method: 'PATCH',
-    headers: {
-      ...headerParam,
-      Authorization: token,
-    },
-    body: JSON.stringify({
-      status,
-    }),
+    headers: { ...headerParam, Authorization: token },
+    body: JSON.stringify({ status }),
   };
   try {
     const response = await fetch(`${URL}/customer/update/${id}`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSaleData = async (obj, token) => {
+  const options = { method: 'POST',
+    headers: { ...headerParam, Authorization: token },
+    body: JSON.stringify(obj),
+  };
+  try {
+    const response = await fetch(`${URL}/customer`, options);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllOrdersByUser = async (id, token) => {
+  const options = {
+    method: 'GET', headers: { ...headerParam, Authorization: token },
+  };
+  try {
+    const response = await fetch(`${URL}/customer/user/${id}`, options);
     const json = await response.json();
     return json;
   } catch (error) {

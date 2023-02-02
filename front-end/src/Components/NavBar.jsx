@@ -7,7 +7,6 @@ export default function NavBar() {
   const history = useHistory();
   const onClickNavigation = (setPath) => {
     history.push(setPath);
-    window.location.reload();
   };
 
   const logout = () => {
@@ -27,7 +26,7 @@ export default function NavBar() {
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => onClickNavigation('orders') }
+          onClick={ () => onClickNavigation('/customer/orders') }
           className="ordersBtn"
         >
           Meus Pedidos

@@ -23,7 +23,7 @@ export default function ProductCard({ products }) {
     let arrayCart = [];
 
     const itemIncreasedObj = {
-      id: cartItems.length + 1,
+      id,
       name,
       price: priceFixed,
       quantity: unitItem,

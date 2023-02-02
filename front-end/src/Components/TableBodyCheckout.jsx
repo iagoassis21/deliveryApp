@@ -15,13 +15,13 @@ export default function TableBodyCheckout() {
   useEffect(() => {
     const products = JSON.parse(localStorage.getItem('cart'));
     setCartItems(products);
-  }, []);
+  }, [setCartItems]);
 
   const getPrice = (product) => {
-    const result = checkout
-      ? Number(product.totalPrice)
-      : product.price * Number(product.quantity);
-    return result.toFixed(2).replace('.', ',');
+    const calculateTotalPrice = Number(product.price.replace(',', '.'))
+     * product.quantity;
+    const result = calculateTotalPrice.toFixed(2).replace('.', ',');
+    return result;
   };
 
   const removeItem = (id) => {
@@ -38,7 +38,7 @@ export default function TableBodyCheckout() {
   };
 
   return (
-    !cartItems ? <LoadingBar /> : (
+    !checkout && !cart ? <LoadingBar /> : (
       <tbody>
         {
           checkPageParams().map((product, index) => (
@@ -46,7 +46,7 @@ export default function TableBodyCheckout() {
               <td
                 data-testid={ `${testId}element-order-table-item-number-${index}` }
               >
-                { Number(index + 1) }
+                { index + 1 }
               </td>
 
               <td
