@@ -33,6 +33,8 @@ export default function ProductOrderCard({ orders }) {
   );
 }
 
+// AGORA VAI TA ATE PRINTANDO AQUI Ó https://prnt.sc/x8mzFACBSLRq
+
 ProductOrderCard.propTypes = {
   orders: PropTypes.shape({
     id: PropTypes.number,
