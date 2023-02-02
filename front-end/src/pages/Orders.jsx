@@ -10,21 +10,23 @@ export default function Orders() {
     const { id, token } = JSON.parse(localStorage.getItem('user'));
     const data = async () => {
       const response = await getAllOrdersByUser(id, token);
+      console.log('log do response', response);
       setOrders(response);
     };
     data();
   }, []);
 
+  console.log('log do orders', orders);
+
   return (
     <div>
       <NavBar />
-      <section className="orders-container">
-        {
-          orders.map((item) => (
+      <div>
+        { !orders.length ? <h1>Não há pedidos</h1>
+          : orders.map((item) => (
             <ProductOrderCard key={ item.id } orders={ item } />
-          ))
-        }
-      </section>
+          ))}
+      </div>
     </div>
   );
 }
