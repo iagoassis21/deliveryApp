@@ -4,6 +4,7 @@ import { getOrderById, updateStatus } from '../Services/DeliveryAppApi';
 
 export default function Tableproductss({ saleId }) {
   const [order, setOrder] = useState([]);
+  // const [isDisabled, setIsDisabled] = useState(true);
 
   const dataTestDate = 'seller_order_details__element-order-details-label-order-date';
   const dTestStatus = 'seller_order_details__element-order-details-label-delivery-status';
@@ -20,10 +21,14 @@ export default function Tableproductss({ saleId }) {
       // console.log(token);
       const saleDetails = await getOrderById(token, saleId);
       setOrder(saleDetails);
-      // console.log(saleDetails);
     };
     data();
   }, []);
+
+  const dataa = order.map(({ saleDate }) => saleDate);
+  const dataFunc = new Date(dataa);
+  const dataFormatada = dataFunc.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+  console.log(dataFormatada);
 
   const handleStatus = async (event) => {
     event.preventDefault();
@@ -35,6 +40,7 @@ export default function Tableproductss({ saleId }) {
       await updateStatus(saleId, preparando, token);
       const update = await await getOrderById(token, saleId);
       setOrder(update);
+      // setIsDisabled(false);
     }
     if (name === 'Transito') {
       const transito = 'Em Trânsito';
@@ -59,7 +65,7 @@ export default function Tableproductss({ saleId }) {
                 <th
                   data-testid={ dataTestDate }
                 >
-                  { obj.saleDate }
+                  { dataFormatada }
                 </th>
                 <th
                   data-testid={ dTestStatus }
@@ -72,6 +78,7 @@ export default function Tableproductss({ saleId }) {
                     data-testid="seller_order_details__button-preparing-check"
                     name="Preparando"
                     onClick={ handleStatus }
+                    disabled={ obj.status !== 'Pendente' }
                   >
                     PREPARAR PEDIDO
                   </button>
@@ -82,6 +89,7 @@ export default function Tableproductss({ saleId }) {
                     data-testid="seller_order_details__button-dispatch-check"
                     name="Transito"
                     onClick={ handleStatus }
+                    disabled={ obj.status !== 'Preparando' }
                   >
                     SAIU PARA ENTREGA
                   </button>
@@ -143,8 +151,7 @@ export default function Tableproductss({ saleId }) {
             <h1
               data-testid="seller_order_details__element-order-total-price"
             >
-              Total:
-              {obj.totalPrice}
+              {obj.totalPrice.replace('.', ',')}
             </h1>
           </table>
         ))
