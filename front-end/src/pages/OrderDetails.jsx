@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSaleById } from '../Services/DeliveryAppApi';
+import { getSaleById, updateStatus } from '../Services/DeliveryAppApi';
 import TableHeaderCheckout from '../Components/TableHeaderCheckout';
 import TableBodyCheckout from '../Components/TableBodyCheckout';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
@@ -29,6 +29,14 @@ export default function OrderDetails() {
     const month = dateFormated.getMonth() + 1;
     const year = dateFormated.getFullYear();
     return `0${day}/0${month}/${year}`;
+  };
+
+  const handleStatus = async (event) => {
+    const { name } = event.target;
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    await updateStatus(orderId, name, token);
+    const orderData = await getSaleById(orderId, token);
+    setSalaData(orderData);
   };
 
   if (loading) {
@@ -60,8 +68,10 @@ export default function OrderDetails() {
             </p>
             <button
               data-testid="customer_order_details__button-delivery-check"
+              name="Entregue"
               type="button"
               disabled={ saleData.status !== 'Em Trânsito' }
+              onClick={ handleStatus }
             >
               Marcar como Entregue
             </button>

@@ -1,9 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 const testId = 'customer_products__element-navbar-link-products';
 
 export default function NavBar() {
+  const location = useLocation();
+  const { pathname } = location;
   const history = useHistory();
   const onClickNavigation = (setPath) => {
     history.push(setPath);
@@ -26,7 +28,9 @@ export default function NavBar() {
         <button
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
-          onClick={ () => onClickNavigation('/customer/orders') }
+          onClick={ role === 'customer'
+            ? () => onClickNavigation('/customer/orders')
+            : () => onClickNavigation('/seller/orders') }
           className="ordersBtn"
         >
           Meus Pedidos

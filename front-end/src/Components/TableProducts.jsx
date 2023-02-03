@@ -21,6 +21,7 @@ export default function Tableproductss({ saleId }) {
       // console.log(token);
       const saleDetails = await getOrderById(token, saleId);
       setOrder(saleDetails);
+      console.log(saleDetails);
     };
     data();
   }, []);
@@ -40,6 +41,7 @@ export default function Tableproductss({ saleId }) {
       await updateStatus(saleId, preparando, token);
       const update = await await getOrderById(token, saleId);
       setOrder(update);
+      console.log(update, order);
       // setIsDisabled(false);
     }
     if (name === 'Transito') {
@@ -47,6 +49,7 @@ export default function Tableproductss({ saleId }) {
       await updateStatus(saleId, transito, token);
       const update = await getOrderById(token, saleId);
       setOrder(update);
+      console.log(update, order);
     }
   };
 
