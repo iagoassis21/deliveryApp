@@ -28,7 +28,10 @@ export default function Checkout() {
           ? <p className="flex justify-center font-medium p-4">{cartMessage}</p>
           : (
             <section className="relative overflow-x-auto shadow-md">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <table
+                className={ `w-full text-sm text-left text-gray-500 
+              dark:text-gray-400` }
+              >
                 <TableHeaderCheckout />
                 <TableBodyCheckout />
               </table>

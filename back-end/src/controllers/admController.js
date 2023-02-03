@@ -2,7 +2,7 @@ const admService = require('../services/admService');
 
 const createUsers = async (req, res) => {
   try {
-    const user = await admService.admCreateUser(req.body);
+    await admService.admCreateUser(req.body);
     return res.status(201).json({ message: 'Created' });
   } catch (error) {
     return res.status(409).json({ message: 'Conflict' });
