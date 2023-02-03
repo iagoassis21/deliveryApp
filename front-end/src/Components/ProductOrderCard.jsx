@@ -4,13 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default function ProductOrderCard({ orders: { id, saleDate,
   totalPrice, status } }) {
-  console.log(
-    'log do orders dentro do componente ordeCard',
-    id,
-    saleDate,
-    totalPrice,
-    status,
-  );
   return (
     <Link
       data-testid={ `customer_orders__element-order-id-${id}` }

@@ -24,7 +24,6 @@ function AdmForm({ setUsers, token }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted', formData);
     const { name, email, password, role } = formData;
     const newUser = {
       name,

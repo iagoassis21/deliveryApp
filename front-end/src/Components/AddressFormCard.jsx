@@ -35,7 +35,6 @@ export default function AddressFormCard() {
       products: getCartItems,
       status: 'Pendente',
     };
-    console.log('log do cartItems antes de mandar pro banco', cartItems);
     const orderId = await getSaleData(obj, token);
     if (!orderId) return <h1>Aguardando criação do pedido</h1>;
     return history.push(`/customer/orders/${orderId}`);

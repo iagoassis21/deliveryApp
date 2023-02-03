@@ -23,16 +23,18 @@ export default function NavBar() {
           role === 'customer'
             && <button type="button" data-testid={ testId }>Produtos</button>
         }
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-          onClick={ role === 'customer'
-            ? () => onClickNavigation('/customer/orders')
-            : () => onClickNavigation('/seller/orders') }
-          className="ordersBtn"
-        >
-          Meus Pedidos
-        </button>
+        { role === 'administrator' ? null : (
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+            onClick={ role === 'customer'
+              ? () => onClickNavigation('/customer/orders')
+              : () => onClickNavigation('/seller/orders') }
+            className="ordersBtn"
+          >
+            Meus Pedidos
+          </button>
+        )}
         <button
           type="button"
           data-testid="customer_products__element-navbar-user-full-name"

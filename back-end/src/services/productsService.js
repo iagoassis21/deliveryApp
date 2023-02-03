@@ -12,7 +12,6 @@ const getProductsBySaleId = async (mySaleId) => {
       saleId: mySaleId, 
     },
   });
-  console.log(products);
   return products;
 };
 

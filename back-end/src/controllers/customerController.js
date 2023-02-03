@@ -6,7 +6,6 @@ const createOrder = async (req, res) => {
 
     return res.status(201).json(newSale);
   } catch (error) {
-    console.log(error);
     return res.status(409).json({ message: 'Conflict customer' });
   }
 };
@@ -40,7 +39,6 @@ const getOrderBySeller = async (req, res) => {
 
     return res.status(200).json(sales);
   } catch (error) {
-    console.log(error);
     return res.status(404).json({ message: 'Not found' });
   }
 };

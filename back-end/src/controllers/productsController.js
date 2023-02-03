@@ -22,7 +22,6 @@ const getProductsById = async (req, res) => {
 
     return res.status(200).json(product);
   } catch (error) {
-    console.log(error);
     return res.status(404).json({ message: error });
   }
 };

@@ -96,7 +96,6 @@ export const deleteUsers = async (id, token) => {
           Authorization: `${token}`,
         } },
     );
-    console.log(`O usuário ${id} foi deletado`);
   } catch (error) {
     console.log(error);
   }

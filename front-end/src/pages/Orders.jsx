@@ -10,13 +10,10 @@ export default function Orders() {
     const { id, token } = JSON.parse(localStorage.getItem('user'));
     const data = async () => {
       const response = await getAllOrdersByUser(id, token);
-      console.log('log do response', response);
       setOrders(response);
     };
     data();
   }, []);
-
-  console.log('log do orders', orders);
 
   return (
     <div>

@@ -18,10 +18,8 @@ export default function Tableproductss({ saleId }) {
     const data = async () => {
       const userInfo = JSON.parse(localStorage.getItem('user'));
       const { token } = userInfo;
-      // console.log(token);
       const saleDetails = await getOrderById(token, saleId);
       setOrder(saleDetails);
-      console.log(saleDetails);
     };
     data();
   }, []);
@@ -29,7 +27,6 @@ export default function Tableproductss({ saleId }) {
   const dataa = order.map(({ saleDate }) => saleDate);
   const dataFunc = new Date(dataa);
   const dataFormatada = dataFunc.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-  console.log(dataFormatada);
 
   const handleStatus = async (event) => {
     event.preventDefault();
@@ -41,15 +38,12 @@ export default function Tableproductss({ saleId }) {
       await updateStatus(saleId, preparando, token);
       const update = await await getOrderById(token, saleId);
       setOrder(update);
-      console.log(update, order);
-      // setIsDisabled(false);
     }
     if (name === 'Transito') {
       const transito = 'Em Trânsito';
       await updateStatus(saleId, transito, token);
       const update = await getOrderById(token, saleId);
       setOrder(update);
-      console.log(update, order);
     }
   };
 
