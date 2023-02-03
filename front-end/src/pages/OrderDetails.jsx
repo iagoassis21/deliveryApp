@@ -28,7 +28,7 @@ export default function OrderDetails() {
     const day = dateFormated.getDate();
     const month = dateFormated.getMonth() + 1;
     const year = dateFormated.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `0${day}/0${month}/${year}`;
   };
 
   if (loading) {
@@ -61,6 +61,7 @@ export default function OrderDetails() {
             <button
               data-testid="customer_order_details__button-delivery-check"
               type="button"
+              disabled={ saleData.status !== 'Em Trânsito' }
             >
               Marcar como Entregue
             </button>
@@ -74,7 +75,7 @@ export default function OrderDetails() {
           data-testid="customer_order_details__element-order-total-price"
           type="button"
         >
-          { `${saleData.totalPrice}` }
+          { `Total: ${saleData?.totalPrice?.replace('.', ',')}` }
         </button>
       </div>
     </div>
