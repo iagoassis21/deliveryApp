@@ -1,10 +1,10 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 const createToken = require('../utils/createToken');
-const validateRegister = require('../utils/validateRegister');
+// const validateRegister = require('../utils/validateRegister');
 
 const admCreateUser = async (obj) => {
-  validateRegister(obj);
+  // validateRegister(obj);
   const passCrypt = md5(obj.password);
   const user = await User.findOne({ where: { email: obj.email } });
 
