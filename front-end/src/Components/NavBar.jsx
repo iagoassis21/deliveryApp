@@ -16,39 +16,63 @@ export default function NavBar() {
 
   const { name, role } = JSON.parse(localStorage.getItem('user'));
 
+  const buttonStyles = `inline-block font-medium border border-yellow rounded
+  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
+  href="#"`;
+
   return (
-    <header className="header-container">
-      <nav>
-        {
-          role === 'customer'
-            && <button type="button" data-testid={ testId }>Produtos</button>
-        }
-        { role === 'administrator' ? null : (
+    <ul className="flex justify-evenly bg-darkGray px-2 sm:px-4 py-3.5 ">
+      {
+        role === 'customer'
+            && (
+              <li className="mr-3">
+                <button
+                  className={ buttonStyles }
+                  type="button"
+                  data-testid={ testId }
+                  onClick={ () => history.push('/customer/products') }
+                >
+                  Produtos
+
+                </button>
+              </li>
+            )
+      }
+      { role === 'administrator' ? null : (
+        <li>
           <button
             type="button"
             data-testid="customer_products__element-navbar-link-orders"
             onClick={ role === 'customer'
               ? () => onClickNavigation('/customer/orders')
               : () => onClickNavigation('/seller/orders') }
-            className="ordersBtn"
+            className={ buttonStyles }
+            href="#"
           >
             Meus Pedidos
           </button>
-        )}
-        <button
+        </li>
+      )}
+      <li>
+        <span
+          className={ buttonStyles }
+          href="#"
           type="button"
           data-testid="customer_products__element-navbar-user-full-name"
         >
           {name}
-        </button>
+        </span>
+      </li>
+      <li>
         <button
+          className={ buttonStyles }
           type="button"
           data-testid="customer_products__element-navbar-link-logout"
           onClick={ logout }
         >
           Sair
         </button>
-      </nav>
-    </header>
+      </li>
+    </ul>
   );
 }

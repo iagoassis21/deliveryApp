@@ -19,6 +19,10 @@ export default function AddressFormCard() {
     getSellers();
   }, []);
 
+  const buttonStyles = `inline-block font-medium border border-yellow rounded
+  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
+  href="#"`;
+
   const handleSubmit = async () => {
     const { token, id: userId } = JSON.parse(localStorage.getItem('user'));
     const getCartItems = cartItems
@@ -41,16 +45,25 @@ export default function AddressFormCard() {
   };
 
   return (
-    <div>
-      <form>
-        <select data-testid="customer_checkout__select-seller">
-          {sellers.map((seller) => (
-            <option value={ seller.id } key={ seller.name }>
-              {seller.name}
-            </option>))}
-        </select>
+    <div className="flex justify-center">
+      <form className="flex flex-wrap border w-80 my-4">
+        <label htmlFor="select" className="block mb-2 text-sm font-medium text-gray-900">
+          Selecione um Vendedor:
+          <select
+            id="select"
+            className="pl-4"
+            data-testid="customer_checkout__select-seller"
+          >
+            {sellers.map((seller) => (
+              <option value={ seller.id } key={ seller.name }>
+                {seller.name}
+              </option>))}
+          </select>
+        </label>
         <label htmlFor="addresInput">
+          Endereço:
           <input
+            className="border pl-2"
             value={ deliveryAddress }
             onChange={ ({ target }) => setAddress(target.value) }
             data-testid="customer_checkout__input-address"
@@ -60,6 +73,7 @@ export default function AddressFormCard() {
           />
         </label>
         <label htmlFor="numberInput">
+          Nº:
           <input
             value={ deliveryNumber }
             onChange={ ({ target }) => setNumber(target.value) }
@@ -70,6 +84,7 @@ export default function AddressFormCard() {
           />
         </label>
         <button
+          className={ buttonStyles }
           data-testid="customer_checkout__button-submit-order"
           type="button"
           onClick={ handleSubmit }

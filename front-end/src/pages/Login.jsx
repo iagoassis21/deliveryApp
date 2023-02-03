@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+// import * as Dialog from '@radix-ui/react-dialog';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import logo from '../images/logo.svg';
 import regexEmail from '../utils/regexEmail';
@@ -91,6 +92,7 @@ export default function Login() {
             <input
               id="inputPass"
               name="password"
+              type="password"
               data-testid="common_login__input-password"
               placeholder="Senha"
               value={ password }

@@ -45,11 +45,15 @@ export default function ProductCard({ products }) {
     setUnitItem(unitItem + 1);
   };
 
+  const buttonStyles = `inline-block bg-darkGray font-medium border border-yellow rounded
+  py-0.25 px-2.5 mx-2 hover:bg-yellow text-yellow hover:text-black
+  href="#"`;
+
   return (
     <div
       key={ id }
       className="flex-col justify-center
-     text-center border-4 border-lime-600 border-color: rgb(101 163 13); rounded-lg"
+     text-center border-4 border-lightYellow  rounded-lg shadow-xl"
     >
       <img
         className="flex self-center justify-center"
@@ -57,39 +61,47 @@ export default function ProductCard({ products }) {
         src={ urlImage }
         alt={ name }
       />
-      <div className="bg-slate-400">
+      <div className="bg-lightYellow">
         <p
+          className="text-lg font-bold"
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           { name }
         </p>
         <p
+          className="text-lg font-bold"
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          { `${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
+          { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
         </p>
-        <button
-          className="border-2 w-8 border-black rounded-lg"
-          type="button"
-          onClick={ decreaseQuantity }
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
+        <div
+          className={ `inline-block bg-darkGray font-medium border border-yellow rounded
+  py-1 px-3 text-yellow hover:text-black
+  href="#"` }
         >
-          -
-        </button>
-        <input
-          className="w-10 text-center rounded-lg"
-          onChange={ (event) => setUnitItem(event.target.value) }
-          value={ unitItem }
-          data-testid={ `customer_products__input-card-quantity-${id}` }
-        />
-        <button
-          className="border-2 w-8 border-black rounded-lg"
-          type="button"
-          onClick={ increaseQuantity }
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-        >
-          +
-        </button>
+          <button
+            className={ buttonStyles }
+            type="button"
+            onClick={ decreaseQuantity }
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
+          >
+            -
+          </button>
+          <input
+            className="w-10 text-center rounded-lg"
+            onChange={ (event) => setUnitItem(event.target.value) }
+            value={ unitItem }
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+          />
+          <button
+            className={ buttonStyles }
+            type="button"
+            onClick={ increaseQuantity }
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

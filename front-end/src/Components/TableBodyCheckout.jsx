@@ -37,42 +37,56 @@ export default function TableBodyCheckout() {
     return cart;
   };
 
+  const buttonStyles = `inline-block font-medium border border-yellow rounded
+  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
+  href="#"`;
+
   return (
     !checkout && !cart ? <LoadingBar /> : (
       <tbody>
         {
           checkPageParams().map((product, index) => (
-            <tr key={ index }>
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-t-bgColorGrayThead" key={ index }>
               <td
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 data-testid={ `${testId}element-order-table-item-number-${index}` }
               >
                 { index + 1 }
               </td>
 
               <td
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 data-testid={ `${testId}element-order-table-name-${index}` }
               >
                 { product.name }
               </td>
               <td
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 data-testid={ `${testId}element-order-table-quantity-${index}` }
               >
                 { product.quantity }
               </td>
               <td
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 data-testid={ `${testId}element-order-table-unit-price-${index}` }
               >
                 { product.price }
               </td>
-              <td data-testid={ `${testId}element-order-table-sub-total-${index}` }>
+              <td
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                data-testid={ `${testId}element-order-table-sub-total-${index}` }
+              >
                 {
                   getPrice(product)
                 }
               </td>
               {
                 pathname === '/customer/checkout' && (
-                  <td>
+                  <td
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
                     <button
+                      className={ buttonStyles }
                       type="button"
                       data-testid={ `${testId}element-order-table-remove-${index}` }
                       onClick={ () => removeItem(product.id) }

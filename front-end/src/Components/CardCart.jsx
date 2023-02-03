@@ -28,6 +28,10 @@ export default function CardCart() {
     history.push('/customer/checkout');
   };
 
+  const buttonStyles = `inline-block bg-darkGray font-medium border border-yellow rounded
+  py-1.5 px-3 hover:bg-yellow text-yellow hover:text-black
+  href="#"`;
+
   return (
     <div>
       <button
@@ -37,9 +41,10 @@ export default function CardCart() {
         disabled={ cartItems.length === 0 }
       >
         <p
+          className={ buttonStyles }
           data-testid="customer_products__checkout-bottom-value"
         >
-          {`R$: ${cartValue}` }
+          {`Ver Carrinho: R$${cartValue}` }
         </p>
       </button>
     </div>

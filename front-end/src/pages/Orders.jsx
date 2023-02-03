@@ -19,7 +19,14 @@ export default function Orders() {
     <div>
       <NavBar />
       <div>
-        { !orders.length ? <h1>Não há pedidos</h1>
+        { !orders.length ? (
+          <h1
+            className={ `grid h-screen place-items-center
+         font-medium bg-bgColorWhiteIce` }
+          >
+            Você ainda não fez nenhum pedido...
+          </h1>
+        )
           : orders.map((item) => (
             <ProductOrderCard key={ item.id } orders={ item } />
           ))}

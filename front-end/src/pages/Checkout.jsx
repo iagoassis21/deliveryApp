@@ -22,26 +22,31 @@ export default function Checkout() {
   return (
     <div>
       <NavBar />
-      <h1>Finalizar Pedido</h1>
+      <h1 className="flex justify-center font-medium p-4">Finalize seu pedido abaixo</h1>
       {
         cartState.length === 0
-          ? <p>{cartMessage}</p>
+          ? <p className="flex justify-center font-medium p-4">{cartMessage}</p>
           : (
-            <section>
-              <table>
+            <section className="relative overflow-x-auto shadow-md">
+              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <TableHeaderCheckout />
                 <TableBodyCheckout />
               </table>
-              <button
-                type="button"
-                data-testid="customer_checkout__element-order-total-price"
-              >
-                {cartValue}
 
-              </button>
             </section>
+
           )
       }
+      <div className="flex justify-end mt-4 mr-4">
+        <button
+          className=" bg-yellow text-black font-bold py-2 px-4 rounded"
+          type="button"
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          {`Total dos itens: R$${!cartValue ? 0 : cartValue}`}
+
+        </button>
+      </div>
       <h2> Detalhes e Endereço para Entrega </h2>
       <AddressFormCard />
     </div>
