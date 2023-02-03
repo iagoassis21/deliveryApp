@@ -1,11 +1,9 @@
 import React from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const testId = 'customer_products__element-navbar-link-products';
 
 export default function NavBar() {
-  const location = useLocation();
-  const { pathname } = location;
   const history = useHistory();
   const onClickNavigation = (setPath) => {
     history.push(setPath);
