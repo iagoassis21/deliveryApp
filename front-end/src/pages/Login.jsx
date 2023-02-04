@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from '@radix-ui/react-dialog';
+import { SignIn } from 'phosphor-react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 import logo from '../images/logo.svg';
 import regexEmail from '../utils/regexEmail';
 import { getLoginApp } from '../Services/DeliveryAppApi';
+import ModalLoginBtn from '../Components/ModalLoginBtn';
 
 export default function Login() {
   const history = useHistory();
@@ -72,6 +74,7 @@ export default function Login() {
 
   return (
     <div className="loginPage">
+      <SignIn />
       <form className="login-form">
         <div>
           <img src={ logo } alt="logo" className="image-logo" />
