@@ -12,6 +12,8 @@ module.exports = {
       bgColorLightGray: '#9ca3af',
       bgColorWhiteIce: '#FAFAFA',
       bgColorGrayThead: '#374151',
+      zinc: '#18181b',
+      transparent: 'transparent',
     },
   },
   plugins: [],
