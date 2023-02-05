@@ -14,6 +14,9 @@ function AdmForm({ setUsers, token }) {
 
   const NAME_LENGHT = 12;
   const PASSWORD_LENGHT = 6;
+  const buttonStyles = `bg-darkGray font-medium border p-2 border-yellow rounded
+  py-0.25 px-2.5 mx-2 hover:bg-yellow text-yellow hover:text-black 
+  href="#"`;
 
   const handleInputChange = (event) => {
     setFormData({
@@ -52,9 +55,14 @@ function AdmForm({ setUsers, token }) {
   }, [formData]);
 
   return (
-    <form onSubmit={ handleFormSubmit }>
-      <div>
-        <label htmlFor="name">
+    <form
+      onSubmit={ handleFormSubmit }
+      className="grid justify-items-center font-medium mt-4 mb-4"
+    >
+      <div className="mb-2">
+        <label
+          htmlFor="name"
+        >
           Name:
           <input
             type="text"
@@ -63,11 +71,12 @@ function AdmForm({ setUsers, token }) {
             data-testid="admin_manage__input-name"
             value={ formData.name }
             onChange={ handleInputChange }
+            className="border rounded-lg"
           />
         </label>
       </div>
 
-      <div>
+      <div className="mb-2">
         <label htmlFor="email">
           Email:
           <input
@@ -77,11 +86,12 @@ function AdmForm({ setUsers, token }) {
             data-testid="admin_manage__input-email"
             value={ formData.email }
             onChange={ handleInputChange }
+            className="border rounded-lg"
           />
         </label>
       </div>
 
-      <div>
+      <div className="mb-2">
         <label htmlFor="password">
           Password:
           <input
@@ -91,11 +101,12 @@ function AdmForm({ setUsers, token }) {
             data-testid="admin_manage__input-password"
             value={ formData.password }
             onChange={ handleInputChange }
+            className="border rounded-lg"
           />
         </label>
       </div>
 
-      <div>
+      <div className="mb-2">
         <label htmlFor="role">
           Role:
           <select
@@ -110,14 +121,16 @@ function AdmForm({ setUsers, token }) {
           </select>
         </label>
       </div>
-
-      <button
-        type="submit"
-        disabled={ isButtonDisabled }
-        data-testid="admin_manage__button-register"
-      >
-        Submit
-      </button>
+      <div>
+        <button
+          type="submit"
+          disabled={ isButtonDisabled }
+          data-testid="admin_manage__button-register"
+          className={ buttonStyles }
+        >
+          Submit
+        </button>
+      </div>
       <span data-testid="admin_manage__element-invalid-register" />
     </form>
   );
