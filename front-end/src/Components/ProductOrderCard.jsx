@@ -16,22 +16,22 @@ export default function ProductOrderCard({ orders: { id, saleDate,
         <div
           data-testid={ `customer_orders__element-order-id-${id}` }
         >
-          {id}
+          {`Pedido: ${id}`}
         </div>
         <div
           data-testid={ `customer_orders__element-delivery-status-${id}` }
         >
-          {status}
+          {`Status do pedido: ${status}`}
         </div>
         <div
           data-testid={ `customer_orders__element-order-date-${id}` }
         >
-          {new Date(saleDate).toLocaleDateString('pt-BR')}
+          {`Data do Pedido: ${new Date(saleDate).toLocaleDateString('pt-BR')}`}
         </div>
         <div
           data-testid={ `customer_orders__element-card-price-${id}` }
         >
-          {totalPrice.replace('.', ',')}
+          {`Valor: ${totalPrice.replace('.', ',')}`}
         </div>
       </div>
     </Link>

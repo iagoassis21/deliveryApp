@@ -18,7 +18,7 @@ export default function Orders() {
   return (
     <div>
       <NavBar />
-      <div>
+      <div className="grid grid-cols-3 gap-3 mt-8 py-12 px-12 rounded-lg">
         { !orders.length ? (
           <h1
             className={ `grid h-screen place-items-center
@@ -30,6 +30,7 @@ export default function Orders() {
           : orders.map((item) => (
             <ProductOrderCard key={ item.id } orders={ item } />
           ))}
+
       </div>
     </div>
   );

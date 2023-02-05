@@ -40,18 +40,19 @@ export default function Checkout() {
 
           )
       }
-      <div className="flex justify-end mt-4 mr-4">
-        <button
+      <div className="flex justify-center py-6">
+        <p
           className=" bg-yellow text-black font-bold py-2 px-4 rounded"
           type="button"
           data-testid="customer_checkout__element-order-total-price"
         >
           {`Total dos itens: R$${!cartValue ? 0 : cartValue}`}
 
-        </button>
+        </p>
       </div>
-      <h2> Detalhes e Endereço para Entrega </h2>
-      <AddressFormCard />
+      <div className="flex justify-center">
+        <AddressFormCard />
+      </div>
     </div>
   );
 }

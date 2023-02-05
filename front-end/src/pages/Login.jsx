@@ -37,7 +37,7 @@ export default function Login() {
     setPassword(event.target.value);
     if (event.target.value.length < seis) {
       setPassIsValid(false);
-      return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
+      return setErrorMsg('A senha possui no mínimo 6 caracteres');
     }
     setPassIsValid(true);
     return setErrorMsg('');
@@ -47,7 +47,7 @@ export default function Login() {
     event.preventDefault();
     const { message, ...user } = await getLoginApp(email, password);
     if (message === 'Not found') {
-      return setErrorMsg('Dados Invalidos');
+      return setErrorMsg('Dados Inválidos');
     }
     setErrorMsg('');
     if (user.role === 'administrator') {

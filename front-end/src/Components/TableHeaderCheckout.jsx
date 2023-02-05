@@ -7,12 +7,12 @@ export default function TableHeaderCheckout() {
      bg-bgColorGrayThead dark:bg-bgColorGrayThead` }
     >
       <tr>
-        <th scope="col" className="px-6 py-3">Id</th>
-        <th scope="col" className="px-6 py-3">Name</th>
-        <th scope="col" className="px-6 py-3">Qtd</th>
-        <th scope="col" className="px-6 py-3">Price</th>
-        <th scope="col" className="px-6 py-3">Total</th>
-        <th scope="col" className="px-6 py-3">Remover Itens</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Id</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Name</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Qtd</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Price</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Total</th>
+        <th scope="col" className="px-6 py-3 text-white text-base">Remover Itens</th>
       </tr>
     </thead>
   );

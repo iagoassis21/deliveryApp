@@ -24,7 +24,7 @@ export default function Register(props) {
     setName(event.target.value);
     if (event.target.value.length < DOZE) {
       setNameIsValid(false);
-      return setErrorMsg('O campo nome precisa ter no mínimo 12 caracteres');
+      return setErrorMsg('O nome deve ter no mínimo 12 caracteres');
     }
     setNameIsValid(true);
     return setErrorMsg('');
@@ -34,7 +34,7 @@ export default function Register(props) {
     setPassword(event.target.value);
     if (event.target.value.length < SEIS) {
       setPassIsValid(false);
-      return setErrorMsg('O campo da senha precisa ter no mínimo 6 caracteres');
+      return setErrorMsg('A senha precisa ter no mínimo 6 caracteres');
     }
     setPassIsValid(true);
     return setErrorMsg('');
@@ -44,7 +44,7 @@ export default function Register(props) {
     setEmail(event.target.value);
     if (!regexEmail.test(event.target.value)) {
       setMailIsValid(false);
-      return setErrorMsg('O campo e-mail precisa ser um e-mail válido!');
+      return setErrorMsg('O campo e-mail precisa ser de um tipo válido!');
     }
     setMailIsValid(true);
     return setErrorMsg('');

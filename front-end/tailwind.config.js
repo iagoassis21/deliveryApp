@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.jsx', './src/**/*.ts', './src/**/*.tsx', './src/**/*.css'],
+  content: ['./src/**/*.jsx', './src/**/*.html', './src/**/*.tsx', './src/**/*.css'],
   theme: {
     extend: {},
     colors: {
@@ -13,6 +13,7 @@ module.exports = {
       bgColorWhiteIce: '#FAFAFA',
       bgColorGrayThead: '#374151',
       zinc: '#18181b',
+      zinc400: '#a1a1aa',
       transparent: 'transparent',
     },
   },

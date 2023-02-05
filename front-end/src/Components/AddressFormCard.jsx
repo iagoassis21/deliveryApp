@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ShoppingCart } from 'phosphor-react';
 import { getAllSellers, getSaleData } from '../Services/DeliveryAppApi';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
 
@@ -18,10 +19,6 @@ export default function AddressFormCard() {
     };
     getSellers();
   }, []);
-
-  const buttonStyles = `inline-block font-medium border border-yellow rounded
-  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
-  href="#"`;
 
   const handleSubmit = async () => {
     const { token, id: userId } = JSON.parse(localStorage.getItem('user'));
@@ -44,14 +41,32 @@ export default function AddressFormCard() {
     return history.push(`/customer/orders/${orderId}`);
   };
 
+  const inputStyle = `bg-zinc py-3 px-4 rounded text-sm
+  placeholder:text-zinc-light w-full`;
+
+  const buttonStyles = `bg-yellow px-5 h-12 rounded-md bg-darkGray border border-yellow
+  font-bold flex text-center items-center gap-3 hover:bg-yellow text-yellow
+  hover:text-black href="#"`;
+
   return (
-    <div className="flex justify-center">
-      <form className="flex flex-wrap border w-80 my-4">
-        <label htmlFor="select" className="block mb-2 text-sm font-medium text-gray-900">
+    <div
+      className={ `flex justify-center font-semibold py-8 px-10
+      bg-darkGray text-white w-[450px] rounded-lg` }
+    >
+      <form className="flex flex-col justify-center gap-4">
+        <h1
+          className="text-2xl font-semibold pb-2"
+        >
+          Detalhes e Endereço para Entrega
+        </h1>
+        <label
+          htmlFor="select"
+          className="block mb-2 text-sm font-semibold text-gray-900"
+        >
           Selecione um Vendedor:
           <select
+            className={ inputStyle }
             id="select"
-            className="pl-4"
             data-testid="customer_checkout__select-seller"
           >
             {sellers.map((seller) => (
@@ -60,10 +75,10 @@ export default function AddressFormCard() {
               </option>))}
           </select>
         </label>
-        <label htmlFor="addresInput">
+        <label className="font-semibold" htmlFor="addresInput">
           Endereço:
           <input
-            className="border pl-2"
+            className={ inputStyle }
             value={ deliveryAddress }
             onChange={ ({ target }) => setAddress(target.value) }
             data-testid="customer_checkout__input-address"
@@ -72,9 +87,10 @@ export default function AddressFormCard() {
             placeholder="Rua/Av."
           />
         </label>
-        <label htmlFor="numberInput">
+        <label className="font-semibold" htmlFor="numberInput">
           Nº:
           <input
+            className={ inputStyle }
             value={ deliveryNumber }
             onChange={ ({ target }) => setNumber(target.value) }
             data-testid="customer_checkout__input-address-number"
@@ -83,14 +99,17 @@ export default function AddressFormCard() {
             placeholder="Número"
           />
         </label>
-        <button
-          className={ buttonStyles }
-          data-testid="customer_checkout__button-submit-order"
-          type="button"
-          onClick={ handleSubmit }
-        >
-          <p>Finalizar Pedido</p>
-        </button>
+        <div className="flex justify-center mt-4 gap-4">
+          <button
+            className={ buttonStyles }
+            data-testid="customer_checkout__button-submit-order"
+            type="button"
+            onClick={ handleSubmit }
+          >
+            <ShoppingCart size={ 32 } />
+            Finalizar Pedido
+          </button>
+        </div>
       </form>
     </div>
   );
