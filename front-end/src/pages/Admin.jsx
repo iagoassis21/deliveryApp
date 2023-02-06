@@ -7,6 +7,10 @@ export default function Admin() {
   const [users, setUsers] = useState([]);
   const [token, setToken] = useState([]);
 
+  const buttonStyles = `bg-darkGray font-medium border p-4 border-yellow rounded
+  py-0.25 px-2.5 mx-2 hover:bg-yellow text-yellow hover:text-black 
+  href="#"`;
+
   useEffect(() => {
     const data = async () => {
       const userInfo = JSON.parse(localStorage.getItem('user'));
@@ -26,37 +30,62 @@ export default function Admin() {
   return (
     <div>
       <NavBar />
-      <AdmForm setUsers={ setUsers } token={ token } />
+      <div
+        className="grid justify-items-center py-6"
+      >
+        <AdmForm setUsers={ setUsers } token={ token } />
+      </div>
       {
         users.map((item, index) => (
-          <div key={ item.id }>
-            <p
-              data-testid={ `admin_manage__element-user-table-item-number-${index}` }
-            >
-              {item.id}
-            </p>
-            <p
-              data-testid={ `admin_manage__element-user-table-name-${index}` }
-            >
-              {item.name}
-            </p>
-            <p
-              data-testid={ `admin_manage__element-user-table-email-${index}` }
-            >
-              {item.email}
-            </p>
-            <p
-              data-testid={ `admin_manage__element-user-table-role-${index}` }
-            >
-              {item.role}
-            </p>
-            <button
-              type="submit"
-              data-testid={ `admin_manage__element-user-table-remove-${index}` }
-              onClick={ () => handleDelete(item.id) }
-            >
-              Deletar
-            </button>
+          <div
+            key={ item.id }
+            className="flex-col justify-center
+            text-center font-medium border-2 border-lightYellow rounded-lg shadow-xl"
+          >
+            <ul className="flex flex-wrap -mb-px">
+              <li className="mr-2">
+                <p
+                  data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+                  className="inline-block p-4 "
+                >
+                  {item.id}
+                </p>
+              </li>
+              <li className="mr-2 grow">
+                <p
+                  data-testid={ `admin_manage__element-user-table-name-${index}` }
+                  className="inline-block p-4"
+                >
+                  {item.name}
+                </p>
+              </li>
+              <li className="mr-2 grow">
+                <p
+                  data-testid={ `admin_manage__element-user-table-email-${index}` }
+                  className="inline-block p-4"
+                >
+                  {item.email}
+                </p>
+              </li>
+              <li className="mr-2 grow">
+                <p
+                  data-testid={ `admin_manage__element-user-table-role-${index}` }
+                  className="inline-block p-4"
+                >
+                  {item.role}
+                </p>
+              </li>
+              <li className="mr-2">
+                <button
+                  type="submit"
+                  data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                  onClick={ () => handleDelete(item.id) }
+                  className={ buttonStyles }
+                >
+                  Deletar
+                </button>
+              </li>
+            </ul>
           </div>
         ))
       }

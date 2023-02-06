@@ -44,9 +44,11 @@ export default function AddressFormCard() {
   const inputStyle = `bg-zinc py-3 px-4 rounded text-sm
   placeholder:text-zinc-light w-full`;
 
-  const buttonStyles = `bg-yellow px-5 h-12 rounded-md bg-darkGray border border-yellow
-  font-bold flex text-center items-center gap-3 hover:bg-yellow text-yellow
-  hover:text-black href="#"`;
+  const buttonAllowed = `bg-yellow px-5 h-12 rounded-md
+  font-bold flex text-center items-center gap-3 hover:text-black`;
+
+  const buttonNotAllowed = `bg-yellow cursor-not-allowed px-5 h-12 rounded-md
+  font-bold flex items-center gap-3 hover:text-black`;
 
   return (
     <div
@@ -101,10 +103,14 @@ export default function AddressFormCard() {
         </label>
         <div className="flex justify-center mt-4 gap-4">
           <button
-            className={ buttonStyles }
+            className={ (!deliveryAddress || !deliveryNumber)
+              ? buttonNotAllowed : buttonAllowed }
             data-testid="customer_checkout__button-submit-order"
             type="button"
+            disabled={ !deliveryAddress || !deliveryNumber }
             onClick={ handleSubmit }
+            title={ (!deliveryAddress || !deliveryNumber)
+              ? 'Preencha todos os campos' : 'Finalize o pedido' }
           >
             <ShoppingCart size={ 32 } />
             Finalizar Pedido

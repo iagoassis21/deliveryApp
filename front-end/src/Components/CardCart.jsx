@@ -28,9 +28,13 @@ export default function CardCart() {
     history.push('/customer/checkout');
   };
 
-  const buttonStyles = `inline-block bg-darkGray font-bold border border-yellow rounded
-  py-5 px-5 hover:bg-yellow text-yellow hover:text-black
-  href="#"`;
+  const buttonAllowed = `bg-darkGray px-5 h-12 rounded-md border border-yellow
+  font-bold flex text-center items-center gap-3 hover:bg-yellow
+  text-yellow hover:text-black`;
+
+  const buttonNotAllowed = `bg-darkGray cursor-not-allowed border border-yellow px-5 h-12
+  rounded-md font-bold flex items-center text-yellow gap-3 hover:bg-yellow
+  text-yellow hover:text-black`;
 
   return (
     <div>
@@ -39,13 +43,12 @@ export default function CardCart() {
         type="button"
         onClick={ onClickRedirect }
         disabled={ cartItems.length === 0 }
+        className={ cartItems.length === 0 ? buttonNotAllowed : buttonAllowed }
+        title={ cartItems.length === 0 ? 'Carrinho Vazio' : 'Ver Carrinho' }
       >
-        <p
-          className={ buttonStyles }
-          data-testid="customer_products__checkout-bottom-value"
-        >
-          {`Ver Carrinho: R$${cartValue}` }
-        </p>
+
+        {`Ver Carrinho: R$${cartValue}` }
+
       </button>
     </div>
   );

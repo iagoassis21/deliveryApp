@@ -9,8 +9,8 @@ export default function SellerOrdersdetails() {
   return (
     <div>
       <NavBar />
-      <div>
-        <h1>Detalhes do Pedido</h1>
+      <div className="grid grid-cols gap-3 py-10 px-36 rounded-lg">
+        <h1 className="text-center font-bold pb-4">Detalhes do Pedido</h1>
         <TableProducts saleId={ id } />
       </div>
     </div>
