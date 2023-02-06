@@ -1,3 +1,4 @@
+import { ShoppingCart } from 'phosphor-react';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
@@ -46,7 +47,7 @@ export default function CardCart() {
         className={ cartItems.length === 0 ? buttonNotAllowed : buttonAllowed }
         title={ cartItems.length === 0 ? 'Carrinho Vazio' : 'Ver Carrinho' }
       >
-
+        <ShoppingCart size={ 32 } />
         {`Ver Carrinho: R$${cartValue}` }
 
       </button>

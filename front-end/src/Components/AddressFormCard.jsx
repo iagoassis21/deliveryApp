@@ -87,11 +87,13 @@ export default function AddressFormCard() {
             id="addresInput"
             type="text"
             placeholder="Rua/Av."
+            autoComplete="off"
           />
         </label>
         <label className="font-semibold" htmlFor="numberInput">
           Nº:
           <input
+            autoComplete="off"
             className={ inputStyle }
             value={ deliveryNumber }
             onChange={ ({ target }) => setNumber(target.value) }

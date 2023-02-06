@@ -71,77 +71,78 @@ export default function Register(props) {
     placeholder:text-zinc-light w-full`;
 
   return (
-    <>
-      <div
-        className={ `flex flex-col justify-center font-semibold fixed py-10 px-10
+    <div
+      className={ `flex flex-col justify-center font-semibold fixed py-10 px-10
       bg-darkGray text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
        w-[450px] rounded-lg` }
-      >
-        <form className="flex flex-col justify-center gap-4">
-          <h1
-            className={ `flex justify-center text-center
+    >
+      <form className="flex flex-col justify-center gap-4">
+        <h1
+          className={ `flex justify-center text-center
             text-4xl font-semibold` }
+        >
+          Register
+        </h1>
+        <label htmlFor="newUserName">
+          <p className="py-2">Nome</p>
+          <input
+            className={ inputStyle }
+            autoComplete="off"
+            id="newUserName"
+            name="name"
+            data-testid="common_register__input-name"
+            type="text"
+            placeholder="Seu Nome"
+            value={ name }
+            onChange={ handleNameChange }
+          />
+        </label>
+        <label htmlFor="newUserEmail">
+          <p className="py-2">Email</p>
+          <input
+            autoComplete="off"
+            className={ inputStyle }
+            id="newUserEmail"
+            name="email"
+            data-testid="common_register__input-email"
+            type="text"
+            placeholder="seu-email@site.com.br"
+            value={ email }
+            onChange={ handleEmailChange }
+          />
+        </label>
+        <label htmlFor="newUserPassword">
+          <p className="py-2">Senha</p>
+          <input
+            className={ inputStyle }
+            id="newUserPassword"
+            name="password"
+            data-testid="common_register__input-password"
+            type="password"
+            placeholder="**********"
+            value={ password }
+            onChange={ handlePasswordChange }
+          />
+        </label>
+        <span data-testid="common_register__element-invalid_register">
+          { errorMsg }
+        </span>
+        <div className="mt-4 flex justify-end gap-4">
+          <button
+            className={ !mailIsValid || !passIsValid || !nameIsValid
+              ? buttonNotAllowed : buttonAllowed }
+            id="sendButton"
+            data-testid="common_register__button-register"
+            type="button"
+            disabled={ !mailIsValid || !passIsValid || !nameIsValid }
+            onClick={ onClickRegister }
           >
-            Register
-          </h1>
-          <label htmlFor="newUserName">
-            <p className="py-2">Nome</p>
-            <input
-              className={ inputStyle }
-              id="newUserName"
-              name="name"
-              data-testid="common_register__input-name"
-              type="text"
-              placeholder="Seu Nome"
-              value={ name }
-              onChange={ handleNameChange }
-            />
-          </label>
-          <label htmlFor="newUserEmail">
-            <p className="py-2">Email</p>
-            <input
-              className={ inputStyle }
-              id="newUserEmail"
-              name="email"
-              data-testid="common_register__input-email"
-              type="text"
-              placeholder="seu-email@site.com.br"
-              value={ email }
-              onChange={ handleEmailChange }
-            />
-          </label>
-          <label htmlFor="newUserPassword">
-            <p className="py-2">Senha</p>
-            <input
-              className={ inputStyle }
-              id="newUserPassword"
-              name="password"
-              data-testid="common_register__input-password"
-              type="password"
-              placeholder="**********"
-              value={ password }
-              onChange={ handlePasswordChange }
-            />
-          </label>
-          <div className="mt-4 flex justify-end gap-4">
-            <button
-              className={ !mailIsValid || !passIsValid || !nameIsValid
-                ? buttonNotAllowed : buttonAllowed }
-              id="sendButton"
-              data-testid="common_register__button-register"
-              type="button"
-              disabled={ !mailIsValid || !passIsValid || !nameIsValid }
-              onClick={ onClickRegister }
-            >
-              CADASTRAR
-            </button>
-          </div>
-        </form>
-      </div>
-      <span data-testid="common_register__element-invalid_register">
-        { errorMsg }
-      </span>
-    </>
+            CADASTRAR
+          </button>
+        </div>
+      </form>
+
+    </div>
   );
 }
 

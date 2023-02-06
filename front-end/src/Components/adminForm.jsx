@@ -76,6 +76,7 @@ function AdmForm({ setUsers, token }) {
           >
             <p className="py-2">Nome</p>
             <input
+              autoComplete="off"
               className={ inputStyle }
               type="text"
               id="name"
@@ -91,6 +92,7 @@ function AdmForm({ setUsers, token }) {
           <label htmlFor="email">
             Email:
             <input
+              autoComplete="off"
               type="email"
               id="email"
               name="email"

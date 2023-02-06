@@ -87,7 +87,7 @@ export default function Login() {
        bg-darkGray text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
         rounded-lg` }
     >
-      <h1 className="flex justify-center pb-5"> Delivery do GRUPÃO 10</h1>
+      <h1 className="flex justify-center pb-5">Delivery 10</h1>
       <Dialog.Root>
         <Dialog.Trigger
           className={ `bg-yellow py-5 h-12 rounded-md
@@ -119,6 +119,7 @@ export default function Login() {
                     <p className="py-2">Email</p>
                     <input
                       className={ inputStyle }
+                      autoComplete="off"
                       type="email"
                       id="inputEmail"
                       name="email"
