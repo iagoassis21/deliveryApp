@@ -21,12 +21,14 @@ export default function Products() {
     <div className="bg-bgColorWhiteIce">
       <NavBar />
       { products && products.length === 0 && <LoadingBar />}
-      <div className="grid grid-cols-4 gap-4 mt-8 mx-12 rounded-lg">
+      <div className="grid grid-cols-5 gap-4 mt-8 mx-12 rounded-lg">
         {
           products.map((item) => (
             <ProductCard key={ item.id } products={ item } />
           ))
         }
+      </div>
+      <div className="fixed bottom-10 right-5">
         <CardCart />
       </div>
     </div>

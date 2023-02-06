@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
@@ -53,54 +54,63 @@ export default function ProductCard({ products }) {
     <div
       key={ id }
       className="flex-col justify-center
-     text-center border-4 border-lightYellow  rounded-lg shadow-xl"
+     text-center border-4 bg-lightYellow border-lightYellow  rounded-lg shadow-xl"
     >
-      <img
-        className="flex self-center justify-center"
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
-        src={ urlImage }
-        alt={ name }
-      />
-      <div className="bg-lightYellow">
-        <p
-          className="text-lg font-bold"
-          data-testid={ `customer_products__element-card-title-${id}` }
-        >
-          { name }
-        </p>
-        <p
-          className="text-lg font-bold"
-          data-testid={ `customer_products__element-card-price-${id}` }
-        >
-          { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
-        </p>
-        <div
-          className={ `inline-block bg-darkGray font-medium border border-yellow rounded
-  py-1 px-3 text-yellow hover:text-black
-  href="#"` }
-        >
-          <button
-            className={ buttonStyles }
-            type="button"
-            onClick={ decreaseQuantity }
-            data-testid={ `customer_products__button-card-rm-item-${id}` }
+      <div className="flex flex-col">
+        <img
+          className="flex self-center justify-center"
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ urlImage }
+          alt={ name }
+        />
+        <div className="bg-lightYellow flex flex-col">
+          <div className="flex flex-col bg-lightYellow">
+            <p
+              className="flex justify-center flex-wrap text-lg font-bold py-2"
+              data-testid={ `customer_products__element-card-title-${id}` }
+            >
+              { name }
+            </p>
+            <p
+              className="text-lg font-bold"
+              data-testid={ `customer_products__element-card-price-${id}` }
+            >
+              { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
+            </p>
+          </div>
+          <div
+            className={ `flex justify-center bg-darkGray font-medium border border-yellow
+           roundedpy-1 py-2 text-yellow hover:text-black href="#"` }
           >
-            -
-          </button>
-          <input
-            className="w-10 text-center rounded-lg"
-            onChange={ (event) => setUnitItem(event.target.value) }
-            value={ unitItem }
-            data-testid={ `customer_products__input-card-quantity-${id}` }
-          />
-          <button
-            className={ buttonStyles }
-            type="button"
-            onClick={ increaseQuantity }
-            data-testid={ `customer_products__button-card-add-item-${id}` }
-          >
-            +
-          </button>
+            <div>
+              <button
+                className={ buttonStyles }
+                type="button"
+                onClick={ decreaseQuantity }
+                data-testid={ `customer_products__button-card-rm-item-${id}` }
+              >
+                -
+              </button>
+            </div>
+            <div>
+              <input
+                className="w-10 text-center rounded-lg"
+                onChange={ (event) => setUnitItem(event.target.value) }
+                value={ unitItem }
+                data-testid={ `customer_products__input-card-quantity-${id}` }
+              />
+            </div>
+            <div>
+              <button
+                className={ buttonStyles }
+                type="button"
+                onClick={ increaseQuantity }
+                data-testid={ `customer_products__button-card-add-item-${id}` }
+              >
+                +
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

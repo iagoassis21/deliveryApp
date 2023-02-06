@@ -27,7 +27,7 @@ export default function Checkout() {
         cartState.length === 0
           ? <p className="flex justify-center font-medium p-4">{cartMessage}</p>
           : (
-            <section className="relative overflow-x-auto shadow-md">
+            <section className="grid grid-col justify-center">
               <table
                 className={ `w-full text-sm text-left text-gray-500 
               dark:text-gray-400` }

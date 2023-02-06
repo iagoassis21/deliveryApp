@@ -18,19 +18,23 @@ export default function Orders() {
   return (
     <div>
       <NavBar />
-      <div className="grid grid-cols-3 gap-3 mt-8 py-12 px-12 rounded-lg">
-        { !orders.length ? (
-          <h1
-            className={ `grid h-screen place-items-center
+      <div className="flex flex-col justify-center">
+        <h1 className="flex self-center pt-8 font-bold">
+          Selecione um pedido para ir aos detalhes
+        </h1>
+        <div className="grid grid-cols gap-3 mt-2 py-12 px-36 rounded-lg">
+          { !orders.length ? (
+            <h1
+              className={ `grid h-screen place-items-center
          font-medium bg-bgColorWhiteIce` }
-          >
-            Você ainda não fez nenhum pedido...
-          </h1>
-        )
-          : orders.map((item) => (
-            <ProductOrderCard key={ item.id } orders={ item } />
-          ))}
-
+            >
+              Você ainda não fez nenhum pedido...
+            </h1>
+          )
+            : orders.map((item) => (
+              <ProductOrderCard key={ item.id } orders={ item } />
+            ))}
+        </div>
       </div>
     </div>
   );

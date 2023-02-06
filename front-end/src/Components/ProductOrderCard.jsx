@@ -4,47 +4,76 @@ import { Link } from 'react-router-dom';
 
 export default function ProductOrderCard({ orders: { id, saleDate,
   totalPrice, status } }) {
+  const handleChangeStatusStyle = (statusParams) => {
+    switch (statusParams) {
+    case 'Pendente':
+      return 'border bg-bgPendente text-black uppercase font-semibold rounded mt-1';
+    case 'Preparando':
+      return 'border bg-bgPreparando text-black uppercase font-semibold rounded mt-1';
+    case 'Em Trânsito':
+      return 'border bg-bgTransito text-black uppercase font-semibold rounded mt-1';
+    case 'Entregue':
+      return 'border bg-bgEntregue text-black uppercase font-semibold rounded mt-1';
+    case 'Cancelado':
+      return 'border bg-bgCancelado text-black uppercase font-semibold rounded mt-1';
+    default:
+      return '';
+    }
+  };
+
   return (
     <Link
       data-testid={ `customer_orders__element-order-id-${id}` }
       to={ `/customer/orders/${id}` }
     >
-      <div
-        className="justify-center
-     text-center border-4 border-lime-600 border-color: rgb(101 163 13); rounded-lg"
+      <section
+        className={ `flex justify-center text-center border-4 bg-bgColorGrayThead
+       border-darkGray hover:bg-darkGray text-white font-semibold
+         shadow-2xl rounded-lg href="#"` }
       >
-        <div
-          data-testid={ `customer_orders__element-order-id-${id}` }
-        >
-          {`Pedido: ${id}`}
+        <div className="flex space-x-24 py-4">
+          <div className="grid justify-center">
+            <p>Número do Pedido</p>
+            <div
+              data-testid={ `customer_orders__element-order-id-${id}` }
+            >
+              {`${id}`}
+            </div>
+          </div>
+          <div className="grid justify-center">
+            <p className="pb-2">Status do Pedido</p>
+            <div
+              className={ handleChangeStatusStyle(status) }
+              data-testid={ `customer_orders__element-delivery-status-${id}` }
+            >
+              {`${status}`}
+            </div>
+          </div>
+          <div className="grid justify-center">
+            <p>Data do Pedido</p>
+            <div
+              data-testid={ `customer_orders__element-order-date-${id}` }
+            >
+              {`${new Date(saleDate).toLocaleDateString('pt-BR')}`}
+            </div>
+          </div>
+          <div className="grid justify-center">
+            <p>Valor do Pedido</p>
+            <div
+              data-testid={ `customer_orders__element-card-price-${id}` }
+            >
+              {`R$: ${totalPrice.replace('.', ',')}`}
+            </div>
+          </div>
         </div>
-        <div
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
-        >
-          {`Status do pedido: ${status}`}
-        </div>
-        <div
-          data-testid={ `customer_orders__element-order-date-${id}` }
-        >
-          {`Data do Pedido: ${new Date(saleDate).toLocaleDateString('pt-BR')}`}
-        </div>
-        <div
-          data-testid={ `customer_orders__element-card-price-${id}` }
-        >
-          {`Valor: ${totalPrice.replace('.', ',')}`}
-        </div>
-      </div>
+      </section>
     </Link>
   );
 }
 
-// AGORA VAI TA ATE PRINTANDO AQUI Ó https://prnt.sc/x8mzFACBSLRq
-
 ProductOrderCard.propTypes = {
-  // orders: PropTypes.shape({
   id: PropTypes.number,
   saleDate: PropTypes.string,
   totalPrice: PropTypes.string,
   status: PropTypes.string,
-  // }).isRequired,
 }.isRequired;

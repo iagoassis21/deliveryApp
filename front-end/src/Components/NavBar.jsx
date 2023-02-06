@@ -1,3 +1,4 @@
+import { List, ShoppingBagOpen, SignOut, User } from 'phosphor-react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -16,9 +17,9 @@ export default function NavBar() {
 
   const { name, role } = JSON.parse(localStorage.getItem('user'));
 
-  const buttonStyles = `inline-block font-medium border border-yellow rounded
-  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
-  href="#"`;
+  const buttonStyles = `py-1 px-3 rounded-md bg-darkGray border border-yellow
+  font-bold flex text-center items-center justify-center gap-1 hover:bg-yellow
+text-yellow hover:text-black href="#"`;
 
   return (
     <ul className="flex justify-evenly bg-darkGray px-2 sm:px-4 py-3.5 ">
@@ -32,8 +33,8 @@ export default function NavBar() {
                   data-testid={ testId }
                   onClick={ () => history.push('/customer/products') }
                 >
+                  <List />
                   Produtos
-
                 </button>
               </li>
             )
@@ -49,6 +50,7 @@ export default function NavBar() {
             className={ buttonStyles }
             href="#"
           >
+            <ShoppingBagOpen size={ 22 } />
             Meus Pedidos
           </button>
         </li>
@@ -60,16 +62,18 @@ export default function NavBar() {
           type="button"
           data-testid="customer_products__element-navbar-user-full-name"
         >
+          <User />
           {name}
         </span>
       </li>
-      <li>
+      <li className="flex justify-center">
         <button
           className={ buttonStyles }
           type="button"
           data-testid="customer_products__element-navbar-link-logout"
           onClick={ logout }
         >
+          <SignOut />
           Sair
         </button>
       </li>

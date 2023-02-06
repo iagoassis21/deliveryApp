@@ -38,7 +38,7 @@ export default function TableBodyCheckout() {
   };
 
   const buttonStyles = `inline-block font-medium border border-yellow rounded
-  py-1 px-3 hover:bg-yellow text-yellow hover:text-black
+  py-1 px-3 bg-darkGray hover:bg-yellow text-yellow hover:text-black
   href="#"`;
 
   return (

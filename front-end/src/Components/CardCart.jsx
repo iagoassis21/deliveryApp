@@ -28,8 +28,8 @@ export default function CardCart() {
     history.push('/customer/checkout');
   };
 
-  const buttonStyles = `inline-block bg-darkGray font-medium border border-yellow rounded
-  py-1.5 px-3 hover:bg-yellow text-yellow hover:text-black
+  const buttonStyles = `inline-block bg-darkGray font-bold border border-yellow rounded
+  py-5 px-5 hover:bg-yellow text-yellow hover:text-black
   href="#"`;
 
   return (
