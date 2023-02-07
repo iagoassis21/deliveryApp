@@ -18,8 +18,15 @@ export default function Login() {
 
   useEffect(() => {
     const user = localStorage.getItem('user');
-    if (user) {
-      history.push('/customer/products');
+    console.log(user);
+    if (!user) {
+      return history.push('/login');
+    }
+    if (user.role === 'administrator') {
+      return history.push('/admin/manage');
+    }
+    if (user.role === 'seller' || user.role === 'customer') {
+      return history.push('/customer/products');
     }
   }, [history]);
 

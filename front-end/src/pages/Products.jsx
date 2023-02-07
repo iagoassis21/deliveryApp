@@ -21,7 +21,10 @@ export default function Products() {
     <div className="bg-bgColorWhiteIce">
       <NavBar />
       { products && products.length === 0 && <LoadingBar />}
-      <div className="grid grid-cols-5 gap-4 mt-8 mx-12 rounded-lg">
+      <div
+        className={ `grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3
+         sm:grid-cols-2 mb:grid-cols gap-4 mt-8 mx-12 rounded-lg` }
+      >
         {
           products.map((item) => (
             <ProductCard key={ item.id } products={ item } />

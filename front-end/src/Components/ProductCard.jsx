@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-max-depth */
+import { Minus, Plus } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import DeliveryAppContext from '../Context/DeliveryAppContext';
@@ -46,71 +47,60 @@ export default function ProductCard({ products }) {
     setUnitItem(unitItem + 1);
   };
 
-  const buttonStyles = `inline-block bg-darkGray font-medium border border-yellow rounded
-  py-0.25 px-2.5 mx-2 hover:bg-yellow text-yellow hover:text-black
-  href="#"`;
+  // const buttonStyles = `inline-block bg-darkGray font-medium border border-yellow rounded
+  // py-0.25 px-2.5 mx-2 hover:bg-yellow text-yellow hover:text-black
+  // href="#"`;
 
   return (
     <div
+      className="shadow-md transition-all hover:-translate-y-2
+      duration-200 bg-bgColorWhiteIce rounded-lg p-1 border border-1"
       key={ id }
-      className="flex-col justify-center
-     text-center border-4 bg-lightYellow border-lightYellow  rounded-lg shadow-xl"
     >
-      <div className="flex flex-col">
-        <img
-          className="flex self-center justify-center"
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ urlImage }
-          alt={ name }
-        />
-        <div className="bg-lightYellow flex flex-col">
-          <div className="flex flex-col bg-lightYellow">
-            <p
-              className="flex justify-center flex-wrap text-lg font-bold py-2"
-              data-testid={ `customer_products__element-card-title-${id}` }
-            >
-              { name }
-            </p>
-            <p
-              className="text-lg font-bold"
-              data-testid={ `customer_products__element-card-price-${id}` }
-            >
-              { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
-            </p>
-          </div>
-          <div
-            className={ `flex justify-center bg-darkGray font-medium border border-yellow
-           roundedpy-1 py-2 text-yellow hover:text-black href="#"` }
+      <img
+        className="flex self-center justify-center"
+        data-testid={ `customer_products__img-card-bg-image-${id}` }
+        src={ urlImage }
+        alt={ name }
+      />
+      <div className="flex flex-col flex-wrap items-center">
+        <div data-testid={ `customer_products__element-card-title-${id}` }>
+          { name }
+        </div>
+        <div
+          data-testid={ `customer_products__element-card-price-${id}` }
+        >
+          { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <div>
+          <button
+            className="border border-darkGray rounded px-0.5 py-0.5"
+            type="button"
+            onClick={ decreaseQuantity }
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
           >
-            <div>
-              <button
-                className={ buttonStyles }
-                type="button"
-                onClick={ decreaseQuantity }
-                data-testid={ `customer_products__button-card-rm-item-${id}` }
-              >
-                -
-              </button>
-            </div>
-            <div>
-              <input
-                className="w-10 text-center rounded-lg"
-                onChange={ (event) => setUnitItem(event.target.value) }
-                value={ unitItem }
-                data-testid={ `customer_products__input-card-quantity-${id}` }
-              />
-            </div>
-            <div>
-              <button
-                className={ buttonStyles }
-                type="button"
-                onClick={ increaseQuantity }
-                data-testid={ `customer_products__button-card-add-item-${id}` }
-              >
-                +
-              </button>
-            </div>
-          </div>
+            <Minus size={ 24 } />
+          </button>
+        </div>
+        <div>
+          <input
+            className="w-10 text-center px-0.5 py-0.5"
+            onChange={ (event) => setUnitItem(event.target.value) }
+            value={ unitItem }
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+          />
+        </div>
+        <div>
+          <button
+            className="border border-darkGray rounded px-0.5 py-0.5"
+            type="button"
+            onClick={ increaseQuantity }
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+          >
+            <Plus size={ 24 } />
+          </button>
         </div>
       </div>
     </div>

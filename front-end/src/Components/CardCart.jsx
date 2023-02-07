@@ -33,18 +33,13 @@ export default function CardCart() {
   font-bold flex text-center items-center gap-3 hover:bg-yellow
   text-yellow hover:text-black`;
 
-  const buttonNotAllowed = `bg-darkGray cursor-not-allowed border border-yellow px-5 h-12
-  rounded-md font-bold flex items-center text-yellow gap-3 hover:bg-yellow
-  text-yellow hover:text-black`;
-
   return (
     <div>
       <button
         data-testid="customer_products__button-cart"
         type="button"
         onClick={ onClickRedirect }
-        disabled={ cartItems.length === 0 }
-        className={ cartItems.length === 0 ? buttonNotAllowed : buttonAllowed }
+        className={ buttonAllowed }
         title={ cartItems.length === 0 ? 'Carrinho Vazio' : 'Ver Carrinho' }
       >
         <ShoppingCart size={ 32 } />

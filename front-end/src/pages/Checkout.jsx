@@ -46,12 +46,12 @@ export default function Checkout() {
           type="button"
           data-testid="customer_checkout__element-order-total-price"
         >
-          {`Total dos itens: R$${!cartValue ? 0 : cartValue}`}
+          {`Total dos itens: R$${!cartValue ? '0,00' : cartValue}`}
 
         </p>
       </div>
       <div className="flex justify-center">
-        <AddressFormCard />
+        { cartValue === '0,00' || !cartValue ? '' : <AddressFormCard /> }
       </div>
     </div>
   );

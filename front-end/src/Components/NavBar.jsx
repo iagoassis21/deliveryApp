@@ -22,7 +22,7 @@ export default function NavBar() {
 text-yellow hover:text-black href="#"`;
 
   return (
-    <ul className="flex justify-evenly bg-darkGray px-2 sm:px-4 py-3.5 ">
+    <ul className="flex justify-evenly bg-darkGray py-4 sm:max-w-8 sm:h-full">
       {
         role === 'customer'
             && (
