@@ -48,7 +48,7 @@ export default function TableBodyCheckout() {
           checkPageParams().map((product, index) => (
             <tr
               className={ `bg-white border-b dark:bg-gray-900
-             dark:border-t-bgColorGrayThead` }
+             dark:border-t-bgColorGrayThead text-center` }
               key={ index }
             >
               <td

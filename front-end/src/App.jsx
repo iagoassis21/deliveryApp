@@ -9,7 +9,6 @@ import Checkout from './pages/Checkout';
 import SellerOrders from './pages/Sellerorders';
 import SellerOrdersdetails from './pages/SellerOrdersdetails';
 import OrderDetails from './pages/OrderDetails';
-import './App.css';
 
 function App() {
   return (

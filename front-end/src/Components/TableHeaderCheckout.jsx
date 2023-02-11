@@ -6,15 +6,15 @@ export default function TableHeaderCheckout() {
   const isCheckout = pathname === '/customer/checkout';
   return (
     <thead
-      className={ `text-xs h-12 py-3.5 uppercase
+      className={ `text-xs text-center h-10 py-3.5 uppercase
      bg-bgColorGrayThead dark:bg-bgColorGrayThead` }
     >
       <tr>
-        <th scope="col" className="px-6 py-3 text-white text-base">Id</th>
+        <th scope="col" className="px-3 py-3 text-white text-base">Item</th>
         <th scope="col" className="px-6 py-3 text-white text-base">Name</th>
-        <th scope="col" className="px-6 py-3 text-white text-base">Qtd</th>
-        <th scope="col" className="px-6 py-3 text-white text-base">Price</th>
-        <th scope="col" className="px-6 py-3 text-white text-base">Total</th>
+        <th scope="col" className="px-3 py-3 text-white text-base">Qtd</th>
+        <th scope="col" className="px-4 py-3 text-white text-base">Preço</th>
+        <th scope="col" className="px-4 py-3 text-white text-base">Total</th>
         { isCheckout
           ? (
             <th scope="col" className="px-6 py-3 text-white text-base">

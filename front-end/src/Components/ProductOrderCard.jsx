@@ -7,15 +7,15 @@ export default function ProductOrderCard({ orders: { id, saleDate,
   const handleChangeStatusStyle = (statusParams) => {
     switch (statusParams) {
     case 'Pendente':
-      return 'border bg-bgPendente text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgPendente text-black uppercase font-semibold rounded px-2';
     case 'Preparando':
-      return 'border bg-bgPreparando text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgPreparando text-black uppercase font-semibold rounded px-2';
     case 'Em Trânsito':
-      return 'border bg-bgTransito text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgTransito text-black uppercase font-semibold rounded px-2';
     case 'Entregue':
-      return 'border bg-bgEntregue text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgEntregue text-black uppercase font-semibold rounded px-2';
     case 'Cancelado':
-      return 'border bg-bgCancelado text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgCancelado text-black uppercase font-semibold rounded px-2';
     default:
       return '';
     }
@@ -29,11 +29,11 @@ export default function ProductOrderCard({ orders: { id, saleDate,
       <section
         className={ `flex justify-center text-center border-4 bg-bgColorGrayThead
        border-darkGray hover:bg-darkGray text-white font-semibold
-         shadow-2xl rounded-lg href="#"` }
+         shadow-2xl rounded-lg` }
       >
-        <div className="flex space-x-24 py-4">
+        <div className="xl:flex lg:flex md:flex sm:flex justify-center space-x-8 py-4">
           <div className="grid justify-center">
-            <p>Número do Pedido</p>
+            <p className="pb-2 flex justify-center">Número do Pedido</p>
             <div
               data-testid={ `customer_orders__element-order-id-${id}` }
             >
@@ -41,7 +41,7 @@ export default function ProductOrderCard({ orders: { id, saleDate,
             </div>
           </div>
           <div className="grid justify-center">
-            <p className="pb-2">Status do Pedido</p>
+            <p className="pb-2">Status</p>
             <div
               className={ handleChangeStatusStyle(status) }
               data-testid={ `customer_orders__element-delivery-status-${id}` }
@@ -50,7 +50,7 @@ export default function ProductOrderCard({ orders: { id, saleDate,
             </div>
           </div>
           <div className="grid justify-center">
-            <p>Data do Pedido</p>
+            <p className="pb-2">Data</p>
             <div
               data-testid={ `customer_orders__element-order-date-${id}` }
             >
@@ -58,7 +58,7 @@ export default function ProductOrderCard({ orders: { id, saleDate,
             </div>
           </div>
           <div className="grid justify-center">
-            <p>Valor do Pedido</p>
+            <p className="pb-2">Valor</p>
             <div
               data-testid={ `customer_orders__element-card-price-${id}` }
             >

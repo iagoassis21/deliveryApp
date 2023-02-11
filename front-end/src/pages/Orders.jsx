@@ -20,9 +20,12 @@ export default function Orders() {
       <NavBar />
       <div className="flex flex-col justify-center">
         <h1 className="flex self-center pt-8 font-bold">
-          Selecione um pedido para ir aos detalhes
+          Clique no pedido para ir aos detalhes
         </h1>
-        <div className="grid grid-cols gap-3 mt-2 py-12 px-36 rounded-lg">
+        <div
+          className={ `grid grid-cols gap-3 py-4 xl:px-36 
+        lg:px-28 md:px-20 sm:px-8 px-4 rounded-lg` }
+        >
           { !orders.length ? (
             <h1
               className={ `grid h-screen place-items-center

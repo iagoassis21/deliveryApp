@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { blackA, mauve, violet } = require('@radix-ui/colors');
+
 module.exports = {
   content: ['./src/**/*.jsx', './src/**/*.html', './src/**/*.tsx', './src/**/*.css'],
   theme: {
@@ -20,6 +22,9 @@ module.exports = {
       bgEntregue: '#00CC9B',
       bgTransito: '#00CCFF',
       bgCancelado: '#CC0000',
+      ...blackA,
+      ...mauve,
+      ...violet,
     },
     screens: {
       mb: '320px',

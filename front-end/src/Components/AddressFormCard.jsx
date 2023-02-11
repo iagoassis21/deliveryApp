@@ -57,9 +57,9 @@ export default function AddressFormCard() {
     >
       <form className="flex flex-col justify-center gap-4">
         <h1
-          className="text-2xl font-semibold pb-2"
+          className="text-xl font-semibold pb-2 text-center"
         >
-          Detalhes e Endereço para Entrega
+          Endereço para Entrega
         </h1>
         <label
           htmlFor="select"

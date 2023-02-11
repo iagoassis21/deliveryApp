@@ -63,44 +63,46 @@ export default function ProductCard({ products }) {
         src={ urlImage }
         alt={ name }
       />
-      <div className="flex flex-col flex-wrap items-center">
-        <div data-testid={ `customer_products__element-card-title-${id}` }>
-          { name }
-        </div>
-        <div
-          data-testid={ `customer_products__element-card-price-${id}` }
-        >
-          { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div>
-          <button
-            className="border border-darkGray rounded px-0.5 py-0.5"
-            type="button"
-            onClick={ decreaseQuantity }
-            data-testid={ `customer_products__button-card-rm-item-${id}` }
+      <div className="border border-1 rounded bg-darkGray text-white font-medium">
+        <div className="flex flex-col flex-wrap items-center">
+          <div data-testid={ `customer_products__element-card-title-${id}` }>
+            { name }
+          </div>
+          <div
+            data-testid={ `customer_products__element-card-price-${id}` }
           >
-            <Minus size={ 24 } />
-          </button>
+            { `R$: ${priceFixed === undefined ? <span>Loading...</span> : priceFixed}` }
+          </div>
         </div>
-        <div>
-          <input
-            className="w-10 text-center px-0.5 py-0.5"
-            onChange={ (event) => setUnitItem(event.target.value) }
-            value={ unitItem }
-            data-testid={ `customer_products__input-card-quantity-${id}` }
-          />
-        </div>
-        <div>
-          <button
-            className="border border-darkGray rounded px-0.5 py-0.5"
-            type="button"
-            onClick={ increaseQuantity }
-            data-testid={ `customer_products__button-card-add-item-${id}` }
-          >
-            <Plus size={ 24 } />
-          </button>
+        <div className="flex justify-center">
+          <div>
+            <button
+              className="px-0.5 py-0.5"
+              type="button"
+              onClick={ decreaseQuantity }
+              data-testid={ `customer_products__button-card-rm-item-${id}` }
+            >
+              <Minus size={ 24 } />
+            </button>
+          </div>
+          <div className="px-1 mt-0.5">
+            <input
+              className="w-10 rounded text-center text-black px-0.5 py-0.5"
+              onChange={ (event) => setUnitItem(event.target.value) }
+              value={ unitItem }
+              data-testid={ `customer_products__input-card-quantity-${id}` }
+            />
+          </div>
+          <div>
+            <button
+              className="px-0.5 py-0.5"
+              type="button"
+              onClick={ increaseQuantity }
+              data-testid={ `customer_products__button-card-add-item-${id}` }
+            >
+              <Plus size={ 24 } />
+            </button>
+          </div>
         </div>
       </div>
     </div>
