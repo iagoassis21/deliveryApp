@@ -26,15 +26,15 @@ export default function SellerOrders(props) {
   const handleChangeStatusStyle = (statusParams) => {
     switch (statusParams) {
     case 'Pendente':
-      return 'border bg-bgPendente text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgPendente text-black uppercase font-semibold rounded px-2';
     case 'Preparando':
-      return 'border bg-bgPreparando text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgPreparando text-black uppercase font-semibold rounded px-2';
     case 'Em Trânsito':
-      return 'border bg-bgTransito text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgTransito text-black uppercase font-semibold rounded px-2';
     case 'Entregue':
-      return 'border bg-bgEntregue text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgEntregue text-black uppercase font-semibold rounded px-2';
     case 'Cancelado':
-      return 'border bg-bgCancelado text-black uppercase font-semibold rounded mt-1';
+      return 'border bg-bgCancelado text-black uppercase font-semibold rounded px-2';
     default:
       return '';
     }
@@ -45,20 +45,24 @@ export default function SellerOrders(props) {
       <NavBar />
       {
         orders.map((obj) => (
-          <div className="grid grid-cols gap-3 mt-2 py-12 px-36 rounded-lg" key={ obj.id }>
+          <div
+            className={ `grid grid-cols gap-3 py-4 xl:px-36 
+          lg:px-28 md:px-20 sm:px-8 px-4 rounded-lg` }
+            key={ obj.id }
+          >
             <section
               className={ `flex justify-center text-center border-4 bg-bgColorGrayThead
-       border-darkGray hover:bg-darkGray text-white font-semibold
-         shadow-2xl rounded-lg href="#"` }
+              border-darkGray hover:bg-darkGray text-white font-semibold
+                shadow-2xl rounded-lg` }
             >
               <button type="submit" onClick={ () => handlePush(obj.id) }>
-                <div className="flex space-x-24 py-4">
-                  <div className="grid justify-center">
-                    <p className="pb-2">Número do Pedido</p>
-                    <div data-testid={ `seller_orders__element-order-id-${obj.id}` }>{obj.id}</div>
+                <div className="flex flex-col sm:flex-row justify-evenly py-2">
+                  <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+                    <p className="pr-2">Número do Pedido</p>
+                    <div data-testid={ `seller_orders__element-order-id-${obj.id}` }>{`#${obj.id}`}</div>
                   </div>
-                  <div className="grid justify-center">
-                    <p className="pb-2">Status do Pedido</p>
+                  <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+                    <p className="pr-2">Status do Pedido:</p>
                     <div
                       className={ handleChangeStatusStyle(obj.status) }
                       data-testid={ `seller_orders__element-delivery-status-${obj.id}` }
@@ -66,26 +70,25 @@ export default function SellerOrders(props) {
                       {`${obj.status}`}
                     </div>
                   </div>
-                  <div className="grid justify-center">
-                    <p className="pb-2">Data do Pedido</p>
+                  <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+                    <p className="pr-2">Data: </p>
                     <div
                       data-testid={ `seller_orders__element-order-date-${obj.id}` }
                     >
                       {`${new Date(obj.saleDate).toLocaleDateString('pt-BR')}`}
                     </div>
                   </div>
-                  <div className="grid justify-center">
-                    <p>Valor do Pedido</p>
+                  <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+                    <p>Valor:</p>
                     <div
                       data-testid={ `seller_orders__element-card-price-${obj.id}` }
                     >
                       {`R$: ${obj.totalPrice.replace('.', ',')}`}
                     </div>
                   </div>
-                  <div className="grid justify-center">
-                    <p>Endereço</p>
+                  <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
                     <div data-testid={ `seller_orders__element-card-address-${obj.id}` }>
-                      {obj.deliveryAddress}
+                      { `Endereço: ${obj.deliveryAddress}`}
                     </div>
                   </div>
                 </div>

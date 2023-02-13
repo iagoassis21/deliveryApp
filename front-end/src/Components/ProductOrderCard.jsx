@@ -31,17 +31,17 @@ export default function ProductOrderCard({ orders: { id, saleDate,
        border-darkGray hover:bg-darkGray text-white font-semibold
          shadow-2xl rounded-lg` }
       >
-        <div className="xl:flex lg:flex md:flex sm:flex justify-center space-x-8 py-4">
-          <div className="grid justify-center">
-            <p className="pb-2 flex justify-center">Número do Pedido</p>
+        <div className="flex flex-col sm:flex-row justify-evenly py-2">
+          <div className="flex flex-row sm:flex-col justify-center py-1">
+            <p className="pr-2">Número do Pedido</p>
             <div
               data-testid={ `customer_orders__element-order-id-${id}` }
             >
-              {`${id}`}
+              {`#${id}`}
             </div>
           </div>
-          <div className="grid justify-center">
-            <p className="pb-2">Status</p>
+          <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+            <p className="pr-2">Status:</p>
             <div
               className={ handleChangeStatusStyle(status) }
               data-testid={ `customer_orders__element-delivery-status-${id}` }
@@ -49,16 +49,16 @@ export default function ProductOrderCard({ orders: { id, saleDate,
               {`${status}`}
             </div>
           </div>
-          <div className="grid justify-center">
-            <p className="pb-2">Data</p>
+          <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+            <p className="pr-2">Data:</p>
             <div
               data-testid={ `customer_orders__element-order-date-${id}` }
             >
               {`${new Date(saleDate).toLocaleDateString('pt-BR')}`}
             </div>
           </div>
-          <div className="grid justify-center">
-            <p className="pb-2">Valor</p>
+          <div className="flex flex-row sm:flex-col justify-center px-2 py-1">
+            <p className="pr-2">Valor:</p>
             <div
               data-testid={ `customer_orders__element-card-price-${id}` }
             >

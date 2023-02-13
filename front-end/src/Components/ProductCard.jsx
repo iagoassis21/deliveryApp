@@ -8,7 +8,11 @@ export default function ProductCard({ products }) {
   const { cartItems, setCartItems } = useContext(DeliveryAppContext);
   const { id, urlImage, name, price } = products;
   const priceFixed = Number(price).toFixed(2).replace('.', ',');
-  const [unitItem, setUnitItem] = useState(0);
+  const [unitItem, setUnitItem] = useState(() => {
+    const item = cartItems.find((product) => product.id === id);
+    if (item) return item.quantity;
+    return 0;
+  });
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));

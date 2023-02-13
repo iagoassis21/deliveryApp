@@ -49,98 +49,97 @@ export default function Tableproductss({ saleId }) {
     }
   };
 
-  const buttonAllowed = `px-1 h-12 rounded-md bg-darkGray border border-yellow
-  font-bold flex text-center items-center justify-center gap-1 hover:bg-yellow text-yellow
-  hover:text-black href="#"`;
+  const buttonAllowed = `flex w-full p-1 justify-center rounded-md bg-darkGray border border-yellow
+  font-bold justify-center hover:bg-yellow text-yellow
+  hover:text-black`;
 
-  const buttonNotAllowed = `bg-yellow cursor-not-allowed px-2 h-12 rounded-md
-  font-bold flex items-center gap-3 hover:text-black`;
+  const buttonNotAllowed = `flex w-full p-1 justify-center bg-yellow cursor-not-allowed border rounded-md
+  font-bold hover:text-black`;
 
   return (
     <div>
       {
         order && order.map((obj) => (
-          <section className="grid grid-col justify-center" key={ obj.id }>
+          <section className="flex flex-col justify-center" key={ obj.id }>
+            <div
+              className={ `flex p-2 items-center font-semibold text-white
+               uppercase border-b-2 border-y-yellow bg-bgColorGrayThead dark:bg-bgColorGrayThead gap-2` }
+            >
+              <div className="flex flex-col md:flex-row md:justify-evenly flex-grow gap-1">
+                <div
+                  className="text-white text-base text-center"
+                  data-testid={ `seller_order_details__
+                    element-order-details-label-order-id` }
+                >
+                  { `PEDIDO ${obj.id}`}
+                </div>
+                <div
+                  className="text-white text-base text-center"
+                  data-testid={ dataTestDate }
+                >
+                  { dataFormatada }
+                </div>
+                <div
+                  className="text-white text-base text-center"
+                  data-testid={ dTestStatus }
+                >
+                  {`Status: ${obj.status}`}
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row gap-1">
+                <div className="text-white text-base">
+                  <button
+                    className={ obj.status !== 'Pendente'
+                      ? buttonNotAllowed : buttonAllowed }
+                    type="button"
+                    data-testid="seller_order_details__button-preparing-check"
+                    name="Preparando"
+                    onClick={ handleStatus }
+                    disabled={ obj.status !== 'Pendente' }
+                  >
+                    { obj.status !== 'Pendente' ? 'JÁ PREPARADO' : 'PREPARAR PEDIDO'}
+                  </button>
+                </div>
+                <div className="text-white text-base">
+                  <button
+                    className={ obj.status !== 'Preparando'
+                      ? buttonNotAllowed : buttonAllowed }
+                    type="button"
+                    data-testid="seller_order_details__button-dispatch-check"
+                    name="Transito"
+                    onClick={ handleStatus }
+                    disabled={ obj.status !== 'Preparando' }
+                  >
+                    { obj.status !== 'Preparando'
+                      ? 'SAIU PARA ENTREGA' : 'SAIR PARA ENTREGA'}
+                  </button>
+                </div>
+              </div>
+            </div>
             <table
-              className={ `w-full text-base text-left text-gray-500 
-              dark:text-gray-400` }
+              className={ `table-fixed text-base text-left text-gray-500 
+              dark:text-gray-400 border-none` }
               key={ obj.id }
             >
-              <thead
-                className={ `text-white h-12 py-3.5 uppercase border-b
-     bg-bgColorGrayThead dark:bg-bgColorGrayThead` }
-              >
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-white text-base"
-                    data-testid={ `seller_order_details__
-                    element-order-details-label-order-id` }
-                  >
-                    { `PEDIDO ${obj.id}`}
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-white text-base"
-                    data-testid={ dataTestDate }
-                  >
-                    { dataFormatada }
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-white text-base"
-                    data-testid={ dTestStatus }
-                  >
-                    { obj.status }
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
-                    <button
-                      className={ obj.status !== 'Pendente'
-                        ? buttonNotAllowed : buttonAllowed }
-                      type="button"
-                      data-testid="seller_order_details__button-preparing-check"
-                      name="Preparando"
-                      onClick={ handleStatus }
-                      disabled={ obj.status !== 'Pendente' }
-                    >
-                      { obj.status !== 'Pendente' ? 'JÁ PREPARADO' : 'PREPARAR PEDIDO'}
-                    </button>
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
-                    <button
-                      className={ obj.status !== 'Preparando'
-                        ? buttonNotAllowed : buttonAllowed }
-                      type="button"
-                      data-testid="seller_order_details__button-dispatch-check"
-                      name="Transito"
-                      onClick={ handleStatus }
-                      disabled={ obj.status !== 'Preparando' }
-                    >
-                      { obj.status !== 'Preparando'
-                        ? 'JÁ SAIU PARA ENTREGA' : 'SAIR PARA ENTREGA'}
-                    </button>
-                  </th>
-                </tr>
-              </thead>
               <thead
                 className={ `text-white h-12 py-3.5 uppercase
                 bg-bgColorGrayThead dark:bg-bgColorGrayThead` }
               >
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
+                  <th scope="col" className="py-3 text-white text-base text-center sm:table-cell hidden">
                     Item
                   </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
+                  <th scope="col" className="py-3 max-w-[200px] text-white text-base text-center">
                     Descrição
                   </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
-                    Quantidade
+                  <th scope="col" className="py-3 text-white text-base text-center">
+                    Qtd
                   </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
-                    Valor Unitário
+                  <th scope="col" className="py-3 text-white text-base text-center">
+                    Valor
                   </th>
-                  <th scope="col" className="px-6 py-3 text-white text-base">
-                    Sub-total
+                  <th scope="col" className="py-3 text-white text-base text-center">
+                    total
                   </th>
                 </tr>
               </thead>
@@ -148,36 +147,41 @@ export default function Tableproductss({ saleId }) {
               {
                 obj.products.map((products, index) => (
                   <tr
-                    className={ `bg-white border-b dark:bg-gray-900
-             dark:border-t-bgColorGrayThead` }
+                    className={ `bg-white dark:bg-gray-900
+             dark:border-t-bgColorGrayThead odd:bg-bgColorWhiteIce even:bg-bgColorLightGray` }
                     key={ index }
                   >
                     <td
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className={ `py-4 font-medium text-gray-900
+                       whitespace-nowrap text-center sm:table-cell hidden` }
                       data-testid={ `${dItemNum}-${index}` }
                     >
                       {index}
                     </td>
                     <td
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className={ `max-w-[200px] py-4 text-[15px] text-gray-900
+                       whitespace-nowrap text-center` }
                       data-testid={ `${dItemName}-${index}` }
                     >
                       {products.name}
                     </td>
                     <td
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className={ `py-4 font-medium text-gray-900
+                       whitespace-nowrap text-center` }
                       data-testid={ `${dItemQuantity}-${index}` }
                     >
                       {products.SalesProduct.quantity}
                     </td>
                     <td
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className={ `py-4 font-medium text-gray-900
+                       whitespace-nowrap text-center` }
                       data-testid={ `${dUnityPrice}${index}` }
                     >
                       { products.price }
                     </td>
                     <td
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className={ `py-4 font-medium text-gray-900
+                       whitespace-nowrap text-center` }
                       data-testid={ `${dSubPrice}-${index}` }
                     >
                       { Number(products.SalesProduct.quantity
@@ -186,17 +190,17 @@ export default function Tableproductss({ saleId }) {
                   </tr>
                 ))
               }
-              <div className="flex justify-center pt-6">
-                <p
-                  className={ `inline-block font-medium border border-yellow rounded
-                py-1 px-3 bg-darkGray hover:bg-yellow text-yellow hover:text-black
-                href="#"` }
-                  data-testid="seller_order_details__element-order-total-price"
-                >
-                  { `Valor total do pedido: ${obj.totalPrice?.replace('.', ',')}` }
-                </p>
-              </div>
             </table>
+            <div className="flex justify-start py-6">
+              <p
+                className={ `font-medium border border-yellow rounded
+                py-1 px-3 bg-darkGray hover:bg-yellow text-yellow hover:text-black
+                fixed bottom-3 right-5` }
+                data-testid="seller_order_details__element-order-total-price"
+              >
+                { `Valor total do pedido: ${obj.totalPrice?.replace('.', ',')}` }
+              </p>
+            </div>
           </section>
         ))
       }
